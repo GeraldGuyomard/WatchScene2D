@@ -1,0 +1,310 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		74E4AE811BC5F17A006860EE /* WatchScene2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 74E4AE801BC5F17A006860EE /* WatchScene2D.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		74E4AE961BC60601006860EE /* W2DContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E4AE951BC60601006860EE /* W2DContext.swift */; settings = {ASSET_TAGS = (); }; };
+		74E4AE981BC606A5006860EE /* W2DContextImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E4AE971BC606A5006860EE /* W2DContextImpl.swift */; settings = {ASSET_TAGS = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		74E4AE7D1BC5F17A006860EE /* WatchScene2D.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatchScene2D.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		74E4AE801BC5F17A006860EE /* WatchScene2D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatchScene2D.h; sourceTree = "<group>"; };
+		74E4AE821BC5F17A006860EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		74E4AE951BC60601006860EE /* W2DContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DContext.swift; sourceTree = "<group>"; };
+		74E4AE971BC606A5006860EE /* W2DContextImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DContextImpl.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		74E4AE791BC5F17A006860EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		74E4AE731BC5F17A006860EE = {
+			isa = PBXGroup;
+			children = (
+				74E4AE7F1BC5F17A006860EE /* WatchScene2D */,
+				74E4AE7E1BC5F17A006860EE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		74E4AE7E1BC5F17A006860EE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				74E4AE7D1BC5F17A006860EE /* WatchScene2D.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		74E4AE7F1BC5F17A006860EE /* WatchScene2D */ = {
+			isa = PBXGroup;
+			children = (
+				74E4AE801BC5F17A006860EE /* WatchScene2D.h */,
+				74E4AE821BC5F17A006860EE /* Info.plist */,
+				74E4AE941BC605E2006860EE /* public */,
+				74E4AE8F1BC5F4ED006860EE /* sources */,
+			);
+			path = WatchScene2D;
+			sourceTree = "<group>";
+		};
+		74E4AE8F1BC5F4ED006860EE /* sources */ = {
+			isa = PBXGroup;
+			children = (
+				74E4AE971BC606A5006860EE /* W2DContextImpl.swift */,
+			);
+			path = sources;
+			sourceTree = "<group>";
+		};
+		74E4AE941BC605E2006860EE /* public */ = {
+			isa = PBXGroup;
+			children = (
+				74E4AE951BC60601006860EE /* W2DContext.swift */,
+			);
+			path = public;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		74E4AE7A1BC5F17A006860EE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74E4AE811BC5F17A006860EE /* WatchScene2D.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		74E4AE7C1BC5F17A006860EE /* WatchScene2D */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 74E4AE851BC5F17A006860EE /* Build configuration list for PBXNativeTarget "WatchScene2D" */;
+			buildPhases = (
+				74E4AE781BC5F17A006860EE /* Sources */,
+				74E4AE791BC5F17A006860EE /* Frameworks */,
+				74E4AE7A1BC5F17A006860EE /* Headers */,
+				74E4AE7B1BC5F17A006860EE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WatchScene2D;
+			productName = WatchScene2D;
+			productReference = 74E4AE7D1BC5F17A006860EE /* WatchScene2D.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		74E4AE741BC5F17A006860EE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Gérald Guyomard";
+				TargetAttributes = {
+					74E4AE7C1BC5F17A006860EE = {
+						CreatedOnToolsVersion = 7.0;
+					};
+				};
+			};
+			buildConfigurationList = 74E4AE771BC5F17A006860EE /* Build configuration list for PBXProject "WatchScene2D" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 74E4AE731BC5F17A006860EE;
+			productRefGroup = 74E4AE7E1BC5F17A006860EE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				74E4AE7C1BC5F17A006860EE /* WatchScene2D */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		74E4AE7B1BC5F17A006860EE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		74E4AE781BC5F17A006860EE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74E4AE981BC606A5006860EE /* W2DContextImpl.swift in Sources */,
+				74E4AE961BC60601006860EE /* W2DContext.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		74E4AE831BC5F17A006860EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = watchos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		74E4AE841BC5F17A006860EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = watchos;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		74E4AE861BC5F17A006860EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = WatchScene2D/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.geraldguyomard.WatchScene2D;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		74E4AE871BC5F17A006860EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = WatchScene2D/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.geraldguyomard.WatchScene2D;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		74E4AE771BC5F17A006860EE /* Build configuration list for PBXProject "WatchScene2D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74E4AE831BC5F17A006860EE /* Debug */,
+				74E4AE841BC5F17A006860EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		74E4AE851BC5F17A006860EE /* Build configuration list for PBXNativeTarget "WatchScene2D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74E4AE861BC5F17A006860EE /* Debug */,
+				74E4AE871BC5F17A006860EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 74E4AE741BC5F17A006860EE /* Project object */;
+}
