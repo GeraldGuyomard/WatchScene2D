@@ -10,12 +10,18 @@ import WatchKit
 
 public protocol W2DContext
 {
-    init(size:CGSize)
+    var width : UInt { get }
+    var height : UInt { get }
     
-    func render()
+    func clear(r r:CGFloat, g:CGFloat, b:CGFloat, a:CGFloat)
+    
+    func draw(image image:UIImage?, atPosition pos:CGPoint)
+    func draw(image image:UIImage?, inRect rect:CGRect)
+    
+    func render() -> UIImage?
 }
 
-public func createW2DContext(size:CGSize) -> W2DContext
+public func createW2DContext(width width:UInt, height:UInt) -> W2DContext
 {
-    return W2DContextImpl(size:size)
+    return W2DContextImpl(width: width, height: height)
 }
