@@ -7,3 +7,20 @@
 //
 
 import Foundation
+
+public protocol W2DDirector
+{
+    var dT : NSTimeInterval { get }
+    
+    func start()
+    func stop()
+    
+    func addBehavior(behavior:W2DBehavior)
+    func removeBehavior(behavior:W2DBehavior)
+    
+}
+
+public func createW2DDirector(target:WKInterfaceImage, context:W2DContext) -> W2DDirector
+{
+    return W2DDirectorImpl(target: target, context: context)
+}
