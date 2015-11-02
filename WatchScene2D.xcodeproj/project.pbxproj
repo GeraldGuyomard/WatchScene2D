@@ -11,6 +11,8 @@
 		74041F921BD32CDA004EDB33 /* W2DDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F911BD32CDA004EDB33 /* W2DDirector.swift */; settings = {ASSET_TAGS = (); }; };
 		74041F941BD43BE8004EDB33 /* W2DBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F931BD43BE8004EDB33 /* W2DBehavior.swift */; settings = {ASSET_TAGS = (); }; };
 		74041F961BD43F98004EDB33 /* W2DDirectorImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F951BD43F98004EDB33 /* W2DDirectorImpl.swift */; settings = {ASSET_TAGS = (); }; };
+		74041F981BD44CC6004EDB33 /* W2DImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F971BD44CC6004EDB33 /* W2DImage.swift */; settings = {ASSET_TAGS = (); }; };
+		74041F9A1BD44E12004EDB33 /* W2DImageImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F991BD44E12004EDB33 /* W2DImageImpl.swift */; settings = {ASSET_TAGS = (); }; };
 		74E4AE811BC5F17A006860EE /* WatchScene2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 74E4AE801BC5F17A006860EE /* WatchScene2D.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		74E4AE961BC60601006860EE /* W2DContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E4AE951BC60601006860EE /* W2DContext.swift */; settings = {ASSET_TAGS = (); }; };
 		74E4AE981BC606A5006860EE /* W2DContextImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E4AE971BC606A5006860EE /* W2DContextImpl.swift */; settings = {ASSET_TAGS = (); }; };
@@ -21,6 +23,8 @@
 		74041F911BD32CDA004EDB33 /* W2DDirector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DDirector.swift; sourceTree = "<group>"; };
 		74041F931BD43BE8004EDB33 /* W2DBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DBehavior.swift; sourceTree = "<group>"; };
 		74041F951BD43F98004EDB33 /* W2DDirectorImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DDirectorImpl.swift; sourceTree = "<group>"; };
+		74041F971BD44CC6004EDB33 /* W2DImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DImage.swift; sourceTree = "<group>"; };
+		74041F991BD44E12004EDB33 /* W2DImageImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DImageImpl.swift; sourceTree = "<group>"; };
 		74E4AE7D1BC5F17A006860EE /* WatchScene2D.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatchScene2D.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74E4AE801BC5F17A006860EE /* WatchScene2D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatchScene2D.h; sourceTree = "<group>"; };
 		74E4AE821BC5F17A006860EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -71,6 +75,7 @@
 			children = (
 				74E4AE971BC606A5006860EE /* W2DContextImpl.swift */,
 				74041F951BD43F98004EDB33 /* W2DDirectorImpl.swift */,
+				74041F991BD44E12004EDB33 /* W2DImageImpl.swift */,
 			);
 			path = sources;
 			sourceTree = "<group>";
@@ -82,6 +87,7 @@
 				74041F8F1BD323AE004EDB33 /* CGPoint+BasicOperations.swift */,
 				74041F911BD32CDA004EDB33 /* W2DDirector.swift */,
 				74041F931BD43BE8004EDB33 /* W2DBehavior.swift */,
+				74041F971BD44CC6004EDB33 /* W2DImage.swift */,
 			);
 			path = public;
 			sourceTree = "<group>";
@@ -170,7 +176,9 @@
 				74041F941BD43BE8004EDB33 /* W2DBehavior.swift in Sources */,
 				74041F921BD32CDA004EDB33 /* W2DDirector.swift in Sources */,
 				74E4AE981BC606A5006860EE /* W2DContextImpl.swift in Sources */,
+				74041F981BD44CC6004EDB33 /* W2DImage.swift in Sources */,
 				74E4AE961BC60601006860EE /* W2DContext.swift in Sources */,
+				74041F9A1BD44E12004EDB33 /* W2DImageImpl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

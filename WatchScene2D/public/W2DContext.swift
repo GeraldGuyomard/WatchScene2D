@@ -15,8 +15,7 @@ public protocol W2DContext
     
     func clear(r r:CGFloat, g:CGFloat, b:CGFloat, a:CGFloat)
     
-    func draw(image image:UIImage?, atPosition pos:CGPoint)
-    func draw(image image:UIImage?, inRect rect:CGRect)
+    func image(named:String) -> W2DImage?
     
     func render() -> UIImage?
 }

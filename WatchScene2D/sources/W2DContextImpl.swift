@@ -50,23 +50,9 @@ import Foundation
         }
     }
     
-    func draw(image image:UIImage?, atPosition pos:CGPoint)
+    func image(named:String) -> W2DImage?
     {
-        if let img = image
-        {
-            let cgImage = img.CGImage;
-            let rect = CGRect(x:pos.x, y:pos.y, width:CGFloat(CGImageGetWidth(cgImage)), height:CGFloat(CGImageGetHeight(cgImage)))
-            
-            CGContextDrawImage(fCGContext, rect, cgImage)
-        }
-    }
-    
-    func draw(image image:UIImage?, inRect rect:CGRect)
-    {
-        if let img = image
-        {
-            CGContextDrawImage(fCGContext, rect, img.CGImage)
-        }
+        return W2DImageImpl(context:fCGContext!, named: named)
     }
     
     func render() -> UIImage?
