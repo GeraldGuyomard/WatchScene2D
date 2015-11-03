@@ -23,7 +23,14 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         fContext = context
     }
     
+    var context : W2DContext
+    {
+        get { return fContext }
+    }
+    
     var dT : NSTimeInterval { return fdT }
+    
+    var currentScene : W2DScene?
     
     func start()
     {
@@ -103,7 +110,10 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
     
     private func render()
     {
-        // Here the scene graph
+        if let scene = self.currentScene
+        {
+            scene.render(self.context)
+        }
     }
     
     private func presentRender()

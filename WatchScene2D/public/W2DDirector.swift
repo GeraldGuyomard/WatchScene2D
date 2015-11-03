@@ -10,6 +10,8 @@ import Foundation
 
 public protocol W2DDirector
 {
+    var context : W2DContext { get }
+    var currentScene : W2DScene? { get set }
     var dT : NSTimeInterval { get }
     
     func start()

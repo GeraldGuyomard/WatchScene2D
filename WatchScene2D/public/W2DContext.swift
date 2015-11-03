@@ -15,9 +15,13 @@ public protocol W2DContext
     
     func clear(r r:CGFloat, g:CGFloat, b:CGFloat, a:CGFloat)
     
-    func image(named:String) -> W2DImage?
+    func image(named name:String) -> W2DImage?
     
     func render() -> UIImage?
+    
+    func saveTranform()
+    func restoreTransform()
+    func applyTransform(transform:CGAffineTransform)
 }
 
 public func createW2DContext(width width:UInt, height:UInt) -> W2DContext

@@ -50,9 +50,9 @@ import Foundation
         }
     }
     
-    func image(named:String) -> W2DImage?
+    func image(named name:String) -> W2DImage?
     {
-        return W2DImageImpl(context:fCGContext!, named: named)
+        return W2DImageImpl(context:fCGContext!, named: name)
     }
     
     func render() -> UIImage?
@@ -80,6 +80,21 @@ import Foundation
         }
         
         return UIImage(CGImage: fImage!)
+    }
+    
+    func saveTranform()
+    {
+        CGContextSaveGState(fCGContext)
+    }
+    
+    func restoreTransform()
+    {
+        CGContextRestoreGState(fCGContext)
+    }
+    
+    func applyTransform(transform:CGAffineTransform)
+    {
+        CGContextConcatCTM(fCGContext, transform)
     }
     
     private var    fBackBuffer : UnsafeMutablePointer<Void> = UnsafeMutablePointer<Void>();
