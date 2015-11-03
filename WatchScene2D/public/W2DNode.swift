@@ -20,6 +20,8 @@ public class W2DNode
     private var fPosition = CGPointMake(0, 0)
     private var fSize = CGSizeMake(0, 0)
     
+    public var hidden = false
+    
     public var position : CGPoint
     {
         get { return fPosition }
@@ -108,20 +110,23 @@ public class W2DNode
     
     public func render(context:W2DContext)
     {
-        context.saveTranform()
-        context.applyTransform(self.globalTransform)
-        
-        selfRender(context)
-        
-        if let children = fChildren
+        if (!self.hidden)
         {
-            for child in children
+            context.saveTranform()
+            context.applyTransform(self.globalTransform)
+            
+            selfRender(context)
+            
+            if let children = fChildren
             {
-                child.render(context)
+                for child in children
+                {
+                    child.render(context)
+                }
             }
+            
+            context.restoreTransform()
         }
-        
-        context.restoreTransform()
     }
     
     public func selfRender(context:W2DContext)
