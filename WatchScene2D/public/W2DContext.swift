@@ -13,7 +13,7 @@ public protocol W2DContext
     var width : UInt { get }
     var height : UInt { get }
     
-    func clear(r r:CGFloat, g:CGFloat, b:CGFloat, a:CGFloat)
+    func clear(color:W2DColor4f)
     
     func image(named name:String) -> W2DImage?
     

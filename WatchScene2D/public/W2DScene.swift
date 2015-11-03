@@ -10,5 +10,10 @@ import WatchKit
 
 public class W2DScene : W2DNode
 {
+    public var backgroundColor = W2DColor4f()
     
+    override public func selfRender(context: W2DContext)
+    {
+        context.clear(self.backgroundColor)
+    }
 }

@@ -35,16 +35,16 @@ import Foundation
     var width : UInt { return fWidth }
     var height : UInt { return fHeight }
 
-    func clear(r r:CGFloat, g:CGFloat, b:CGFloat, a:CGFloat)
+    func clear(color:W2DColor4f)
     {
-        if r == 0 && g == 0 && b == 0 && a == 0
+        if color.red == 0 && color.green == 0 && color.blue == 0 && color.alpha == 0
         {
             let size = fWidth * fHeight * 4
             memset(fBackBuffer, 0, Int(size))
         }
         else
         {
-            CGContextSetRGBFillColor(fCGContext, r, g, b, a)
+            CGContextSetRGBFillColor(fCGContext, color.red, color.green, color.blue, color.alpha)
             let rect = CGRect(x: 0, y: 0, width:CGFloat(fWidth), height:CGFloat(fHeight))
             CGContextFillRect(fCGContext, rect)
         }
