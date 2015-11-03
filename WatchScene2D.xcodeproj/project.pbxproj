@@ -15,6 +15,7 @@
 		74041F9A1BD44E12004EDB33 /* W2DImageImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F991BD44E12004EDB33 /* W2DImageImpl.swift */; };
 		745C2B571BE8772900EA2639 /* W2DSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C2B561BE8772900EA2639 /* W2DSprite.swift */; };
 		745C2B591BE8804100EA2639 /* W2DScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C2B581BE8804100EA2639 /* W2DScene.swift */; };
+		745C2B5C1BE887ED00EA2639 /* W2DColor4f.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C2B5B1BE887ED00EA2639 /* W2DColor4f.swift */; };
 		74D6FBC81BE7113300D0276F /* W2DNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D6FBC71BE7113300D0276F /* W2DNode.swift */; };
 		74E4AE811BC5F17A006860EE /* WatchScene2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 74E4AE801BC5F17A006860EE /* WatchScene2D.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		74E4AE961BC60601006860EE /* W2DContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E4AE951BC60601006860EE /* W2DContext.swift */; };
@@ -30,6 +31,7 @@
 		74041F991BD44E12004EDB33 /* W2DImageImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DImageImpl.swift; sourceTree = "<group>"; };
 		745C2B561BE8772900EA2639 /* W2DSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DSprite.swift; sourceTree = "<group>"; };
 		745C2B581BE8804100EA2639 /* W2DScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DScene.swift; sourceTree = "<group>"; };
+		745C2B5B1BE887ED00EA2639 /* W2DColor4f.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DColor4f.swift; sourceTree = "<group>"; };
 		74D6FBC71BE7113300D0276F /* W2DNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DNode.swift; sourceTree = "<group>"; };
 		74E4AE7D1BC5F17A006860EE /* WatchScene2D.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatchScene2D.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74E4AE801BC5F17A006860EE /* WatchScene2D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatchScene2D.h; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				74D6FBC71BE7113300D0276F /* W2DNode.swift */,
 				745C2B561BE8772900EA2639 /* W2DSprite.swift */,
 				745C2B581BE8804100EA2639 /* W2DScene.swift */,
+				745C2B5B1BE887ED00EA2639 /* W2DColor4f.swift */,
 			);
 			path = public;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 				74041F941BD43BE8004EDB33 /* W2DBehavior.swift in Sources */,
 				74041F921BD32CDA004EDB33 /* W2DDirector.swift in Sources */,
 				74D6FBC81BE7113300D0276F /* W2DNode.swift in Sources */,
+				745C2B5C1BE887ED00EA2639 /* W2DColor4f.swift in Sources */,
 				74E4AE981BC606A5006860EE /* W2DContextImpl.swift in Sources */,
 				74041F981BD44CC6004EDB33 /* W2DImage.swift in Sources */,
 				745C2B591BE8804100EA2639 /* W2DScene.swift in Sources */,
