@@ -17,6 +17,10 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
     private var     fContext : W2DContext
     private var     fBehaviors = [W2DBehavior]()
     
+    private var     fInterfacePicker : WKInterfacePicker?
+    private var     fSensitivity = Float(0.0)
+    private var     fLastNormalizedInput = Float(0.0)
+    
     init(target:WKInterfaceImage, context:W2DContext)
     {
         fTarget = target
@@ -31,6 +35,45 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
     var dT : NSTimeInterval { return fdT }
     
     var currentScene : W2DScene?
+    
+    func setupDigitalCrownInput(picker picker:WKInterfacePicker, sensitivity:UInt)
+    {
+        fInterfacePicker = picker
+        fSensitivity = Float(sensitivity) - 1
+        
+        if let picker = fInterfacePicker
+        {
+            var items = [WKPickerItem]();
+            
+            let item = WKPickerItem()
+            item.title = " ";
+            
+            for _ in 1...sensitivity
+            {
+                items.append(item)
+            }
+            
+            picker.setItems(items)
+        }
+    }
+    
+    func setDigitalCrownValue(value:Float)
+    {
+        assert(fInterfacePicker != nil)
+        
+        if let picker = fInterfacePicker
+        {
+            let index = Int(value * fSensitivity)
+            picker.setSelectedItemIndex(index)
+        }
+    }
+    
+    func processDigitalCrownInput(input:NSInteger, handler:(Float) -> Void)
+    {
+        fLastNormalizedInput = (fSensitivity != 0) ? (Float(input) / fSensitivity) : 0
+        
+        handler(fLastNormalizedInput)
+    }
     
     func start()
     {

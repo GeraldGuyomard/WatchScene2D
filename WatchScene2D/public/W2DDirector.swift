@@ -14,6 +14,10 @@ public protocol W2DDirector
     var currentScene : W2DScene? { get set }
     var dT : NSTimeInterval { get }
     
+    func setupDigitalCrownInput(picker picker:WKInterfacePicker, sensitivity:UInt)
+    func setDigitalCrownValue(value:Float) // 0..1
+    func processDigitalCrownInput(input:NSInteger, handler:(Float) -> Void)
+    
     func start()
     func stop()
     
