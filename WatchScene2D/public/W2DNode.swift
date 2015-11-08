@@ -13,10 +13,14 @@ public class W2DNode
 {
     private weak var fParent : W2DNode? = nil
     private var fChildren : Array<W2DNode>? = nil
+    
+    private var fLocalTransform = CGAffineTransformIdentity
+    private var fIsLocalTransformValid = false
+    
     private var fGlobalTransform = CGAffineTransformIdentity
     private var fIsGlobalTransformValid = false
     
-    // decomposed transform
+    // decomposed local transform
     private var fPosition = CGPointMake(0, 0)
     private var fSize = CGSizeMake(0, 0)
     
@@ -28,8 +32,11 @@ public class W2DNode
         
         set(newPosition)
         {
-            fPosition = newPosition
-            fIsGlobalTransformValid = false
+            if (fPosition != newPosition)
+            {
+                fPosition = newPosition
+                invalidateTransforms()
+            }
         }
     }
     
@@ -42,7 +49,7 @@ public class W2DNode
             if (fSize != newSize)
             {
                 fSize = newSize
-                fIsGlobalTransformValid = false
+                invalidateTransforms()
             }
         }
     }
@@ -96,12 +103,31 @@ public class W2DNode
         fChildren!.append(child)
     }
     
+    public var localTransform : CGAffineTransform
+    {
+        if !fIsLocalTransformValid
+        {
+            fLocalTransform = CGAffineTransformIdentity
+            fLocalTransform = CGAffineTransformTranslate(fLocalTransform, fPosition.x, fPosition.y)
+            fIsLocalTransformValid = true
+        }
+        
+        return fLocalTransform
+    }
+    
     public var globalTransform : CGAffineTransform
     {
         if !fIsGlobalTransformValid
         {
-            fGlobalTransform = fParent != nil ? fParent!.globalTransform : CGAffineTransformIdentity
-            fGlobalTransform = CGAffineTransformTranslate(fGlobalTransform, fPosition.x, fPosition.y)
+            if fParent != nil
+            {
+                fGlobalTransform = CGAffineTransformConcat(fParent!.globalTransform, self.localTransform)
+            }
+            else
+            {
+                fGlobalTransform = self.localTransform
+            }
+            
             fIsGlobalTransformValid = true
         }
         
@@ -131,4 +157,18 @@ public class W2DNode
     
     public func selfRender(context:W2DContext)
     {}
+    
+    internal func invalidateTransforms()
+    {
+        fIsLocalTransformValid = false
+        fIsGlobalTransformValid = false
+
+        if let children = fChildren
+        {
+            for child in children
+            {
+                child.invalidateTransforms()
+            }
+        }
+    }
 }
