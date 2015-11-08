@@ -121,7 +121,7 @@ public class W2DNode
         {
             if fParent != nil
             {
-                fGlobalTransform = CGAffineTransformConcat(fParent!.globalTransform, self.localTransform)
+                fGlobalTransform = CGAffineTransformConcat(self.localTransform, fParent!.globalTransform)
             }
             else
             {
