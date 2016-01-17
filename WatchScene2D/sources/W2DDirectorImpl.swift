@@ -147,7 +147,7 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
     {
         for behavior in fBehaviors
         {
-            behavior.execute(fdT)
+            behavior.execute(fdT, director:self)
         }
     }
     
@@ -155,7 +155,7 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
     {
         if let scene = self.currentScene
         {
-            scene.render(self.context)
+            scene.render(self)
         }
     }
     

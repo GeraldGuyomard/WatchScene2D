@@ -9,7 +9,7 @@
 import WatchKit
 import Foundation
 
-public class W2DNode
+public class W2DNode : W2DComponent
 {
     private weak var fParent : W2DNode? = nil
     private var fChildren : Array<W2DNode>? = nil
@@ -54,7 +54,7 @@ public class W2DNode
         }
     }
     
-    public init()
+    public override init()
     {
     }
     
@@ -134,10 +134,12 @@ public class W2DNode
         return fGlobalTransform
     }
     
-    public func render(context:W2DContext)
+    public func render(director:W2DDirector!)
     {
         if (!self.hidden)
         {
+            let context = director.context
+            
             context.saveTranform()
             context.applyTransform(self.globalTransform)
             
@@ -147,7 +149,7 @@ public class W2DNode
             {
                 for child in children
                 {
-                    child.render(context)
+                    child.render(director)
                 }
             }
             

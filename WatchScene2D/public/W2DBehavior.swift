@@ -10,5 +10,5 @@ import Foundation
 
 public protocol W2DBehavior : class
 {
-    func execute(dT:NSTimeInterval)
+    func execute(dT:NSTimeInterval, director:W2DDirector!)
 }
