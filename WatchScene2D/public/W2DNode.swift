@@ -63,6 +63,11 @@ public class W2DNode : W2DComponent
         get { return fParent }
     }
     
+    public var children :Array<W2DNode>?
+    {
+        get { return fChildren }
+    }
+    
     public func removeFromParent()
     {
         if let p = fParent
@@ -132,6 +137,12 @@ public class W2DNode : W2DComponent
         }
         
         return fGlobalTransform
+    }
+    
+    public var globalBox : CGRect
+    {
+        let localBox = CGRectMake(0, 0, self.size.width, self.size.height)
+        return CGRectApplyAffineTransform(localBox, self.globalTransform)
     }
     
     public func render(director:W2DDirector!)
