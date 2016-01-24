@@ -15,6 +15,11 @@ public extension CGPoint
         return CGFloat(sqrtf(Float((x * x) + (y * y))));
     }
     
+    func opposite() -> CGPoint
+    {
+        return CGPointMake(-x, -y)
+    }
+    
     func normalizedVector() -> CGPoint
     {
         let l = norm();
