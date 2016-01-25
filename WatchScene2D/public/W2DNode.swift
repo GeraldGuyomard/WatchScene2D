@@ -106,6 +106,7 @@ public class W2DNode : W2DComponent
         }
         
         fChildren!.append(child)
+        child.fParent = self
     }
     
     public var localTransform : CGAffineTransform
