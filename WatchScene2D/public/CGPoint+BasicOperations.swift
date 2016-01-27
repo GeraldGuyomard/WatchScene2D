@@ -35,6 +35,11 @@ public extension CGPoint
     {
         return CGPointMake(x + other.x, y + other.y)
     }
+
+    func sub(other: CGPoint) -> CGPoint
+    {
+        return CGPointMake(x - other.x, y - other.y)
+    }
     
     func mul(f : CGFloat) -> CGPoint
     {
