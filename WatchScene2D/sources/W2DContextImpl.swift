@@ -44,8 +44,16 @@ import Foundation
         }
         else
         {
-            CGContextSetRGBFillColor(fCGContext, color.red, color.green, color.blue, color.alpha)
             let rect = CGRect(x: 0, y: 0, width:CGFloat(fWidth), height:CGFloat(fHeight))
+            fillRect(rect, withColor: color)
+        }
+    }
+    
+    func fillRect(rect:CGRect, withColor color:W2DColor4f)
+    {
+        if color.alpha != 0
+        {
+            CGContextSetRGBFillColor(fCGContext, color.red, color.green, color.blue, color.alpha)
             CGContextFillRect(fCGContext, rect)
         }
     }
