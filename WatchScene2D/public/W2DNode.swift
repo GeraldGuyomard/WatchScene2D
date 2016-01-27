@@ -20,6 +20,9 @@ public class W2DNode : W2DComponent
     private var fGlobalTransform = CGAffineTransformIdentity
     private var fIsGlobalTransformValid = false
     
+    private var fGlobalBoundingBox = CGRectZero
+    private var fIsGlobalBoundingBoxValid = false
+    
     // decomposed local transform
     private var fPosition = CGPointMake(0, 0)
     private var fSize = CGSizeMake(0, 0)
@@ -140,10 +143,17 @@ public class W2DNode : W2DComponent
         return fGlobalTransform
     }
     
-    public var globalBox : CGRect
+    public var globalBoundingBox : CGRect
     {
-        let localBox = CGRectMake(0, 0, self.size.width, self.size.height)
-        return CGRectApplyAffineTransform(localBox, self.globalTransform)
+        if !fIsGlobalBoundingBoxValid
+        {
+            let localBox = CGRectMake(0, 0, self.size.width, self.size.height)
+            fGlobalBoundingBox = CGRectApplyAffineTransform(localBox, self.globalTransform)
+            
+            fIsGlobalBoundingBoxValid = true
+        }
+        
+        return fGlobalBoundingBox
     }
     
     public func render(director:W2DDirector!)
@@ -176,6 +186,7 @@ public class W2DNode : W2DComponent
     {
         fIsLocalTransformValid = false
         fIsGlobalTransformValid = false
+        fIsGlobalBoundingBoxValid = false
 
         if let children = fChildren
         {
