@@ -25,6 +25,8 @@ import Foundation
         let rgbColorSpace = CGColorSpaceCreateDeviceRGB();
         
         fCGContext = CGBitmapContextCreate(fBackBuffer, Int(fWidth), Int(fHeight), 8, Int(fWidth * 4), rgbColorSpace, CGImageAlphaInfo.NoneSkipLast.rawValue)
+        
+        CGContextSetInterpolationQuality(fCGContext, .None)
     }
     
     deinit
