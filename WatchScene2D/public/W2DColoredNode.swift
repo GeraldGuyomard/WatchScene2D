@@ -12,9 +12,9 @@ public class W2DColoredNode : W2DNode
 {
     public var color : W2DColor4f?
     
-    public init(color:W2DColor4f?)
+    public init(color:W2DColor4f?, director:W2DDirector)
     {
-        super.init()
+        super.init(director: director)
         
         self.color = color
     }

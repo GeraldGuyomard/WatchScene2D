@@ -8,11 +8,13 @@
 
 import Foundation
 
-public protocol W2DDirector
+public protocol W2DDirector : class
 {
     var context : W2DContext { get }
     var currentScene : W2DScene? { get set }
     var dT : NSTimeInterval { get }
+    var smartRedrawEnabled : Bool { get set }
+    var showDirtyRects : Bool { get set }
     
     func setupDigitalCrownInput(picker picker:WKInterfacePicker, sensitivity:UInt)
     func setDigitalCrownValue(value:Float) // 0..1
@@ -24,6 +26,8 @@ public protocol W2DDirector
     func addBehavior(behavior:W2DBehavior)
     func removeBehavior(behavior:W2DBehavior)
     
+    func setNeedsRedraw(rect : CGRect)
+    func setNeedsFullRedraw()
 }
 
 public func createW2DDirector(target:WKInterfaceImage, context:W2DContext) -> W2DDirector

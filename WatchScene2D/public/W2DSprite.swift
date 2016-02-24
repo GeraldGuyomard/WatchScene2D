@@ -12,18 +12,18 @@ public class W2DSprite : W2DNode
 {
     private var fImage : W2DImage?
     
-    public init(image:W2DImage?)
+    public init(image:W2DImage?, director:W2DDirector)
     {
-        super.init()
+        super.init(director: director)
         
         self.image = image
     }
     
-    public init(named name:String, inContext context: W2DContext)
+    public init(named name:String, inDirector director: W2DDirector)
     {
-        super.init()
+        super.init(director: director)
         
-        let img = context.image(named:name)
+        let img = director.context.image(named:name)
         self.image = img
     }
     

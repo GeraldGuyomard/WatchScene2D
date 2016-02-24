@@ -21,6 +21,8 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
     private var     fSensitivity = Float(0.0)
     private var     fLastNormalizedInput = Float(0.0)
     
+    private var     fInvalidatedRects : [CGRect]?
+    
     init(target:WKInterfaceImage, context:W2DContext)
     {
         fTarget = target
@@ -35,6 +37,28 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
     var dT : NSTimeInterval { return fdT }
     
     var currentScene : W2DScene?
+    {
+        didSet
+        {
+            if self.smartRedrawEnabled
+            {
+                
+            }
+        }
+    }
+    
+    var smartRedrawEnabled : Bool = false
+    {
+        didSet
+        {
+            if !self.smartRedrawEnabled
+            {
+                fInvalidatedRects = nil
+            }
+        }
+    }
+    
+    var showDirtyRects : Bool = false
     
     func setupDigitalCrownInput(picker picker:WKInterfacePicker, sensitivity:UInt)
     {
@@ -155,7 +179,32 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
     {
         if let scene = self.currentScene
         {
-            scene.render(self)
+            if (self.smartRedrawEnabled)
+            {
+                if let rects = fInvalidatedRects
+                {
+                    for r in rects
+                    {
+                        fContext.saveState();
+                        fContext.applyClipping(r)
+                        
+                        scene.render()
+                        
+                        if self.showDirtyRects
+                        {
+                            fContext.fillRect(r, withColor: W2DColor4f(red: 1, green: 0, blue: 0, alpha: 0.25))
+                        }
+                        
+                        fContext.restoreState()
+                    }
+                    
+                    fInvalidatedRects = nil
+                }
+            }
+            else
+            {
+                scene.render()
+            }
         }
     }
     
@@ -165,4 +214,49 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         fTarget.setImage(image)
     }
     
+    private static func addDirtyRect(rect: CGRect, var dirtyRects rects:[CGRect])
+    {
+        // coalesce rectI if another rectangle overlaps it
+        var i  = 0
+        let c = rects.count
+        
+        while i < c
+        {
+            let r = rects[i]
+            if CGRectIntersectsRect(rect, r)
+            {
+                rects.removeAtIndex(i)
+                let newRect = CGRectUnion(rect, r)
+                addDirtyRect(newRect, dirtyRects:rects)
+                return
+            }
+            else
+            {
+                ++i
+            }
+        }
+        
+        rects.append(rect)
+    }
+    
+    func setNeedsRedraw(rect : CGRect)
+    {
+        let rectI = CGRectMake( CGFloat(floorf(Float(rect.origin.x))), CGFloat(floorf(Float(rect.origin.y))),
+                                CGFloat(ceilf(Float(rect.size.width))), CGFloat(ceilf(Float(rect.size.height))))
+        
+        if let rects = fInvalidatedRects
+        {
+            W2DDirectorImpl.addDirtyRect(rectI, dirtyRects:rects)
+        }
+        else
+        {
+            fInvalidatedRects = [CGRect]()
+            fInvalidatedRects!.append(rectI)
+        }
+    }
+    
+    func setNeedsFullRedraw()
+    {
+        setNeedsRedraw(CGRectMake(0, 0, CGFloat(fContext.width), CGFloat(fContext.height)))
+    }
 }

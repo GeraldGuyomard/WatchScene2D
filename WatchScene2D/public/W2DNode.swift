@@ -27,6 +27,8 @@ public class W2DNode : W2DComponent
     private var fPosition = CGPointMake(0, 0)
     private var fSize = CGSizeMake(0, 0)
     
+    private weak var fDirector : W2DDirector?
+    
     public var hidden = false
     
     public var position : CGPoint
@@ -37,8 +39,12 @@ public class W2DNode : W2DComponent
         {
             if (fPosition != newPosition)
             {
+                setNeedsRedraw(true)
+                
                 fPosition = newPosition
+                
                 invalidateTransforms()
+                setNeedsRedraw(true)
             }
         }
     }
@@ -51,14 +57,23 @@ public class W2DNode : W2DComponent
         {
             if (fSize != newSize)
             {
+                setNeedsRedraw(true)
+                
                 fSize = newSize
-                invalidateTransforms()
+                
+                setNeedsRedraw(true)
             }
         }
     }
     
-    public override init()
+    public init(director:W2DDirector)
     {
+        fDirector = director
+    }
+    
+    public var director : W2DDirector?
+    {
+        get { return fDirector }
     }
     
     public var parent : W2DNode?
@@ -75,6 +90,8 @@ public class W2DNode : W2DComponent
     {
         if let p = fParent
         {
+            setNeedsRedraw(true)
+            
             assert(p.fChildren != nil)
             if let index = p.fChildren!.indexOf({(n:W2DNode) -> Bool in
                 return n === self
@@ -110,6 +127,8 @@ public class W2DNode : W2DComponent
         
         fChildren!.append(child)
         child.fParent = self
+        
+        child.setNeedsRedraw(true)
     }
     
     public var localTransform : CGAffineTransform
@@ -156,31 +175,67 @@ public class W2DNode : W2DComponent
         return fGlobalBoundingBox
     }
     
-    public func render(director:W2DDirector!)
+    public func render()
     {
         if (!self.hidden)
         {
-            let context = director.context
+            let context = fDirector!.context
             
-            context.saveTranform()
+            context.saveState()
             context.applyTransform(self.globalTransform)
             
-            selfRender(context)
+            var shouldRender = true
+            
+            if let clippingRect = context.clippingRect
+            {
+                let rect = self.globalBoundingBox
+                shouldRender = CGRectIntersectsRect(clippingRect, rect)
+            }
+
+            if shouldRender
+            {
+                selfRender(context)
+            }
             
             if let children = fChildren
             {
                 for child in children
                 {
-                    child.render(director)
+                    child.render()
                 }
             }
             
-            context.restoreTransform()
+            context.restoreState()
         }
     }
     
     public func selfRender(context:W2DContext)
     {}
+    
+    public func setNeedsRedraw(descendantsToo:Bool)
+    {
+        if !self.hidden
+        {
+            if let director = fDirector
+            {
+                if director.smartRedrawEnabled
+                {
+                    director.setNeedsRedraw(self.globalBoundingBox)
+                    
+                    if descendantsToo
+                    {
+                        if let children = fChildren
+                        {
+                            for child in children
+                            {
+                                child.setNeedsRedraw(true)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     internal func invalidateTransforms()
     {

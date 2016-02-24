@@ -36,7 +36,11 @@ import Foundation
     
     var width : UInt { return fWidth }
     var height : UInt { return fHeight }
-
+    var clippingRect : CGRect?
+    {
+        return fClippingRect
+    }
+    
     func clear(color:W2DColor4f)
     {
         if color.red == 0 && color.green == 0 && color.blue == 0 && color.alpha == 0
@@ -92,12 +96,12 @@ import Foundation
         return UIImage(CGImage: fImage!)
     }
     
-    func saveTranform()
+    func saveState()
     {
         CGContextSaveGState(fCGContext)
     }
     
-    func restoreTransform()
+    func restoreState()
     {
         CGContextRestoreGState(fCGContext)
     }
@@ -107,10 +111,17 @@ import Foundation
         CGContextConcatCTM(fCGContext, transform)
     }
     
+    func applyClipping(rect:CGRect)
+    {
+        CGContextClipToRect(fCGContext, rect)
+        fClippingRect = rect
+    }
+    
     private var    fBackBuffer : UnsafeMutablePointer<Void> = UnsafeMutablePointer<Void>();
     private var    fCGContext : CGContext?;
     private var    fWidth : UInt = 0;
     private var    fHeight : UInt = 0;
+    private var    fClippingRect : CGRect? = nil
     private var    fImage : CGImage?;
     
 }

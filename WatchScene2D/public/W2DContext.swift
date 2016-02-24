@@ -12,6 +12,7 @@ public protocol W2DContext
 {
     var width : UInt { get }
     var height : UInt { get }
+    var clippingRect : CGRect? { get }
     
     func clear(color:W2DColor4f)
     func fillRect(rect:CGRect, withColor color:W2DColor4f)
@@ -20,9 +21,11 @@ public protocol W2DContext
     
     func render() -> UIImage?
     
-    func saveTranform()
-    func restoreTransform()
+    func saveState()
+    func restoreState()
+    
     func applyTransform(transform:CGAffineTransform)
+    func applyClipping(rect:CGRect)
 }
 
 public func createW2DContext(width width:UInt, height:UInt) -> W2DContext
