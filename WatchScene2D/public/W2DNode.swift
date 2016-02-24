@@ -28,8 +28,17 @@ public class W2DNode : W2DComponent
     private var fSize = CGSizeMake(0, 0)
     
     private weak var fDirector : W2DDirector?
+    private var fIsOnScreen = false
     
     public var hidden = false
+    
+    public var isOnScreen : Bool
+    {
+        get
+        {
+            return fIsOnScreen
+        }
+    }
     
     public var position : CGPoint
     {
@@ -90,8 +99,6 @@ public class W2DNode : W2DComponent
     {
         if let p = fParent
         {
-            setNeedsRedraw(true)
-            
             assert(p.fChildren != nil)
             if let index = p.fChildren!.indexOf({(n:W2DNode) -> Bool in
                 return n === self
@@ -103,6 +110,8 @@ public class W2DNode : W2DComponent
                     p.fChildren = nil
                 }
             }
+            
+            setIsOnScreen(false)
             
             fParent = nil
         }
@@ -128,7 +137,7 @@ public class W2DNode : W2DComponent
         fChildren!.append(child)
         child.fParent = self
         
-        child.setNeedsRedraw(true)
+        child.setIsOnScreen(fIsOnScreen)
     }
     
     public var localTransform : CGAffineTransform
@@ -214,7 +223,7 @@ public class W2DNode : W2DComponent
     
     public func setNeedsRedraw(descendantsToo:Bool)
     {
-        if !self.hidden
+        if !self.hidden && self.isOnScreen
         {
             if let director = fDirector
             {
@@ -232,6 +241,24 @@ public class W2DNode : W2DComponent
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+    
+    internal func setIsOnScreen(onScreen:Bool)
+    {
+        if fIsOnScreen != onScreen
+        {
+            fIsOnScreen = onScreen
+            
+            setNeedsRedraw(false)
+            
+            if let children = fChildren
+            {
+                for child in children
+                {
+                    child.setIsOnScreen(onScreen)
                 }
             }
         }

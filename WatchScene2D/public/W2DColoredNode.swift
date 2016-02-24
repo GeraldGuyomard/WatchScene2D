@@ -11,6 +11,12 @@ import WatchKit
 public class W2DColoredNode : W2DNode
 {
     public var color : W2DColor4f?
+    {
+        didSet
+        {
+            setNeedsRedraw(false)
+        }
+    }
     
     public init(color:W2DColor4f?, director:W2DDirector)
     {

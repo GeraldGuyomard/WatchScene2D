@@ -43,16 +43,16 @@ import Foundation
     
     func clear(color:W2DColor4f)
     {
-        if color.red == 0 && color.green == 0 && color.blue == 0 && color.alpha == 0
+        /*if color.red == 0 && color.green == 0 && color.blue == 0 && color.alpha == 0
         {
             let size = fWidth * fHeight * 4
             memset(fBackBuffer, 0, Int(size))
         }
-        else
-        {
+        else*/
+        //{
             let rect = CGRect(x: 0, y: 0, width:CGFloat(fWidth), height:CGFloat(fHeight))
             fillRect(rect, withColor: color)
-        }
+        //}
     }
     
     func fillRect(rect:CGRect, withColor color:W2DColor4f)

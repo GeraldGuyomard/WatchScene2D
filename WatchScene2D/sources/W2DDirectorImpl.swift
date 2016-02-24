@@ -42,7 +42,15 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         {
             if self.smartRedrawEnabled
             {
+                if let oldScene = oldValue
+                {
+                    oldScene.discard()
+                }
                 
+                if let newScene = self.currentScene
+                {
+                    newScene.present()
+                }
             }
         }
     }
@@ -214,20 +222,20 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         fTarget.setImage(image)
     }
     
-    private static func addDirtyRect(rect: CGRect, var dirtyRects rects:[CGRect])
+    private func addDirtyRect(rect: CGRect)
     {
         // coalesce rectI if another rectangle overlaps it
         var i  = 0
-        let c = rects.count
+        let c = fInvalidatedRects!.count
         
         while i < c
         {
-            let r = rects[i]
+            let r = fInvalidatedRects![i]
             if CGRectIntersectsRect(rect, r)
             {
-                rects.removeAtIndex(i)
+                fInvalidatedRects!.removeAtIndex(i)
                 let newRect = CGRectUnion(rect, r)
-                addDirtyRect(newRect, dirtyRects:rects)
+                addDirtyRect(newRect)
                 return
             }
             else
@@ -236,17 +244,22 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
             }
         }
         
-        rects.append(rect)
+        fInvalidatedRects!.append(rect)
     }
     
     func setNeedsRedraw(rect : CGRect)
     {
+        if rect.size.width <= 0 || rect.size.height <= 0
+        {
+            return
+        }
+
         let rectI = CGRectMake( CGFloat(floorf(Float(rect.origin.x))), CGFloat(floorf(Float(rect.origin.y))),
                                 CGFloat(ceilf(Float(rect.size.width))), CGFloat(ceilf(Float(rect.size.height))))
         
-        if let rects = fInvalidatedRects
+        if fInvalidatedRects != nil
         {
-            W2DDirectorImpl.addDirtyRect(rectI, dirtyRects:rects)
+            addDirtyRect(rectI)
         }
         else
         {

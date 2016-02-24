@@ -43,6 +43,8 @@ public class W2DSprite : W2DNode
             {
                 self.size = CGSizeMake(0, 0)
             }
+            
+            setNeedsRedraw(false)
         }
     }
     
