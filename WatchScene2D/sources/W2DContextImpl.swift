@@ -18,9 +18,7 @@ import Foundation
         fWidth = width
         fHeight = height
         
-        let bufferSize = fWidth * fHeight * 4
-        fBackBuffer = malloc(Int(bufferSize))
-        //memset(m_BackBuffer, 0xFF, bufferSize);
+        fBackBuffer = malloc(self.bufferSize)
         
         let rgbColorSpace = CGColorSpaceCreateDeviceRGB();
         
@@ -31,7 +29,7 @@ import Foundation
     
     deinit
     {
-        
+        free(fBackBuffer)
     }
     
     var width : UInt { return fWidth }
@@ -39,6 +37,11 @@ import Foundation
     var clippingRect : CGRect?
     {
         return fClippingRect
+    }
+    
+    var bufferSize : Int
+    {
+        get { return Int(fWidth * fHeight * 4) }
     }
     
     func clear(color:W2DColor4f)
@@ -69,31 +72,58 @@ import Foundation
         return W2DImageImpl(context:fCGContext!, named: name)
     }
     
+    private func createCGImage(backBuffer: UnsafeMutablePointer<Void>) -> CGImage?
+    {
+        let provider = CGDataProviderCreateWithData(nil, backBuffer, self.bufferSize, nil)
+        
+        let bitsPerComponent = CGBitmapContextGetBitsPerComponent (fCGContext)
+        let bitsPerPixel = CGBitmapContextGetBitsPerPixel(fCGContext)
+        let bytesPerRow = CGBitmapContextGetBytesPerRow(fCGContext)
+        let colorSpace = CGBitmapContextGetColorSpace(fCGContext)
+        
+        let cgImage = CGImageCreate(Int(fWidth), Int(fHeight),
+            bitsPerComponent,
+            bitsPerPixel,
+            bytesPerRow,
+            colorSpace,
+            CGBitmapInfo(rawValue: CGImageAlphaInfo.None.rawValue),
+            provider,
+            nil,
+            false,
+            .RenderingIntentDefault)
+        
+        return cgImage
+    }
+    
     func render() -> UIImage?
     {
         if (fImage == nil)
         {
-            let bufferSize : Int = Int(fWidth * fHeight * 4)
-            let provider = CGDataProviderCreateWithData(nil, fBackBuffer, bufferSize, nil)
-            
-            let bitsPerComponent = CGBitmapContextGetBitsPerComponent (fCGContext)
-            let bitsPerPixel = CGBitmapContextGetBitsPerPixel(fCGContext)
-            let bytesPerRow = CGBitmapContextGetBytesPerRow(fCGContext)
-            let colorSpace = CGBitmapContextGetColorSpace(fCGContext)
-            
-            fImage = CGImageCreate(Int(fWidth), Int(fHeight),
-                bitsPerComponent,
-                bitsPerPixel,
-                bytesPerRow,
-                colorSpace,
-                CGBitmapInfo(rawValue: CGImageAlphaInfo.None.rawValue),
-                provider,
-                nil,
-                false,
-                .RenderingIntentDefault)
+            fImage = createCGImage(fBackBuffer)
         }
         
         return UIImage(CGImage: fImage!)
+    }
+    
+    func render(dirtyRects: [CGRect]?) -> UIImage?
+    {
+        if let rects = dirtyRects
+        {
+            let newContext = W2DContextImpl(width: fWidth, height: fHeight)
+            memcpy(newContext.fBackBuffer, fBackBuffer, self.bufferSize)
+            
+            let color = W2DColor4f(red: 1, green: 0, blue: 0, alpha: 0.25)
+            for r in rects
+            {
+                newContext.fillRect(r, withColor: color)
+            }
+            
+            return newContext.render()
+        }
+        else
+        {
+            return self.render()
+        }
     }
     
     func saveState()
@@ -122,6 +152,6 @@ import Foundation
     private var    fWidth : UInt = 0;
     private var    fHeight : UInt = 0;
     private var    fClippingRect : CGRect? = nil
-    private var    fImage : CGImage?;
+    private var    fImage : CGImage?
     
 }

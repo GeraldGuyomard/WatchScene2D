@@ -20,6 +20,7 @@ public protocol W2DContext
     func image(named name:String) -> W2DImage?
     
     func render() -> UIImage?
+    func render(dirtyRects: [CGRect]?) -> UIImage?
     
     func saveState()
     func restoreState()

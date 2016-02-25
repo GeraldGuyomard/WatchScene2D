@@ -49,6 +49,7 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
                 
                 if let newScene = self.currentScene
                 {
+                    newScene.size = CGSizeMake(CGFloat(fContext.width), CGFloat(fContext.height))
                     newScene.present()
                 }
             }
@@ -198,15 +199,8 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
                         
                         scene.render()
                         
-                        if self.showDirtyRects
-                        {
-                            fContext.fillRect(r, withColor: W2DColor4f(red: 1, green: 0, blue: 0, alpha: 0.25))
-                        }
-                        
                         fContext.restoreState()
                     }
-                    
-                    fInvalidatedRects = nil
                 }
             }
             else
@@ -218,33 +212,20 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
     
     private func presentRender()
     {
-        let image = fContext.render()
-        fTarget.setImage(image)
-    }
-    
-    private func addDirtyRect(rect: CGRect)
-    {
-        // coalesce rectI if another rectangle overlaps it
-        var i  = 0
-        let c = fInvalidatedRects!.count
+        var image : UIImage?
         
-        while i < c
+        if self.showDirtyRects
         {
-            let r = fInvalidatedRects![i]
-            if CGRectIntersectsRect(rect, r)
-            {
-                fInvalidatedRects!.removeAtIndex(i)
-                let newRect = CGRectUnion(rect, r)
-                addDirtyRect(newRect)
-                return
-            }
-            else
-            {
-                ++i
-            }
+            image = fContext.render(fInvalidatedRects)
+        }
+        else
+        {
+            image = fContext.render()
         }
         
-        fInvalidatedRects!.append(rect)
+        fInvalidatedRects = nil
+        
+        fTarget.setImage(image)
     }
     
     func setNeedsRedraw(rect : CGRect)
@@ -254,12 +235,51 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
             return
         }
 
-        let rectI = CGRectMake( CGFloat(floorf(Float(rect.origin.x))), CGFloat(floorf(Float(rect.origin.y))),
-                                CGFloat(ceilf(Float(rect.size.width))), CGFloat(ceilf(Float(rect.size.height))))
+        let origin = CGPointMake(CGFloat(floorf(Float(rect.origin.x))), CGFloat(floorf(Float(rect.origin.y))))
+        let end = CGPointMake(CGFloat(ceilf(Float(rect.origin.x + rect.size.width))), CGFloat(ceilf(Float(rect.origin.y + rect.size.height))))
+        var rectI = CGRectMake(origin.x - 1.0, origin.y - 1.0, end.x - origin.x + 1.0, end.y - origin.y + 1.0)
         
         if fInvalidatedRects != nil
         {
-            addDirtyRect(rectI)
+            var shouldLoop = true
+            while shouldLoop
+            {
+                // coalesce rectI if another rectangle overlaps it
+                var i  = 0
+                let c = fInvalidatedRects!.count
+                var shouldAppend = true
+                
+                while i < c
+                {
+                    let r = fInvalidatedRects![i]
+                    if CGRectIntersectsRect(r, rectI)
+                    {
+                        shouldAppend = false
+                        
+                        if CGRectContainsRect(r, rectI)
+                        {
+                            shouldLoop = false
+                        }
+                        else
+                        {
+                            fInvalidatedRects!.removeAtIndex(i)
+                            rectI = CGRectUnion(rectI, r)
+                        }
+                        
+                        break
+                    }
+                    else
+                    {
+                        ++i
+                    }
+                }
+                
+                if (shouldAppend)
+                {
+                    fInvalidatedRects!.append(rect)
+                    shouldLoop = false
+                }
+            }
         }
         else
         {

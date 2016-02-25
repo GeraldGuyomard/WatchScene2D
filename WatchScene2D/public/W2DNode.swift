@@ -70,6 +70,7 @@ public class W2DNode : W2DComponent
                 
                 fSize = newSize
                 
+                invalidateTransforms()
                 setNeedsRedraw(true)
             }
         }
