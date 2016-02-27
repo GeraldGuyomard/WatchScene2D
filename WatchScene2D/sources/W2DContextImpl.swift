@@ -112,7 +112,7 @@ import Foundation
             let newContext = W2DContextImpl(width: fWidth, height: fHeight)
             memcpy(newContext.fBackBuffer, fBackBuffer, self.bufferSize)
             
-            let color = W2DColor4f(red: 1, green: 0, blue: 0, alpha: 0.25)
+            let color = W2DColor4f(red: 1, green: 0, blue: 0, alpha: 0.5)
             for r in rects
             {
                 newContext.fillRect(r, withColor: color)
