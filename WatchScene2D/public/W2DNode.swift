@@ -251,9 +251,17 @@ public class W2DNode : W2DComponent
     {
         if fIsOnScreen != onScreen
         {
-            fIsOnScreen = onScreen
-            
-            setNeedsRedraw(false)
+            if (onScreen)
+            {
+                fIsOnScreen = true
+                setNeedsRedraw(false)
+            }
+            else
+            {
+                // leaving screen
+                setNeedsRedraw(false)
+                fIsOnScreen = false
+            }
             
             if let children = fChildren
             {

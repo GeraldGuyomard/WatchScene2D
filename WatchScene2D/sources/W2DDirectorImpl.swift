@@ -230,14 +230,12 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
     
     func setNeedsRedraw(rect : CGRect)
     {
-        if rect.size.width <= 0 || rect.size.height <= 0
+        var rectI = CGRectIntegral(rect)
+        
+        if rectI.size.width <= 0 || rectI.size.height <= 0
         {
             return
         }
-
-        let origin = CGPointMake(CGFloat(floorf(Float(rect.origin.x))), CGFloat(floorf(Float(rect.origin.y))))
-        let end = CGPointMake(CGFloat(ceilf(Float(rect.origin.x + rect.size.width))), CGFloat(ceilf(Float(rect.origin.y + rect.size.height))))
-        var rectI = CGRectMake(origin.x - 1.0, origin.y - 1.0, end.x - origin.x + 1.0, end.y - origin.y + 1.0)
         
         if fInvalidatedRects != nil
         {
@@ -276,7 +274,7 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
                 
                 if (shouldAppend)
                 {
-                    fInvalidatedRects!.append(rect)
+                    fInvalidatedRects!.append(rectI)
                     shouldLoop = false
                 }
             }
