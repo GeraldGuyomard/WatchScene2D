@@ -10,6 +10,8 @@ import Foundation
 
 public class W2DComponent
 {
+    public var debugName : String? = nil
+    
     public init()
     {
     }
