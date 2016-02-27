@@ -48,12 +48,51 @@ internal class W2DImageImpl : W2DImage
             CGContextDrawImage(fCGContext, rect, cgImage)
         }
     }
+
+    func draw(pos:CGPoint, alpha:CGFloat)
+    {
+        if (alpha == 1.0)
+        {
+            draw(pos)
+        }
+        else if (alpha != 0.0)
+        {
+            if let img = fUIImage
+            {
+                let cgImage = img.CGImage;
+                let rect = CGRect(x:pos.x, y:pos.y, width:CGFloat(CGImageGetWidth(cgImage)), height:CGFloat(CGImageGetHeight(cgImage)))
+                
+                CGContextSaveGState(fCGContext)
+                CGContextSetAlpha(fCGContext, alpha)
+                CGContextDrawImage(fCGContext, rect, cgImage)
+                CGContextRestoreGState(fCGContext)
+            }
+        }
+    }
     
     func draw(rect:CGRect)
     {
         if let img = fUIImage
         {
             CGContextDrawImage(fCGContext, rect, img.CGImage)
+        }
+    }
+    
+    func draw(rect:CGRect, alpha:CGFloat)
+    {
+        if (alpha == 1.0)
+        {
+            draw(rect)
+        }
+        else if (alpha != 0.0)
+        {
+            if let img = fUIImage
+            {
+                CGContextSaveGState(fCGContext)
+                CGContextSetAlpha(fCGContext, alpha)
+                CGContextDrawImage(fCGContext, rect, img.CGImage)
+                CGContextRestoreGState(fCGContext)
+            }
         }
     }
 }

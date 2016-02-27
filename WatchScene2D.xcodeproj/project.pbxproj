@@ -13,6 +13,9 @@
 		74041F961BD43F98004EDB33 /* W2DDirectorImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F951BD43F98004EDB33 /* W2DDirectorImpl.swift */; };
 		74041F981BD44CC6004EDB33 /* W2DImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F971BD44CC6004EDB33 /* W2DImage.swift */; };
 		74041F9A1BD44E12004EDB33 /* W2DImageImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F991BD44E12004EDB33 /* W2DImageImpl.swift */; };
+		74426D541C8239A600068074 /* W2DAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74426D531C8239A600068074 /* W2DAction.swift */; };
+		74426D561C823D7D00068074 /* W2DBehaviorGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74426D551C823D7D00068074 /* W2DBehaviorGroup.swift */; };
+		74426D581C8256AD00068074 /* W2DFadeToAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74426D571C8256AD00068074 /* W2DFadeToAction.swift */; };
 		745C2B571BE8772900EA2639 /* W2DSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C2B561BE8772900EA2639 /* W2DSprite.swift */; };
 		745C2B591BE8804100EA2639 /* W2DScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C2B581BE8804100EA2639 /* W2DScene.swift */; };
 		745C2B5C1BE887ED00EA2639 /* W2DColor4f.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C2B5B1BE887ED00EA2639 /* W2DColor4f.swift */; };
@@ -31,6 +34,9 @@
 		74041F951BD43F98004EDB33 /* W2DDirectorImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DDirectorImpl.swift; sourceTree = "<group>"; };
 		74041F971BD44CC6004EDB33 /* W2DImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DImage.swift; sourceTree = "<group>"; };
 		74041F991BD44E12004EDB33 /* W2DImageImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DImageImpl.swift; sourceTree = "<group>"; };
+		74426D531C8239A600068074 /* W2DAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DAction.swift; sourceTree = "<group>"; };
+		74426D551C823D7D00068074 /* W2DBehaviorGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DBehaviorGroup.swift; sourceTree = "<group>"; };
+		74426D571C8256AD00068074 /* W2DFadeToAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DFadeToAction.swift; sourceTree = "<group>"; };
 		745C2B561BE8772900EA2639 /* W2DSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DSprite.swift; sourceTree = "<group>"; };
 		745C2B581BE8804100EA2639 /* W2DScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DScene.swift; sourceTree = "<group>"; };
 		745C2B5B1BE887ED00EA2639 /* W2DColor4f.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DColor4f.swift; sourceTree = "<group>"; };
@@ -106,6 +112,9 @@
 				745C2B5B1BE887ED00EA2639 /* W2DColor4f.swift */,
 				7487DDFA1C14F53400E74977 /* W2DComponent.swift */,
 				74D5C4191C586A2A00829DE7 /* W2DColoredNode.swift */,
+				74426D531C8239A600068074 /* W2DAction.swift */,
+				74426D551C823D7D00068074 /* W2DBehaviorGroup.swift */,
+				74426D571C8256AD00068074 /* W2DFadeToAction.swift */,
 			);
 			path = public;
 			sourceTree = "<group>";
@@ -197,8 +206,11 @@
 				74D6FBC81BE7113300D0276F /* W2DNode.swift in Sources */,
 				745C2B5C1BE887ED00EA2639 /* W2DColor4f.swift in Sources */,
 				74E4AE981BC606A5006860EE /* W2DContextImpl.swift in Sources */,
+				74426D581C8256AD00068074 /* W2DFadeToAction.swift in Sources */,
 				74041F981BD44CC6004EDB33 /* W2DImage.swift in Sources */,
 				745C2B591BE8804100EA2639 /* W2DScene.swift in Sources */,
+				74426D541C8239A600068074 /* W2DAction.swift in Sources */,
+				74426D561C823D7D00068074 /* W2DBehaviorGroup.swift in Sources */,
 				74E4AE961BC60601006860EE /* W2DContext.swift in Sources */,
 				745C2B571BE8772900EA2639 /* W2DSprite.swift in Sources */,
 				7487DDFB1C14F53400E74977 /* W2DComponent.swift in Sources */,

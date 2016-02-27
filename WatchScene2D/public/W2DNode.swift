@@ -29,8 +29,31 @@ public class W2DNode : W2DComponent
     
     private weak var fDirector : W2DDirector?
     private var fIsOnScreen = false
+    private var fAlpha : CGFloat = 1.0
     
     public var hidden = false
+    public var alpha : CGFloat
+    {
+        get { return fAlpha }
+        set
+        {
+            var newAlpha = newValue
+            if newAlpha < 0.0
+            {
+                newAlpha = 0.0
+            }
+            else if (newAlpha > 1.0)
+            {
+                newAlpha = 1.0
+            }
+            
+            if newAlpha != fAlpha
+            {
+                fAlpha = newAlpha
+                setNeedsRedraw(false)
+            }
+        }
+    }
     
     public var isOnScreen : Bool
     {

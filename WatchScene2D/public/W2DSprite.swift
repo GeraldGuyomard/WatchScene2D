@@ -54,7 +54,7 @@ public class W2DSprite : W2DNode
         {
             let s = self.size
             let rect = CGRectMake(0, 0, s.width, s.height)
-            img.draw(rect)
+            img.draw(rect, alpha: self.alpha)
         }
     }
 }

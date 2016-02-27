@@ -8,6 +8,8 @@
 
 import Foundation
 
+public typealias W2DActionManager = W2DBehaviorGroup
+
 public protocol W2DDirector : class
 {
     var context : W2DContext { get }
@@ -15,6 +17,7 @@ public protocol W2DDirector : class
     var dT : NSTimeInterval { get }
     var smartRedrawEnabled : Bool { get set }
     var showDirtyRects : Bool { get set }
+    var actionManager : W2DActionManager { get }
     
     func setupDigitalCrownInput(picker picker:WKInterfacePicker, sensitivity:UInt)
     func setDigitalCrownValue(value:Float) // 0..1

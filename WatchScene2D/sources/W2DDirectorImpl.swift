@@ -15,7 +15,8 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
     private var     fPreviousRenderTime: NSDate?
     private var     fdT : NSTimeInterval = 0.0
     private var     fContext : W2DContext
-    private var     fBehaviors = [W2DBehavior]()
+    private var     fBehaviors = W2DBehaviorGroup()
+    private var     fActions = W2DBehaviorGroup()
     
     private var     fInterfacePicker : WKInterfacePicker?
     private var     fSensitivity = Float(0.0)
@@ -68,6 +69,11 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
     }
     
     var showDirtyRects : Bool = false
+    
+    var actionManager : W2DActionManager
+    {
+        get { return fActions }
+    }
     
     func setupDigitalCrownInput(picker picker:WKInterfacePicker, sensitivity:UInt)
     {
@@ -129,28 +135,26 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         }
     }
     
-    private func _behaviorIndex(behavior:W2DBehavior) -> Array<W2DBehavior>.Index?
-    {
-        return
-            fBehaviors.indexOf({ (b:W2DBehavior) -> Bool in
-            return b === behavior;
-        })
-    }
-    
     func addBehavior(behavior:W2DBehavior)
     {
-        if (_behaviorIndex(behavior) == nil)
-        {
-            fBehaviors.append(behavior)
-        }
+        fBehaviors.addBehavior(behavior)
     }
     
     func removeBehavior(behavior:W2DBehavior)
     {
-        if let index = _behaviorIndex(behavior)
-        {
-            fBehaviors.removeAtIndex(index)
-        }
+        fBehaviors.removeBehavior(behavior)
+    }
+    
+    func startAction(action:W2DAction)
+    {
+        fActions.addBehavior(action)
+        action.start()
+    }
+    
+    func stopAction(action:W2DAction)
+    {
+        action.stop()
+        fActions.removeBehavior(action)
     }
     
     func onRenderTimer(timer:NSTimer)
@@ -166,7 +170,8 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         
         fPreviousRenderTime = startT;
         
-        self.processBehaviors()
+        fBehaviors.execute(fdT, director: self)
+        
         self.render()
         self.presentRender()
         
@@ -174,14 +179,6 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         let duration = endT.timeIntervalSinceDate(startT);
         
         print("frame:\(duration * 1000.0) ms")
-    }
-    
-    private func processBehaviors()
-    {
-        for behavior in fBehaviors
-        {
-            behavior.execute(fdT, director:self)
-        }
     }
     
     private func render()
