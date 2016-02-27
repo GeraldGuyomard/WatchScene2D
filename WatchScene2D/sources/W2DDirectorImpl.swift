@@ -171,6 +171,7 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         fPreviousRenderTime = startT;
         
         fBehaviors.execute(fdT, director: self)
+        fActions.execute(fdT, director: self)
         
         self.render()
         self.presentRender()
