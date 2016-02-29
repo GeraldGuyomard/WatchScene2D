@@ -20,7 +20,18 @@ public class W2DScene : W2DNode
     
     override public func selfRender(context: W2DContext)
     {
-        context.clear(self.backgroundColor)
+        let rect = CGRectMake(0, 0, self.size.width, self.size.height)
+        
+        let c = self.backgroundColor
+        if c.alpha != 1
+        {
+            context.clear(rect)
+        }
+        
+        if c.alpha != 0
+        {
+            context.fillRect(rect, withColor: c)
+        }
     }
     
     public func present()

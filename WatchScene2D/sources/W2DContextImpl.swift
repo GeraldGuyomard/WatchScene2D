@@ -18,11 +18,13 @@ import Foundation
         fWidth = width
         fHeight = height
         
-        fBackBuffer = malloc(self.bufferSize)
+        let size = self.bufferSize
+        fBackBuffer = malloc(size)
+        memset(fBackBuffer, 0, size)
         
         let rgbColorSpace = CGColorSpaceCreateDeviceRGB();
         
-        fCGContext = CGBitmapContextCreate(fBackBuffer, Int(fWidth), Int(fHeight), 8, Int(fWidth * 4), rgbColorSpace, CGImageAlphaInfo.NoneSkipLast.rawValue)
+        fCGContext = CGBitmapContextCreate(fBackBuffer, Int(fWidth), Int(fHeight), 8, Int(fWidth * 4), rgbColorSpace, CGImageAlphaInfo.PremultipliedLast.rawValue)
         
         CGContextSetInterpolationQuality(fCGContext, .None)
     }
@@ -44,18 +46,9 @@ import Foundation
         get { return Int(fWidth * fHeight * 4) }
     }
     
-    func clear(color:W2DColor4f)
+    func clear(rect:CGRect)
     {
-        /*if color.red == 0 && color.green == 0 && color.blue == 0 && color.alpha == 0
-        {
-            let size = fWidth * fHeight * 4
-            memset(fBackBuffer, 0, Int(size))
-        }
-        else*/
-        //{
-            let rect = CGRect(x: 0, y: 0, width:CGFloat(fWidth), height:CGFloat(fHeight))
-            fillRect(rect, withColor: color)
-        //}
+        CGContextClearRect(fCGContext, rect)
     }
     
     func fillRect(rect:CGRect, withColor color:W2DColor4f)
@@ -86,7 +79,7 @@ import Foundation
             bitsPerPixel,
             bytesPerRow,
             colorSpace,
-            CGBitmapInfo(rawValue: CGImageAlphaInfo.None.rawValue),
+            CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedLast.rawValue),
             provider,
             nil,
             false,

@@ -14,7 +14,7 @@ public protocol W2DContext
     var height : UInt { get }
     var clippingRect : CGRect? { get }
     
-    func clear(color:W2DColor4f)
+    func clear(rect:CGRect)
     func fillRect(rect:CGRect, withColor color:W2DColor4f)
     
     func image(named name:String) -> W2DImage?
