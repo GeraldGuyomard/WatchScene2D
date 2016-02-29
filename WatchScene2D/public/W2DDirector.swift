@@ -14,6 +14,7 @@ public protocol W2DDirector : class
 {
     var context : W2DContext { get }
     var currentScene : W2DScene? { get set }
+    var frameRate : UInt { get set }
     var dT : NSTimeInterval { get }
     var smartRedrawEnabled : Bool { get set }
     var showDirtyRects : Bool { get set }

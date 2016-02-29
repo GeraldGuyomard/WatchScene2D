@@ -13,6 +13,7 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
     private var     fTarget : WKInterfaceImage
     private var     fRenderTimer : NSTimer?
     private var     fPreviousRenderTime: NSDate?
+    private var     fFrameRate : UInt = 25
     private var     fdT : NSTimeInterval = 0.0
     private var     fContext : W2DContext
     private var     fBehaviors = W2DBehaviorGroup()
@@ -33,6 +34,24 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
     var context : W2DContext
     {
         get { return fContext }
+    }
+    
+    var frameRate : UInt
+    {
+        get { return fFrameRate }
+        set
+        {
+            if fFrameRate != newValue
+            {
+                assert(newValue != 0)
+                fFrameRate = newValue
+                if fRenderTimer != nil
+                {
+                    stop()
+                    start()
+                }
+            }
+        }
     }
     
     var dT : NSTimeInterval { return fdT }
@@ -121,7 +140,7 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         
         if fRenderTimer == nil
         {
-            let t : NSTimeInterval = 1.0 / 20.0
+            let t : NSTimeInterval = 1.0 / NSTimeInterval(fFrameRate)
             fRenderTimer = NSTimer.scheduledTimerWithTimeInterval(t, target:self, selector:Selector("onRenderTimer:"), userInfo:nil, repeats:true)
         }
     }
