@@ -12,7 +12,7 @@ import Foundation
 public class W2DAction : W2DBehavior
 {
     private weak var fActionManager : W2DBehaviorGroup?
-    internal var fTarget : W2DNode?
+    internal weak var fTarget : W2DNode?
     
     private var fElapsedTime : NSTimeInterval = 0.0
     internal var fIsRunning = false
@@ -25,6 +25,7 @@ public class W2DAction : W2DBehavior
     public init(target:W2DNode)
     {
         fTarget = target
+        target.addAction(self)
         fActionManager = target.director?.actionManager
     }
     
@@ -61,6 +62,11 @@ public class W2DAction : W2DBehavior
             if let manager = fActionManager
             {
                 manager.removeBehavior(self)
+            }
+            
+            if let target = fTarget
+            {
+                target.removeAction(self)
             }
         }
     }

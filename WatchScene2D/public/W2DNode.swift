@@ -31,6 +31,8 @@ public class W2DNode : W2DComponent
     private var fIsOnScreen = false
     private var fAlpha : CGFloat = 1.0
     
+    private var fActions : [W2DAction]? = nil
+    
     public var hidden = false
     public var alpha : CGFloat
     {
@@ -138,6 +140,8 @@ public class W2DNode : W2DComponent
             setIsOnScreen(false)
             
             fParent = nil
+            
+            removeAllActions()
         }
     }
     
@@ -270,6 +274,44 @@ public class W2DNode : W2DComponent
         }
     }
     
+    
+    public func removeAction(action:W2DAction)
+    {
+        if fActions != nil
+        {
+            for i in 0..<fActions!.count
+            {
+                if fActions![i] === action
+                {
+                    fActions!.removeAtIndex(i)
+                    if fActions!.isEmpty
+                    {
+                        fActions = nil
+                    }
+                    
+                    action.stop()
+                    break
+                }
+            }
+        }
+    }
+    
+    public func removeAllActions()
+    {
+        if let actions = fActions
+        {
+            fActions = nil
+            
+            for action in actions
+            {
+                action.stop()
+            }
+        }
+    }
+    
+    /*
+        Internal methods
+    */
     internal func setIsOnScreen(onScreen:Bool)
     {
         if fIsOnScreen != onScreen
@@ -309,5 +351,16 @@ public class W2DNode : W2DComponent
                 child.invalidateTransforms()
             }
         }
+    }
+    
+    // to be called only be w2daction class
+    internal func addAction(action:W2DAction)
+    {
+        if fActions == nil
+        {
+            fActions = [W2DAction]()
+        }
+        
+        fActions!.append(action)
     }
 }
