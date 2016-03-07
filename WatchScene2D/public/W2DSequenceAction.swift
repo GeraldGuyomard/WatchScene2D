@@ -24,15 +24,56 @@ public class W2DSequenceAction : W2DFiniteDurationAction
         fDuration += action.duration
     }
     
-    public override func run(director: W2DDirector!)
+    public override func execute(dT: NSTimeInterval, director: W2DDirector!)
     {
-        if fRunningSubAction == nil
+        super.execute(dT, director: director)
+        
+        if let action = fRunningSubAction
         {
-            fRunningSubAction = fSubActions.first
+            action.execute(dT, director: director)
+        }
+        else
+        {
+            fRunningSubAction = !fSubActions.isEmpty ? fSubActions.removeFirst() : nil
             if let action = fRunningSubAction
             {
-                //action.
+                action.fTarget = self.target
+                
+                action.stopCallback = {[weak self](action:W2DAction, finished:Bool) in
+                    if let this = self
+                    {
+                        this.fRunningSubAction = !this.fSubActions.isEmpty ? this.fSubActions.removeFirst() : nil
+                        if this.fRunningSubAction == nil
+                        {
+                            this.onDone(true)
+                        }
+                    }
+                }
+                
+                action.start()
+                action.execute(dT, director: director)
+            }
+            else
+            {
+                onDone(true)
             }
         }
+
+    }
+    
+    public override func stop()
+    {
+        if let action = fRunningSubAction
+        {
+            action.stopCallback = nil
+            fRunningSubAction = nil
+            action.stop()
+        }
+        
+        super.stop()
+    }
+    
+    public override func run(director: W2DDirector!)
+    {
     }
 }

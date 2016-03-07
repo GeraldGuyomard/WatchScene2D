@@ -62,10 +62,11 @@ public class W2DAction : W2DBehavior
     
     internal func onDone(finished:Bool)
     {
+        fTarget = nil
+        
         if (fIsRunning)
         {
             fIsRunning = false
-            fTarget = nil
             
             if let cb = stopCallback
             {
