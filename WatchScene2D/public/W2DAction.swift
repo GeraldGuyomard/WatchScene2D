@@ -11,28 +11,21 @@ import Foundation
 
 public class W2DAction : W2DBehavior
 {
-    private weak var fActionManager : W2DBehaviorGroup?
-    internal weak var fTarget : W2DNode?
+    internal var fTarget : W2DNode?
     
     private var fElapsedTime : NSTimeInterval = 0.0
     internal var fIsRunning = false
     
-    public init(actionManager:W2DActionManager)
+    public init()
     {
-        fActionManager = actionManager
     }
     
-    public init(target:W2DNode)
-    {
-        fTarget = target
-        target.addAction(self)
-        fActionManager = target.director?.actionManager
-    }
-    
-    public var target : W2DNode?
+    public var target: W2DNode?
     {
         get { return fTarget }
     }
+    
+    public var stopCallback : ((W2DAction, Bool) -> Void)? = nil
     
     public var elapsedTime : NSTimeInterval
     {
@@ -41,34 +34,16 @@ public class W2DAction : W2DBehavior
     
     public func start()
     {
-        if let manager = fActionManager
+        if (!fIsRunning)
         {
-            if (!fIsRunning)
-            {
-                fElapsedTime = 0
-                fIsRunning = true
-                
-                manager.addBehavior(self)
-            }
+            fElapsedTime = 0
+            fIsRunning = true
         }
     }
     
     public func stop()
     {
-        if (fIsRunning)
-        {
-            fIsRunning = false
-            
-            if let manager = fActionManager
-            {
-                manager.removeBehavior(self)
-            }
-            
-            if let target = fTarget
-            {
-                target.removeAction(self)
-            }
-        }
+        onDone(false)
     }
     
     public func execute(dT: NSTimeInterval, director: W2DDirector!)
@@ -84,27 +59,36 @@ public class W2DAction : W2DBehavior
     {
         assert(false) // to override, thx Swift for not allowing declarations of abstract methods
     }
+    
+    internal func onDone(finished:Bool)
+    {
+        if (fIsRunning)
+        {
+            fIsRunning = false
+            fTarget = nil
+            
+            if let cb = stopCallback
+            {
+                stopCallback = nil
+                cb(self, finished)
+            }
+        }
+    }
 }
 
 public class W2DFiniteDurationAction : W2DAction
 {
-    private var fDuration : NSTimeInterval
+    internal var fDuration : NSTimeInterval
     
     public var duration : NSTimeInterval
     {
         get { return fDuration }
     }
     
-    public init(actionManager:W2DActionManager, duration:NSTimeInterval)
+    public init(duration:NSTimeInterval)
     {
         fDuration = duration
-        super.init(actionManager: actionManager)
-    }
-
-    public init(target:W2DNode, duration:NSTimeInterval)
-    {
-        fDuration = duration
-        super.init(target: target)
+        super.init()
     }
     
     override public func execute(dT: NSTimeInterval, director: W2DDirector!)
@@ -113,8 +97,7 @@ public class W2DFiniteDurationAction : W2DAction
         
         if (fElapsedTime >= fDuration)
         {
-            // done
-            stop()
+            onDone(true)
         }
     }
 }

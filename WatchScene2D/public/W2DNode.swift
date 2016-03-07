@@ -294,6 +294,11 @@ public class W2DNode : W2DComponent
                 }
             }
         }
+        
+        if let manager = fDirector?.actionManager
+        {
+            manager.removeBehavior(action)
+        }
     }
     
     public func removeAllActions()
@@ -353,14 +358,30 @@ public class W2DNode : W2DComponent
         }
     }
     
-    // to be called only be w2daction class
-    internal func addAction(action:W2DAction)
+    public var targetNode : W2DNode? { get { return self } }
+    
+    public func run(action:W2DAction)
     {
-        if fActions == nil
-        {
-            fActions = [W2DAction]()
+        action.fTarget = self
+        action.stopCallback = {[weak self](action:W2DAction, finished:Bool) in
+            if let this = self
+            {
+                this.removeAction(action)
+            }
         }
         
-        fActions!.append(action)
+        if let manager = fDirector?.actionManager
+        {
+            manager.addBehavior(action)
+            
+            if fActions == nil
+            {
+                fActions = [W2DAction]()
+            }
+            
+            fActions!.append(action)
+            
+            action.start();
+        }
     }
 }

@@ -10,15 +10,28 @@ import Foundation
 
 public class W2DFadeToAction : W2DFiniteDurationAction
 {
-    private var fInitialAlpha : CGFloat
+    private var fInitialAlpha : CGFloat = 0.0
     private var fFinalAlpha : CGFloat
     
-    public init(target:W2DNode, duration:NSTimeInterval, finalAlpha:CGFloat)
+    public init(duration:NSTimeInterval, finalAlpha:CGFloat)
     {
-        fInitialAlpha = target.alpha
         fFinalAlpha = finalAlpha
         
-        super.init(target:target, duration: duration)
+        super.init(duration: duration)
+    }
+    
+    public override func start()
+    {
+        if let target = fTarget
+        {
+            fInitialAlpha = target.alpha
+        }
+        else
+        {
+            fInitialAlpha = 0
+        }
+        
+        super.start()
     }
     
     public override func run(director: W2DDirector!)

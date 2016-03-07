@@ -164,18 +164,6 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         fBehaviors.removeBehavior(behavior)
     }
     
-    func startAction(action:W2DAction)
-    {
-        fActions.addBehavior(action)
-        action.start()
-    }
-    
-    func stopAction(action:W2DAction)
-    {
-        action.stop()
-        fActions.removeBehavior(action)
-    }
-    
     func onRenderTimer(timer:NSTimer)
     {
         let startT = NSDate()

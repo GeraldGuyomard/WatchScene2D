@@ -13,6 +13,7 @@
 		74041F961BD43F98004EDB33 /* W2DDirectorImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F951BD43F98004EDB33 /* W2DDirectorImpl.swift */; };
 		74041F981BD44CC6004EDB33 /* W2DImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F971BD44CC6004EDB33 /* W2DImage.swift */; };
 		74041F9A1BD44E12004EDB33 /* W2DImageImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F991BD44E12004EDB33 /* W2DImageImpl.swift */; };
+		740B0E5D1C8CD34C00221502 /* W2DSequenceAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740B0E5C1C8CD34C00221502 /* W2DSequenceAction.swift */; };
 		74426D541C8239A600068074 /* W2DAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74426D531C8239A600068074 /* W2DAction.swift */; };
 		74426D561C823D7D00068074 /* W2DBehaviorGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74426D551C823D7D00068074 /* W2DBehaviorGroup.swift */; };
 		74426D581C8256AD00068074 /* W2DFadeToAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74426D571C8256AD00068074 /* W2DFadeToAction.swift */; };
@@ -34,6 +35,7 @@
 		74041F951BD43F98004EDB33 /* W2DDirectorImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DDirectorImpl.swift; sourceTree = "<group>"; };
 		74041F971BD44CC6004EDB33 /* W2DImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DImage.swift; sourceTree = "<group>"; };
 		74041F991BD44E12004EDB33 /* W2DImageImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DImageImpl.swift; sourceTree = "<group>"; };
+		740B0E5C1C8CD34C00221502 /* W2DSequenceAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DSequenceAction.swift; sourceTree = "<group>"; };
 		74426D531C8239A600068074 /* W2DAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DAction.swift; sourceTree = "<group>"; };
 		74426D551C823D7D00068074 /* W2DBehaviorGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DBehaviorGroup.swift; sourceTree = "<group>"; };
 		74426D571C8256AD00068074 /* W2DFadeToAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DFadeToAction.swift; sourceTree = "<group>"; };
@@ -61,6 +63,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		740B0E5E1C8CD35600221502 /* actions */ = {
+			isa = PBXGroup;
+			children = (
+				74426D531C8239A600068074 /* W2DAction.swift */,
+				74426D571C8256AD00068074 /* W2DFadeToAction.swift */,
+				740B0E5C1C8CD34C00221502 /* W2DSequenceAction.swift */,
+			);
+			name = actions;
+			sourceTree = "<group>";
+		};
+		740B0E5F1C8CD36700221502 /* nodes */ = {
+			isa = PBXGroup;
+			children = (
+				74D6FBC71BE7113300D0276F /* W2DNode.swift */,
+				745C2B561BE8772900EA2639 /* W2DSprite.swift */,
+				745C2B581BE8804100EA2639 /* W2DScene.swift */,
+				74D5C4191C586A2A00829DE7 /* W2DColoredNode.swift */,
+			);
+			name = nodes;
+			sourceTree = "<group>";
+		};
+		740B0E601C8CD38E00221502 /* protocols */ = {
+			isa = PBXGroup;
+			children = (
+				74E4AE951BC60601006860EE /* W2DContext.swift */,
+				74041F911BD32CDA004EDB33 /* W2DDirector.swift */,
+				74041F931BD43BE8004EDB33 /* W2DBehavior.swift */,
+				74041F971BD44CC6004EDB33 /* W2DImage.swift */,
+			);
+			name = protocols;
+			sourceTree = "<group>";
+		};
 		74E4AE731BC5F17A006860EE = {
 			isa = PBXGroup;
 			children = (
@@ -101,20 +135,13 @@
 		74E4AE941BC605E2006860EE /* public */ = {
 			isa = PBXGroup;
 			children = (
-				74E4AE951BC60601006860EE /* W2DContext.swift */,
+				740B0E601C8CD38E00221502 /* protocols */,
+				740B0E5F1C8CD36700221502 /* nodes */,
+				740B0E5E1C8CD35600221502 /* actions */,
 				74041F8F1BD323AE004EDB33 /* CGPoint+BasicOperations.swift */,
-				74041F911BD32CDA004EDB33 /* W2DDirector.swift */,
-				74041F931BD43BE8004EDB33 /* W2DBehavior.swift */,
-				74041F971BD44CC6004EDB33 /* W2DImage.swift */,
-				74D6FBC71BE7113300D0276F /* W2DNode.swift */,
-				745C2B561BE8772900EA2639 /* W2DSprite.swift */,
-				745C2B581BE8804100EA2639 /* W2DScene.swift */,
 				745C2B5B1BE887ED00EA2639 /* W2DColor4f.swift */,
 				7487DDFA1C14F53400E74977 /* W2DComponent.swift */,
-				74D5C4191C586A2A00829DE7 /* W2DColoredNode.swift */,
-				74426D531C8239A600068074 /* W2DAction.swift */,
 				74426D551C823D7D00068074 /* W2DBehaviorGroup.swift */,
-				74426D571C8256AD00068074 /* W2DFadeToAction.swift */,
 			);
 			path = public;
 			sourceTree = "<group>";
@@ -206,6 +233,7 @@
 				74D6FBC81BE7113300D0276F /* W2DNode.swift in Sources */,
 				745C2B5C1BE887ED00EA2639 /* W2DColor4f.swift in Sources */,
 				74E4AE981BC606A5006860EE /* W2DContextImpl.swift in Sources */,
+				740B0E5D1C8CD34C00221502 /* W2DSequenceAction.swift in Sources */,
 				74426D581C8256AD00068074 /* W2DFadeToAction.swift in Sources */,
 				74041F981BD44CC6004EDB33 /* W2DImage.swift in Sources */,
 				745C2B591BE8804100EA2639 /* W2DScene.swift in Sources */,
