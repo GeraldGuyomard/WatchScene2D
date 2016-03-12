@@ -25,7 +25,10 @@ public class W2DNode : W2DComponent
     
     // decomposed local transform
     private var fPosition = CGPointMake(0, 0)
+    private var fAnchorPoint = CGPointMake(0, 0)
     private var fSize = CGSizeMake(0, 0)
+    private var fScaleXY = CGPointMake(1, 1)
+    private var fRotation : CGFloat = 0.0
     
     private weak var fDirector : W2DDirector?
     private var fIsOnScreen = false
@@ -71,11 +74,88 @@ public class W2DNode : W2DComponent
         
         set(newPosition)
         {
-            if (fPosition != newPosition)
+            if fPosition != newPosition
             {
                 setNeedsRedraw(true)
                 
                 fPosition = newPosition
+                
+                invalidateTransforms()
+                setNeedsRedraw(true)
+            }
+        }
+    }
+
+    public var anchorPoint : CGPoint
+    {
+        get { return fAnchorPoint }
+        
+        set(newAnchorPoint)
+        {
+            if fAnchorPoint != newAnchorPoint
+            {
+                setNeedsRedraw(true)
+                
+                fAnchorPoint = newAnchorPoint
+                
+                invalidateTransforms()
+                setNeedsRedraw(true)
+            }
+        }
+    }
+    
+    public var scaleXY : CGPoint
+    {
+        get { return fScaleXY }
+        
+        set(newScaleXY)
+        {
+            if fScaleXY != newScaleXY
+            {
+                setNeedsRedraw(true)
+                
+                fScaleXY = newScaleXY
+                
+                invalidateTransforms()
+                setNeedsRedraw(true)
+            }
+        }
+    }
+
+    public var scale : CGFloat
+    {
+        get
+        {
+            assert(fScaleXY.x == fScaleXY.y, "scale should be uniform when calling property scale")
+            return fScaleXY.x
+        }
+
+        set(newScale)
+        {
+            if (fScaleXY.x != newScale) || (fScaleXY.y != newScale)
+            {
+                setNeedsRedraw(true)
+                
+                fScaleXY.x = newScale
+                fScaleXY.y = newScale
+                
+                invalidateTransforms()
+                setNeedsRedraw(true)
+            }
+        }
+    }
+    
+    public var rotation : CGFloat
+        {
+        get { return fRotation }
+        
+        set(newRotation)
+        {
+            if fRotation != newRotation
+            {
+                setNeedsRedraw(true)
+                
+                fRotation = newRotation
                 
                 invalidateTransforms()
                 setNeedsRedraw(true)
@@ -89,7 +169,7 @@ public class W2DNode : W2DComponent
         
         set(newSize)
         {
-            if (fSize != newSize)
+            if fSize != newSize
             {
                 setNeedsRedraw(true)
                 
@@ -172,8 +252,14 @@ public class W2DNode : W2DComponent
     {
         if !fIsLocalTransformValid
         {
+            let aPoint = CGPointMake(-fSize.width * fAnchorPoint.x, -fSize.height * fAnchorPoint.y)
+            
             fLocalTransform = CGAffineTransformIdentity
+            fLocalTransform = CGAffineTransformTranslate(fLocalTransform, aPoint.x, aPoint.y)
+            fLocalTransform = CGAffineTransformScale(fLocalTransform, fScaleXY.x, fScaleXY.y)
+            fLocalTransform = CGAffineTransformRotate(fLocalTransform, fRotation)
             fLocalTransform = CGAffineTransformTranslate(fLocalTransform, fPosition.x, fPosition.y)
+            
             fIsLocalTransformValid = true
         }
         
