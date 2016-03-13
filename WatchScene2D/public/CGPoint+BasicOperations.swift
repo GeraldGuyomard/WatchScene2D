@@ -12,7 +12,23 @@ public extension CGPoint
 {
     func norm() -> CGFloat
     {
-        return CGFloat(sqrtf(Float((x * x) + (y * y))));
+        if x == 0
+        {
+            return y
+        }
+        else if y == 0
+        {
+            return x
+        }
+        else
+        {
+            return CGFloat(sqrtf(Float((x * x) + (y * y))));
+        }
+    }
+    
+    func squareNorm() -> CGFloat
+    {
+        return (x * x) + (y * y);
     }
     
     func opposite() -> CGPoint
@@ -44,5 +60,10 @@ public extension CGPoint
     func mul(f : CGFloat) -> CGPoint
     {
         return CGPointMake(x * f, y * f);
+    }
+    
+    func dot(other:CGPoint) -> CGFloat
+    {
+        return (x * other.x) + (y * other.y)
     }
 }
