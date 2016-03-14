@@ -14,11 +14,11 @@ public extension CGPoint
     {
         if x == 0
         {
-            return y
+            return abs(y)
         }
         else if y == 0
         {
-            return x
+            return abs(x)
         }
         else
         {
