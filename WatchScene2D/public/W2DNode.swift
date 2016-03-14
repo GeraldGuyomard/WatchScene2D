@@ -252,13 +252,33 @@ public class W2DNode : W2DComponent
     {
         if !fIsLocalTransformValid
         {
-            let aPoint = CGPointMake(-fSize.width * fAnchorPoint.x, -fSize.height * fAnchorPoint.y)
+            if fAnchorPoint.x != 0 || fAnchorPoint.y != 0
+            {
+                let aPoint = CGPointMake(-fSize.width * fAnchorPoint.x, -fSize.height * fAnchorPoint.y)
+                fLocalTransform = CGAffineTransformMakeTranslation(aPoint.x, aPoint.y)
+            }
+            else
+            {
+                fLocalTransform = CGAffineTransformIdentity
+            }
             
-            fLocalTransform = CGAffineTransformIdentity
-            fLocalTransform = CGAffineTransformTranslate(fLocalTransform, aPoint.x, aPoint.y)
-            fLocalTransform = CGAffineTransformScale(fLocalTransform, fScaleXY.x, fScaleXY.y)
-            fLocalTransform = CGAffineTransformRotate(fLocalTransform, fRotation)
-            fLocalTransform = CGAffineTransformTranslate(fLocalTransform, fPosition.x, fPosition.y)
+            if fScaleXY.x != 1 || fScaleXY.y != 1
+            {
+                fLocalTransform.a *= fScaleXY.x
+                fLocalTransform.b *= fScaleXY.y
+                fLocalTransform.c *= fScaleXY.x
+                fLocalTransform.d *= fScaleXY.y
+                fLocalTransform.tx *= fScaleXY.x
+                fLocalTransform.ty *= fScaleXY.y
+            }
+            
+            if fRotation != 0
+            {
+                fLocalTransform = CGAffineTransformRotate(fLocalTransform, fRotation)
+            }
+            
+            fLocalTransform.tx += fPosition.x
+            fLocalTransform.ty += fPosition.y
             
             fIsLocalTransformValid = true
         }
