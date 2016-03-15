@@ -13,18 +13,20 @@
 		74041F961BD43F98004EDB33 /* W2DDirectorImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F951BD43F98004EDB33 /* W2DDirectorImpl.swift */; };
 		74041F981BD44CC6004EDB33 /* W2DImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F971BD44CC6004EDB33 /* W2DImage.swift */; };
 		74041F9A1BD44E12004EDB33 /* W2DImageImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F991BD44E12004EDB33 /* W2DImageImpl.swift */; };
-		740B0E5D1C8CD34C00221502 /* W2DSequenceAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740B0E5C1C8CD34C00221502 /* W2DSequenceAction.swift */; };
-		74426D541C8239A600068074 /* W2DAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74426D531C8239A600068074 /* W2DAction.swift */; };
 		74426D561C823D7D00068074 /* W2DBehaviorGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74426D551C823D7D00068074 /* W2DBehaviorGroup.swift */; };
-		74426D581C8256AD00068074 /* W2DFadeToAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74426D571C8256AD00068074 /* W2DFadeToAction.swift */; };
-		745C2B571BE8772900EA2639 /* W2DSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C2B561BE8772900EA2639 /* W2DSprite.swift */; };
-		745C2B591BE8804100EA2639 /* W2DScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C2B581BE8804100EA2639 /* W2DScene.swift */; };
 		745C2B5C1BE887ED00EA2639 /* W2DColor4f.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C2B5B1BE887ED00EA2639 /* W2DColor4f.swift */; };
 		7487DDFB1C14F53400E74977 /* W2DComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7487DDFA1C14F53400E74977 /* W2DComponent.swift */; };
-		7489BAC21C8D3E5E00C6592E /* W2DCallbackAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7489BAC11C8D3E5E00C6592E /* W2DCallbackAction.swift */; };
-		748C2ADC1C95FAC8005875CF /* W2DScaleToAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748C2ADB1C95FAC8005875CF /* W2DScaleToAction.swift */; };
-		74D5C41A1C586A2A00829DE7 /* W2DColoredNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D5C4191C586A2A00829DE7 /* W2DColoredNode.swift */; };
-		74D6FBC81BE7113300D0276F /* W2DNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D6FBC71BE7113300D0276F /* W2DNode.swift */; };
+		74D1BFC31C97CAE100A8CBFF /* W2DAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1BFBE1C97CAE100A8CBFF /* W2DAction.swift */; };
+		74D1BFC41C97CAE100A8CBFF /* W2DCallbackAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1BFBF1C97CAE100A8CBFF /* W2DCallbackAction.swift */; };
+		74D1BFC51C97CAE100A8CBFF /* W2DFadeToAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1BFC01C97CAE100A8CBFF /* W2DFadeToAction.swift */; };
+		74D1BFC61C97CAE100A8CBFF /* W2DScaleToAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1BFC11C97CAE100A8CBFF /* W2DScaleToAction.swift */; };
+		74D1BFC71C97CAE100A8CBFF /* W2DSequenceAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1BFC21C97CAE100A8CBFF /* W2DSequenceAction.swift */; };
+		74D1BFCB1C97CAEB00A8CBFF /* W2DCollider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1BFC91C97CAEB00A8CBFF /* W2DCollider.swift */; };
+		74D1BFCC1C97CAEB00A8CBFF /* W2DCollision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1BFCA1C97CAEB00A8CBFF /* W2DCollision.swift */; };
+		74D1BFD21C97CAF900A8CBFF /* W2DColoredNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1BFCE1C97CAF900A8CBFF /* W2DColoredNode.swift */; };
+		74D1BFD31C97CAF900A8CBFF /* W2DNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1BFCF1C97CAF900A8CBFF /* W2DNode.swift */; };
+		74D1BFD41C97CAF900A8CBFF /* W2DScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1BFD01C97CAF900A8CBFF /* W2DScene.swift */; };
+		74D1BFD51C97CAF900A8CBFF /* W2DSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1BFD11C97CAF900A8CBFF /* W2DSprite.swift */; };
 		74E4AE811BC5F17A006860EE /* WatchScene2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 74E4AE801BC5F17A006860EE /* WatchScene2D.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		74E4AE961BC60601006860EE /* W2DContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E4AE951BC60601006860EE /* W2DContext.swift */; };
 		74E4AE981BC606A5006860EE /* W2DContextImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E4AE971BC606A5006860EE /* W2DContextImpl.swift */; };
@@ -37,18 +39,20 @@
 		74041F951BD43F98004EDB33 /* W2DDirectorImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DDirectorImpl.swift; sourceTree = "<group>"; };
 		74041F971BD44CC6004EDB33 /* W2DImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DImage.swift; sourceTree = "<group>"; };
 		74041F991BD44E12004EDB33 /* W2DImageImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DImageImpl.swift; sourceTree = "<group>"; };
-		740B0E5C1C8CD34C00221502 /* W2DSequenceAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DSequenceAction.swift; sourceTree = "<group>"; };
-		74426D531C8239A600068074 /* W2DAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DAction.swift; sourceTree = "<group>"; };
 		74426D551C823D7D00068074 /* W2DBehaviorGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DBehaviorGroup.swift; sourceTree = "<group>"; };
-		74426D571C8256AD00068074 /* W2DFadeToAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DFadeToAction.swift; sourceTree = "<group>"; };
-		745C2B561BE8772900EA2639 /* W2DSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DSprite.swift; sourceTree = "<group>"; };
-		745C2B581BE8804100EA2639 /* W2DScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DScene.swift; sourceTree = "<group>"; };
 		745C2B5B1BE887ED00EA2639 /* W2DColor4f.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DColor4f.swift; sourceTree = "<group>"; };
 		7487DDFA1C14F53400E74977 /* W2DComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DComponent.swift; sourceTree = "<group>"; };
-		7489BAC11C8D3E5E00C6592E /* W2DCallbackAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DCallbackAction.swift; sourceTree = "<group>"; };
-		748C2ADB1C95FAC8005875CF /* W2DScaleToAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DScaleToAction.swift; sourceTree = "<group>"; };
-		74D5C4191C586A2A00829DE7 /* W2DColoredNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DColoredNode.swift; sourceTree = "<group>"; };
-		74D6FBC71BE7113300D0276F /* W2DNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DNode.swift; sourceTree = "<group>"; };
+		74D1BFBE1C97CAE100A8CBFF /* W2DAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DAction.swift; sourceTree = "<group>"; };
+		74D1BFBF1C97CAE100A8CBFF /* W2DCallbackAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DCallbackAction.swift; sourceTree = "<group>"; };
+		74D1BFC01C97CAE100A8CBFF /* W2DFadeToAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DFadeToAction.swift; sourceTree = "<group>"; };
+		74D1BFC11C97CAE100A8CBFF /* W2DScaleToAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DScaleToAction.swift; sourceTree = "<group>"; };
+		74D1BFC21C97CAE100A8CBFF /* W2DSequenceAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DSequenceAction.swift; sourceTree = "<group>"; };
+		74D1BFC91C97CAEB00A8CBFF /* W2DCollider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DCollider.swift; sourceTree = "<group>"; };
+		74D1BFCA1C97CAEB00A8CBFF /* W2DCollision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DCollision.swift; sourceTree = "<group>"; };
+		74D1BFCE1C97CAF900A8CBFF /* W2DColoredNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DColoredNode.swift; sourceTree = "<group>"; };
+		74D1BFCF1C97CAF900A8CBFF /* W2DNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DNode.swift; sourceTree = "<group>"; };
+		74D1BFD01C97CAF900A8CBFF /* W2DScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DScene.swift; sourceTree = "<group>"; };
+		74D1BFD11C97CAF900A8CBFF /* W2DSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DSprite.swift; sourceTree = "<group>"; };
 		74E4AE7D1BC5F17A006860EE /* WatchScene2D.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatchScene2D.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74E4AE801BC5F17A006860EE /* WatchScene2D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatchScene2D.h; sourceTree = "<group>"; };
 		74E4AE821BC5F17A006860EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -67,29 +71,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		740B0E5E1C8CD35600221502 /* actions */ = {
-			isa = PBXGroup;
-			children = (
-				74426D531C8239A600068074 /* W2DAction.swift */,
-				74426D571C8256AD00068074 /* W2DFadeToAction.swift */,
-				740B0E5C1C8CD34C00221502 /* W2DSequenceAction.swift */,
-				7489BAC11C8D3E5E00C6592E /* W2DCallbackAction.swift */,
-				748C2ADB1C95FAC8005875CF /* W2DScaleToAction.swift */,
-			);
-			name = actions;
-			sourceTree = "<group>";
-		};
-		740B0E5F1C8CD36700221502 /* nodes */ = {
-			isa = PBXGroup;
-			children = (
-				74D6FBC71BE7113300D0276F /* W2DNode.swift */,
-				745C2B561BE8772900EA2639 /* W2DSprite.swift */,
-				745C2B581BE8804100EA2639 /* W2DScene.swift */,
-				74D5C4191C586A2A00829DE7 /* W2DColoredNode.swift */,
-			);
-			name = nodes;
-			sourceTree = "<group>";
-		};
 		740B0E601C8CD38E00221502 /* protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +80,39 @@
 				74041F971BD44CC6004EDB33 /* W2DImage.swift */,
 			);
 			name = protocols;
+			sourceTree = "<group>";
+		};
+		74D1BFBD1C97CAE100A8CBFF /* actions */ = {
+			isa = PBXGroup;
+			children = (
+				74D1BFBE1C97CAE100A8CBFF /* W2DAction.swift */,
+				74D1BFBF1C97CAE100A8CBFF /* W2DCallbackAction.swift */,
+				74D1BFC01C97CAE100A8CBFF /* W2DFadeToAction.swift */,
+				74D1BFC11C97CAE100A8CBFF /* W2DScaleToAction.swift */,
+				74D1BFC21C97CAE100A8CBFF /* W2DSequenceAction.swift */,
+			);
+			path = actions;
+			sourceTree = "<group>";
+		};
+		74D1BFC81C97CAEB00A8CBFF /* collision system */ = {
+			isa = PBXGroup;
+			children = (
+				74D1BFC91C97CAEB00A8CBFF /* W2DCollider.swift */,
+				74D1BFCA1C97CAEB00A8CBFF /* W2DCollision.swift */,
+			);
+			name = "collision system";
+			path = "WatchScene2D/public/collision system";
+			sourceTree = SOURCE_ROOT;
+		};
+		74D1BFCD1C97CAF900A8CBFF /* nodes */ = {
+			isa = PBXGroup;
+			children = (
+				74D1BFCE1C97CAF900A8CBFF /* W2DColoredNode.swift */,
+				74D1BFCF1C97CAF900A8CBFF /* W2DNode.swift */,
+				74D1BFD01C97CAF900A8CBFF /* W2DScene.swift */,
+				74D1BFD11C97CAF900A8CBFF /* W2DSprite.swift */,
+			);
+			path = nodes;
 			sourceTree = "<group>";
 		};
 		74E4AE731BC5F17A006860EE = {
@@ -142,12 +156,13 @@
 			isa = PBXGroup;
 			children = (
 				740B0E601C8CD38E00221502 /* protocols */,
-				740B0E5F1C8CD36700221502 /* nodes */,
-				740B0E5E1C8CD35600221502 /* actions */,
 				74041F8F1BD323AE004EDB33 /* CGPoint+BasicOperations.swift */,
 				745C2B5B1BE887ED00EA2639 /* W2DColor4f.swift */,
 				7487DDFA1C14F53400E74977 /* W2DComponent.swift */,
 				74426D551C823D7D00068074 /* W2DBehaviorGroup.swift */,
+				74D1BFCD1C97CAF900A8CBFF /* nodes */,
+				74D1BFBD1C97CAE100A8CBFF /* actions */,
+				74D1BFC81C97CAEB00A8CBFF /* collision system */,
 			);
 			path = public;
 			sourceTree = "<group>";
@@ -231,26 +246,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74D5C41A1C586A2A00829DE7 /* W2DColoredNode.swift in Sources */,
+				74D1BFD41C97CAF900A8CBFF /* W2DScene.swift in Sources */,
 				74041F901BD323AE004EDB33 /* CGPoint+BasicOperations.swift in Sources */,
+				74D1BFC31C97CAE100A8CBFF /* W2DAction.swift in Sources */,
+				74D1BFCC1C97CAEB00A8CBFF /* W2DCollision.swift in Sources */,
 				74041F961BD43F98004EDB33 /* W2DDirectorImpl.swift in Sources */,
 				74041F941BD43BE8004EDB33 /* W2DBehavior.swift in Sources */,
 				74041F921BD32CDA004EDB33 /* W2DDirector.swift in Sources */,
-				74D6FBC81BE7113300D0276F /* W2DNode.swift in Sources */,
+				74D1BFC41C97CAE100A8CBFF /* W2DCallbackAction.swift in Sources */,
+				74D1BFD31C97CAF900A8CBFF /* W2DNode.swift in Sources */,
+				74D1BFC71C97CAE100A8CBFF /* W2DSequenceAction.swift in Sources */,
 				745C2B5C1BE887ED00EA2639 /* W2DColor4f.swift in Sources */,
 				74E4AE981BC606A5006860EE /* W2DContextImpl.swift in Sources */,
-				740B0E5D1C8CD34C00221502 /* W2DSequenceAction.swift in Sources */,
-				74426D581C8256AD00068074 /* W2DFadeToAction.swift in Sources */,
+				74D1BFC51C97CAE100A8CBFF /* W2DFadeToAction.swift in Sources */,
 				74041F981BD44CC6004EDB33 /* W2DImage.swift in Sources */,
-				7489BAC21C8D3E5E00C6592E /* W2DCallbackAction.swift in Sources */,
-				745C2B591BE8804100EA2639 /* W2DScene.swift in Sources */,
-				74426D541C8239A600068074 /* W2DAction.swift in Sources */,
 				74426D561C823D7D00068074 /* W2DBehaviorGroup.swift in Sources */,
 				74E4AE961BC60601006860EE /* W2DContext.swift in Sources */,
-				745C2B571BE8772900EA2639 /* W2DSprite.swift in Sources */,
+				74D1BFD51C97CAF900A8CBFF /* W2DSprite.swift in Sources */,
 				7487DDFB1C14F53400E74977 /* W2DComponent.swift in Sources */,
 				74041F9A1BD44E12004EDB33 /* W2DImageImpl.swift in Sources */,
-				748C2ADC1C95FAC8005875CF /* W2DScaleToAction.swift in Sources */,
+				74D1BFD21C97CAF900A8CBFF /* W2DColoredNode.swift in Sources */,
+				74D1BFC61C97CAE100A8CBFF /* W2DScaleToAction.swift in Sources */,
+				74D1BFCB1C97CAEB00A8CBFF /* W2DCollider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
