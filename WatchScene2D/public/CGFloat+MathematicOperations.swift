@@ -14,4 +14,9 @@ public extension CGFloat
     {
         return startValue * (1.0 - coeff) + (endValue * coeff)
     }
+    
+    public func isNear(other:CGFloat) -> Bool
+    {
+        return abs(self - other) < 1e-5
+    }
 }

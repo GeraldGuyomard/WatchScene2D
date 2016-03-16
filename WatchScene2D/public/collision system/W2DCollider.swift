@@ -148,6 +148,8 @@ public class W2DCollider : W2DComponent
     
     private func collisionWithEdge(myNode:W2DNode, movingNode:W2DNode, otherNodePosition:CGPoint, otherNodeRadius:CGFloat, vertex1:CGPoint, vertex2:CGPoint, edgeIndex:UInt, direction:CGPoint) ->W2DCollision?
     {
+        assert(direction.norm().isNear(1))
+        
         let AB = vertex2.sub(vertex1)
         let AO = otherNodePosition.sub(vertex1)
         var edgeNormal = CGPointMake(-AB.y, AB.x)
@@ -165,6 +167,7 @@ public class W2DCollider : W2DComponent
         let edgeLength = AB.norm()
         let invLength = 1.0 / edgeLength
         let v = AB.mul(invLength)
+        assert(v.norm().isNear(1))
         
         let AH = AO.dot(v)
         if AH < -otherNodeRadius
@@ -192,9 +195,12 @@ public class W2DCollider : W2DComponent
         let m11 = -m00
         
         let symX = (m00 * direction.x) + (m01 * direction.y)
-        let symY = (m10 * direction.y) + (m11 * direction.y)
+        let symY = (m10 * direction.x) + (m11 * direction.y)
         
-        let newDirection = CGPointMake(-symX, -symY) //.normalizedVector()
+        let det = m00 * m11 - m01 * m10
+        
+        // this is already normalized in theory but re normalize because of floating point inaccuracies
+        let newDirection = CGPointMake(-symX, -symY).normalizedVector()
         
         let hitPoint = vertex1.add(v.mul(AH))
         let distanceToEdge = sqrt(squareOHLength)
