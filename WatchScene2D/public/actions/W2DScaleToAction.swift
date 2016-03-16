@@ -43,10 +43,7 @@ public class W2DScaleToAction : W2DFiniteDurationAction
         {
             let c = CGFloat(self.elapsedTime / self.duration)
             
-            let x = fInitialScale.x * (1.0 - c) + (fFinalScale.x * c)
-            let y = fInitialScale.y * (1.0 - c) + (fFinalScale.y * c)
-            
-            target.scaleXY = CGPointMake(x, y)
+            target.scaleXY = CGPoint.lerp(fInitialScale, endValue:fFinalScale, coeff:c)
         }
     }
 }

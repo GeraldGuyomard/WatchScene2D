@@ -14,6 +14,7 @@
 		74041F981BD44CC6004EDB33 /* W2DImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F971BD44CC6004EDB33 /* W2DImage.swift */; };
 		74041F9A1BD44E12004EDB33 /* W2DImageImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F991BD44E12004EDB33 /* W2DImageImpl.swift */; };
 		74426D561C823D7D00068074 /* W2DBehaviorGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74426D551C823D7D00068074 /* W2DBehaviorGroup.swift */; };
+		7457A3AB1C9917D700CC2A3C /* CGFloat+MathematicOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457A3AA1C9917D700CC2A3C /* CGFloat+MathematicOperations.swift */; };
 		745C2B5C1BE887ED00EA2639 /* W2DColor4f.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C2B5B1BE887ED00EA2639 /* W2DColor4f.swift */; };
 		7487DDFB1C14F53400E74977 /* W2DComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7487DDFA1C14F53400E74977 /* W2DComponent.swift */; };
 		74D1BFC31C97CAE100A8CBFF /* W2DAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1BFBE1C97CAE100A8CBFF /* W2DAction.swift */; };
@@ -40,6 +41,7 @@
 		74041F971BD44CC6004EDB33 /* W2DImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DImage.swift; sourceTree = "<group>"; };
 		74041F991BD44E12004EDB33 /* W2DImageImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DImageImpl.swift; sourceTree = "<group>"; };
 		74426D551C823D7D00068074 /* W2DBehaviorGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DBehaviorGroup.swift; sourceTree = "<group>"; };
+		7457A3AA1C9917D700CC2A3C /* CGFloat+MathematicOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+MathematicOperations.swift"; sourceTree = "<group>"; };
 		745C2B5B1BE887ED00EA2639 /* W2DColor4f.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DColor4f.swift; sourceTree = "<group>"; };
 		7487DDFA1C14F53400E74977 /* W2DComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DComponent.swift; sourceTree = "<group>"; };
 		74D1BFBE1C97CAE100A8CBFF /* W2DAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DAction.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			children = (
 				740B0E601C8CD38E00221502 /* protocols */,
 				74041F8F1BD323AE004EDB33 /* CGPoint+BasicOperations.swift */,
+				7457A3AA1C9917D700CC2A3C /* CGFloat+MathematicOperations.swift */,
 				745C2B5B1BE887ED00EA2639 /* W2DColor4f.swift */,
 				7487DDFA1C14F53400E74977 /* W2DComponent.swift */,
 				74426D551C823D7D00068074 /* W2DBehaviorGroup.swift */,
@@ -258,6 +261,7 @@
 				74D1BFC71C97CAE100A8CBFF /* W2DSequenceAction.swift in Sources */,
 				745C2B5C1BE887ED00EA2639 /* W2DColor4f.swift in Sources */,
 				74E4AE981BC606A5006860EE /* W2DContextImpl.swift in Sources */,
+				7457A3AB1C9917D700CC2A3C /* CGFloat+MathematicOperations.swift in Sources */,
 				74D1BFC51C97CAE100A8CBFF /* W2DFadeToAction.swift in Sources */,
 				74041F981BD44CC6004EDB33 /* W2DImage.swift in Sources */,
 				74426D561C823D7D00068074 /* W2DBehaviorGroup.swift in Sources */,

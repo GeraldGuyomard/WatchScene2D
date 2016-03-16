@@ -39,7 +39,7 @@ public class W2DFadeToAction : W2DFiniteDurationAction
         if let target = self.target
         {
             let c = CGFloat(self.elapsedTime / self.duration)
-            let alpha = fInitialAlpha * (1.0 - c) + (fFinalAlpha * c)
+            let alpha = CGFloat.lerp(fInitialAlpha, endValue: fFinalAlpha, coeff: c)
     
             target.alpha = alpha
         }

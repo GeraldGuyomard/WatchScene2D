@@ -66,4 +66,9 @@ public extension CGPoint
     {
         return (x * other.x) + (y * other.y)
     }
+    
+    static func lerp(startValue:CGPoint, endValue:CGPoint, coeff:CGFloat) -> CGPoint
+    {
+        return CGPointMake(CGFloat.lerp(startValue.x, endValue:endValue.x, coeff:coeff), CGFloat.lerp(startValue.y, endValue:endValue.y, coeff:coeff))
+    }
 }
