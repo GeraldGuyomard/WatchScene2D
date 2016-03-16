@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import WatchScene2D
 
 public struct W2DCollision
 {
