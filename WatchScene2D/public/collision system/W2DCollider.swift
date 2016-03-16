@@ -84,12 +84,8 @@ public class W2DCollider : W2DComponent
         
         let pos = CGPointMake(otherBox.origin.x + radius, otherBox.origin.y + radius)
         
-        let A = myBox.origin
-        let B = CGPointMake(myBox.origin.x, myBox.origin.y + myBox.size.height)
-        let C = CGPointMake(myBox.origin.x + myBox.size.width, myBox.origin.y + myBox.size.height)
-        let D = CGPointMake(myBox.origin.x + myBox.size.width, myBox.origin.y)
+        let vertices = W2DCollider.boundingVertices(myNode)
         
-        let vertices = [A, B, C, D, A]
         let vCount = vertices.count - 1
         var collision : W2DCollision? = nil
         
@@ -123,6 +119,33 @@ public class W2DCollider : W2DComponent
         return collision
     }
 
+    static private func boundingVertices(node:W2DNode) -> [CGPoint]
+    {
+        if node.rotation == 0
+        {
+            let box = node.globalBoundingBox
+            
+            let A = box.origin
+            let B = CGPointMake(box.origin.x, box.origin.y + box.size.height)
+            let C = CGPointMake(box.origin.x + box.size.width, box.origin.y + box.size.height)
+            let D = CGPointMake(box.origin.x + box.size.width, box.origin.y)
+            
+            return [A, B, C, D, A]
+        }
+        else
+        {
+            let t = node.globalTransform
+            let size = node.size
+            
+            let A = CGPointApplyAffineTransform(CGPointMake(0, 0), t)
+            let B = CGPointApplyAffineTransform(CGPointMake(0, size.height), t)
+            let C = CGPointApplyAffineTransform(CGPointMake(size.width, size.height), t)
+            let D = CGPointApplyAffineTransform(CGPointMake(size.width, 0), t)
+            
+            return [A, B, C, D, A]
+        }
+    }
+    
     private func collisionWithEdge(myNode:W2DNode, movingNode:W2DNode, otherNodePosition:CGPoint, otherNodeRadius:CGFloat, vertex1:CGPoint, vertex2:CGPoint, edgeIndex:UInt, direction:CGPoint) ->W2DCollision?
     {
         let AB = vertex2.sub(vertex1)
@@ -171,7 +194,7 @@ public class W2DCollider : W2DComponent
         let symX = (m00 * direction.x) + (m01 * direction.y)
         let symY = (m10 * direction.y) + (m11 * direction.y)
         
-        let newDirection = CGPointMake(-symX, -symY)
+        let newDirection = CGPointMake(-symX, -symY) //.normalizedVector()
         
         let hitPoint = vertex1.add(v.mul(AH))
         let distanceToEdge = sqrt(squareOHLength)
