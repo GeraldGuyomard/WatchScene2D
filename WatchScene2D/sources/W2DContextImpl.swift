@@ -26,7 +26,8 @@ import Foundation
         
         fCGContext = CGBitmapContextCreate(fBackBuffer, Int(fWidth), Int(fHeight), 8, Int(fWidth * 4), rgbColorSpace, CGImageAlphaInfo.PremultipliedLast.rawValue)
         
-        CGContextSetInterpolationQuality(fCGContext, .None)
+        //CGContextSetInterpolationQuality(fCGContext, .None)
+        CGContextSetInterpolationQuality(fCGContext, .Low)
     }
     
     deinit
