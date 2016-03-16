@@ -66,7 +66,8 @@ public class W2DCollider : W2DComponent
         let otherBox = movingNode.globalBoundingBox
         
         var otherMovedBox = otherBox
-        otherMovedBox.origin = otherMovedBox.origin.add(direction.mul(instantaneousSpeed))
+        let moveVector = direction.mul(instantaneousSpeed)
+        otherMovedBox.origin = otherMovedBox.origin.add(moveVector)
         
         let otherMovingBox = CGRectUnion(otherBox, otherMovedBox)
         
@@ -77,12 +78,13 @@ public class W2DCollider : W2DComponent
         
         // edge <-> moving node collision
         var radius = otherBox.size.width / 2.0
-        if instantaneousSpeed > radius
+        /*if instantaneousSpeed > radius
         {
             radius = instantaneousSpeed
-        }
+        }*/
         
         let pos = CGPointMake(otherBox.origin.x + radius, otherBox.origin.y + radius)
+        let nextPos = pos.add(moveVector)
         
         let vertices = W2DCollider.boundingVertices(myNode)
         
@@ -93,8 +95,9 @@ public class W2DCollider : W2DComponent
         {
              if let c = collisionWithEdge(  myNode,
                                             movingNode: movingNode,
-                                            otherNodePosition: pos,
-                                            otherNodeRadius: radius,
+                                            movingNodePosition: pos,
+                                            movingNodeNextPosition: nextPos,
+                                            movingNodeRadius: radius,
                                             vertex1: vertices[index],
                                             vertex2: vertices[index + 1],
                                             edgeIndex: UInt(index),
@@ -146,12 +149,12 @@ public class W2DCollider : W2DComponent
         }
     }
     
-    private func collisionWithEdge(myNode:W2DNode, movingNode:W2DNode, otherNodePosition:CGPoint, otherNodeRadius:CGFloat, vertex1:CGPoint, vertex2:CGPoint, edgeIndex:UInt, direction:CGPoint) ->W2DCollision?
+    private func collisionWithEdge(myNode:W2DNode, movingNode:W2DNode, movingNodePosition:CGPoint, movingNodeNextPosition:CGPoint, movingNodeRadius:CGFloat, vertex1:CGPoint, vertex2:CGPoint, edgeIndex:UInt, direction:CGPoint) ->W2DCollision?
     {
         assert(direction.norm().isNear(1))
         
         let AB = vertex2.sub(vertex1)
-        let AO = otherNodePosition.sub(vertex1)
+        let AO = movingNodePosition.sub(vertex1)
         var edgeNormal = CGPointMake(-AB.y, AB.x)
         
         if AO.dot(edgeNormal) <= 0
@@ -170,7 +173,7 @@ public class W2DCollider : W2DComponent
         assert(v.norm().isNear(1))
         
         let AH = AO.dot(v)
-        if AH < -otherNodeRadius
+        if AH < -movingNodeRadius
         {
             return nil
         }
@@ -182,10 +185,18 @@ public class W2DCollider : W2DComponent
         
         // perpendicular distance
         let squareOHLength = AO.squareNorm() - (AH * AH)
-        if squareOHLength > (otherNodeRadius * otherNodeRadius)
+        if squareOHLength > (movingNodeRadius * movingNodeRadius)
         {
-            // too far
-            return nil
+            // too far but maybe next position will cross this edge...
+            let AP = movingNodeNextPosition.sub(vertex1)
+            if AP.dot(edgeNormal) < 0
+            {
+                return nil
+            }
+            else
+            {
+                // crossed edge indeed
+            }
         }
         
         // symetry of direction
@@ -196,8 +207,6 @@ public class W2DCollider : W2DComponent
         
         let symX = (m00 * direction.x) + (m01 * direction.y)
         let symY = (m10 * direction.x) + (m11 * direction.y)
-        
-        let det = m00 * m11 - m01 * m10
         
         // this is already normalized in theory but re normalize because of floating point inaccuracies
         let newDirection = CGPointMake(-symX, -symY).normalizedVector()
