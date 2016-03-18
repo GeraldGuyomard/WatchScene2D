@@ -16,18 +16,55 @@ public class W2DCollider : W2DComponent
     static public func collideInScene(scene:W2DScene!, movingNode:W2DNode!, direction:CGPoint, instantaneousSpeed:CGFloat) -> [W2DCollision]
     {
         var collisions = [W2DCollision]()
-        _collideRecursive(scene, considerThisNode: false, movingNode:movingNode, direction:direction, instantaneousSpeed:instantaneousSpeed, collisions:&collisions)
+        let input = CollisionInput(movingNode: movingNode, direction: direction, instantaneousSpeed: instantaneousSpeed)
+        
+        _collideRecursive(scene, considerThisNode: false, input:input, collisions:&collisions)
+        
         return collisions
     }
     
-    static private func _collideRecursive(node:W2DNode!, considerThisNode:Bool, movingNode:W2DNode!, direction:CGPoint, instantaneousSpeed:CGFloat, inout collisions:[W2DCollision])
+    public struct CollisionInput
+    {
+        public var movingNode : W2DNode
+        public var movingNodeRadius : CGFloat
+        public var movingNodeRadius2 : CGFloat
+        public var movingNodePosition : CGPoint
+        public var nextMovingNodePosition : CGPoint
+        public var direction : CGPoint
+        public var instantaneousSpeed : CGFloat
+        public var moveVector : CGPoint
+        public var movingBox : CGRect
+        
+        init(movingNode:W2DNode!, direction:CGPoint, instantaneousSpeed:CGFloat)
+        {
+            self.movingNode = movingNode
+            
+            let box = movingNode.globalBoundingBox
+            movingNodeRadius = box.size.width / 2
+            movingNodeRadius2 = movingNodeRadius * movingNodeRadius
+            movingNodePosition = CGPointMake(box.origin.x + movingNodeRadius, box.origin.y + movingNodeRadius)
+            self.direction = direction
+            self.instantaneousSpeed = instantaneousSpeed
+            moveVector = direction.mul(instantaneousSpeed)
+            nextMovingNodePosition = movingNodePosition.add(moveVector)
+            
+            var movedBox = box
+            movedBox.origin = movedBox.origin.add(moveVector)
+            
+            movingBox = CGRectUnion(box, movedBox)
+            
+            assert(direction.norm().isNear(1))
+        }
+    }
+    
+    static private func _collideRecursive(node:W2DNode!, considerThisNode:Bool, input:CollisionInput, inout collisions:[W2DCollision])
     {
         if considerThisNode
         {
             let collider : W2DCollider? = node.component()
             if let c = collider
             {
-                if let collision = c.collide(movingNode, direction: direction, instantaneousSpeed:instantaneousSpeed)
+                if let collision = c.collide(input)
                 {
                     collisions.append(collision)
                 }
@@ -38,7 +75,7 @@ public class W2DCollider : W2DComponent
         {
             for child in children
             {
-                _collideRecursive(child, considerThisNode: true, movingNode:movingNode, direction: direction, instantaneousSpeed: instantaneousSpeed, collisions:&collisions)
+                _collideRecursive(child, considerThisNode: true, input:input, collisions:&collisions)
             }
         }
     }
@@ -47,7 +84,7 @@ public class W2DCollider : W2DComponent
     
     public var collisionCallback : ((collision:W2DCollision) -> W2DCollision?)?
 
-    public func collide(movingNode:W2DNode!, direction:CGPoint, instantaneousSpeed:CGFloat) -> W2DCollision?
+    public func collide(input:CollisionInput) -> W2DCollision?
     {
         if !self.isActive
         {
@@ -63,29 +100,13 @@ public class W2DCollider : W2DComponent
         
         // first easy rejections with AABBs
         let myBox = myNode.globalBoundingBox
-        let otherBox = movingNode.globalBoundingBox
         
-        var otherMovedBox = otherBox
-        let moveVector = direction.mul(instantaneousSpeed)
-        otherMovedBox.origin = otherMovedBox.origin.add(moveVector)
-        
-        let otherMovingBox = CGRectUnion(otherBox, otherMovedBox)
-        
-        if (!myBox.intersects(otherMovingBox))
+        if (!myBox.intersects(input.movingBox))
         {
             return nil
         }
         
         // edge <-> moving node collision
-        var radius = otherBox.size.width / 2.0
-        /*if instantaneousSpeed > radius
-        {
-            radius = instantaneousSpeed
-        }*/
-        
-        let pos = CGPointMake(otherBox.origin.x + radius, otherBox.origin.y + radius)
-        let nextPos = pos.add(moveVector)
-        
         let vertices = W2DCollider.boundingVertices(myNode)
         
         let vCount = vertices.count - 1
@@ -94,14 +115,10 @@ public class W2DCollider : W2DComponent
         for index in 0..<vCount
         {
              if let c = collisionWithEdge(  myNode,
-                                            movingNode: movingNode,
-                                            movingNodePosition: pos,
-                                            movingNodeNextPosition: nextPos,
-                                            movingNodeRadius: radius,
+                                            input:input,
                                             vertex1: vertices[index],
                                             vertex2: vertices[index + 1],
-                                            edgeIndex: UInt(index),
-                                            direction:direction)
+                                            edgeIndex: UInt(index))
             {
                 if c.closerThan(collision)
                 {
@@ -117,6 +134,11 @@ public class W2DCollider : W2DComponent
             {
                 collision = cb(collision: c)
             }
+        }
+        
+        if collision == nil
+        {
+            print("missed collision")
         }
         
         return collision
@@ -149,12 +171,10 @@ public class W2DCollider : W2DComponent
         }
     }
     
-    private func collisionWithEdge(myNode:W2DNode, movingNode:W2DNode, movingNodePosition:CGPoint, movingNodeNextPosition:CGPoint, movingNodeRadius:CGFloat, vertex1:CGPoint, vertex2:CGPoint, edgeIndex:UInt, direction:CGPoint) ->W2DCollision?
+    private func collisionWithEdge(myNode:W2DNode, input:CollisionInput, vertex1:CGPoint, vertex2:CGPoint, edgeIndex:UInt) ->W2DCollision?
     {
-        assert(direction.norm().isNear(1))
-        
         let AB = vertex2.sub(vertex1)
-        let AO = movingNodePosition.sub(vertex1)
+        let AO = input.movingNodePosition.sub(vertex1)
         var edgeNormal = CGPointMake(-AB.y, AB.x)
         
         if AO.dot(edgeNormal) <= 0
@@ -162,7 +182,7 @@ public class W2DCollider : W2DComponent
             return nil
         }
         
-        if direction.dot(edgeNormal) >= 0
+        if input.direction.dot(edgeNormal) >= 0
         {
             return nil
         }
@@ -173,30 +193,22 @@ public class W2DCollider : W2DComponent
         assert(v.norm().isNear(1))
         
         let AH = AO.dot(v)
-        if AH < -movingNodeRadius
+        
+        if AH < -input.movingNodeRadius
         {
             return nil
         }
         
-        if AH > edgeLength
+        if AH > (edgeLength + input.movingNodeRadius)
         {
             return nil
         }
         
         // perpendicular distance
         let squareOHLength = AO.squareNorm() - (AH * AH)
-        if squareOHLength > (movingNodeRadius * movingNodeRadius)
+        if (squareOHLength > input.movingNodeRadius2)
         {
-            // too far but maybe next position will cross this edge...
-            let AP = movingNodeNextPosition.sub(vertex1)
-            if AP.dot(edgeNormal) < 0
-            {
-                return nil
-            }
-            else
-            {
-                // crossed edge indeed
-            }
+            return nil
         }
         
         // symetry of direction
@@ -205,8 +217,8 @@ public class W2DCollider : W2DComponent
         let m01 = m10
         let m11 = -m00
         
-        let symX = (m00 * direction.x) + (m01 * direction.y)
-        let symY = (m10 * direction.x) + (m11 * direction.y)
+        let symX = (m00 * input.direction.x) + (m01 * input.direction.y)
+        let symY = (m10 * input.direction.x) + (m11 * input.direction.y)
         
         // this is already normalized in theory but re normalize because of floating point inaccuracies
         let newDirection = CGPointMake(-symX, -symY).normalizedVector()
@@ -215,11 +227,12 @@ public class W2DCollider : W2DComponent
         let distanceToEdge = sqrt(squareOHLength)
         
         edgeNormal = edgeNormal.mul(invLength)
+        assert(edgeNormal.norm().isNear(1))
         
         return W2DCollision(   hitNode:myNode,
                             hitPoint:hitPoint,
             
-                            movingNode:movingNode,
+                            movingNode:input.movingNode,
             
                             bounceDirection:newDirection,
                             bounceSpeedFactor:bounceSpeedFactor,
