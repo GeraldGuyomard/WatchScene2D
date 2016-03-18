@@ -170,7 +170,7 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         if let previousTime = fPreviousRenderTime
         {
             let timerT = startT.timeIntervalSinceDate(previousTime)
-            print("timer interval=\(timerT * 1000.0) ms")
+            //print("timer interval=\(timerT * 1000.0) ms")
             
             fdT = startT.timeIntervalSinceDate(previousTime)
         }
@@ -186,7 +186,7 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         let  endT = NSDate()
         let duration = endT.timeIntervalSinceDate(startT);
         
-        print("frame:\(duration * 1000.0) ms")
+        //print("frame:\(duration * 1000.0) ms")
     }
     
     private func render()
