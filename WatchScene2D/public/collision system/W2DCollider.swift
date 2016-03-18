@@ -107,7 +107,8 @@ public class W2DCollider : W2DComponent
         }
         
         // edge <-> moving node collision
-        let vertices = W2DCollider.boundingVertices(myNode)
+        var vertices = myNode.globalBoundingVertices
+        vertices.append(vertices.first!)
         
         let vCount = vertices.count - 1
         var collision : W2DCollision? = nil
@@ -144,33 +145,6 @@ public class W2DCollider : W2DComponent
         return collision
     }
 
-    static private func boundingVertices(node:W2DNode) -> [CGPoint]
-    {
-        if node.rotation == 0
-        {
-            let box = node.globalBoundingBox
-            
-            let A = box.origin
-            let B = CGPointMake(box.origin.x, box.origin.y + box.size.height)
-            let C = CGPointMake(box.origin.x + box.size.width, box.origin.y + box.size.height)
-            let D = CGPointMake(box.origin.x + box.size.width, box.origin.y)
-            
-            return [A, B, C, D, A]
-        }
-        else
-        {
-            let t = node.globalTransform
-            let size = node.size
-            
-            let A = CGPointApplyAffineTransform(CGPointMake(0, 0), t)
-            let B = CGPointApplyAffineTransform(CGPointMake(0, size.height), t)
-            let C = CGPointApplyAffineTransform(CGPointMake(size.width, size.height), t)
-            let D = CGPointApplyAffineTransform(CGPointMake(size.width, 0), t)
-            
-            return [A, B, C, D, A]
-        }
-    }
-    
     private func collisionWithEdge(myNode:W2DNode, input:CollisionInput, vertex1:CGPoint, vertex2:CGPoint, edgeIndex:UInt) ->W2DCollision?
     {
         let AB = vertex2.sub(vertex1)

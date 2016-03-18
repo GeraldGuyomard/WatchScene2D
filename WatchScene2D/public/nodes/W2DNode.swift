@@ -318,6 +318,35 @@ public class W2DNode : W2DComponent
         return fGlobalBoundingBox
     }
     
+    public var globalBoundingVertices : [CGPoint]
+    {
+        get
+        {
+            if fRotation == 0
+            {
+                let box = self.globalBoundingBox
+                
+                let A = box.origin
+                let B = CGPointMake(box.origin.x, box.origin.y + box.size.height)
+                let C = CGPointMake(box.origin.x + box.size.width, box.origin.y + box.size.height)
+                let D = CGPointMake(box.origin.x + box.size.width, box.origin.y)
+                
+                return [A, B, C, D]
+            }
+            else
+            {
+                let t = self.globalTransform
+                
+                let A = CGPointApplyAffineTransform(CGPointMake(0, 0), t)
+                let B = CGPointApplyAffineTransform(CGPointMake(0, fSize.height), t)
+                let C = CGPointApplyAffineTransform(CGPointMake(fSize.width, fSize.height), t)
+                let D = CGPointApplyAffineTransform(CGPointMake(fSize.width, 0), t)
+                
+                return [A, B, C, D]
+            }
+        }
+    }
+    
     public func render()
     {
         if (!self.hidden)
