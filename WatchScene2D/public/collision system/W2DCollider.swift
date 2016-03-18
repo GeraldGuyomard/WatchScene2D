@@ -185,23 +185,16 @@ public class W2DCollider : W2DComponent
             return nil
         }
         
+        edgeNormal = edgeNormal.mul(invLength)
+        assert(edgeNormal.norm().isNear(1))
+        
         // symetry of direction
-        let m00 = (v.y * v.y) - (v.x * v.x)
-        let m10 = -2 * v.x * v.y
-        let m01 = m10
-        let m11 = -m00
-        
-        let symX = (m00 * input.direction.x) + (m01 * input.direction.y)
-        let symY = (m10 * input.direction.x) + (m11 * input.direction.y)
-        
+        let sym = CGPoint.symmetry(edgeNormal, point: input.direction)
         // this is already normalized in theory but re normalize because of floating point inaccuracies
-        let newDirection = CGPointMake(-symX, -symY).normalizedVector()
+        let newDirection = CGPointMake(-sym.x, -sym.y).normalizedVector()
         
         let hitPoint = vertex1.add(v.mul(AH))
         let distanceToEdge = sqrt(squareOHLength)
-        
-        edgeNormal = edgeNormal.mul(invLength)
-        assert(edgeNormal.norm().isNear(1))
         
         return W2DCollision(   hitNode:myNode,
                             hitPoint:hitPoint,

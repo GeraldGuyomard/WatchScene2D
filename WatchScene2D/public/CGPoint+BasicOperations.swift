@@ -71,4 +71,19 @@ public extension CGPoint
     {
         return CGPointMake(CGFloat.lerp(startValue.x, endValue:endValue.x, coeff:coeff), CGFloat.lerp(startValue.y, endValue:endValue.y, coeff:coeff))
     }
+    
+    static func symmetry(axis:CGPoint, point:CGPoint) -> CGPoint
+    {
+        let normalizedAxis = axis.normalizedVector()
+        
+        let m00 = (normalizedAxis.x * normalizedAxis.x) - (normalizedAxis.y * normalizedAxis.y)
+        let m10 = 2 * normalizedAxis.x * normalizedAxis.y
+        let m01 = m10
+        let m11 = -m00
+        
+        let symX = (m00 * point.x) + (m01 * point.y)
+        let symY = (m10 * point.x) + (m11 * point.y)
+        
+        return CGPointMake(symX, symY)
+    }
 }
