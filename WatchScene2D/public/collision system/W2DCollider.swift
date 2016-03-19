@@ -115,7 +115,7 @@ public class W2DCollider : W2DComponent
         
         for index in 0..<vCount
         {
-             if let c = collisionWithEdge(  myNode,
+             if let c = collisionWithEdge2(  myNode,
                                             input:input,
                                             vertex1: vertices[index],
                                             vertex2: vertices[index + 1],
@@ -208,4 +208,91 @@ public class W2DCollider : W2DComponent
                             distanceToEdge:distanceToEdge,
                             edgeNormal:edgeNormal)
     }
+    
+    private func collisionWithEdge2(myNode:W2DNode, input:CollisionInput, vertex1:CGPoint, vertex2:CGPoint, edgeIndex:UInt) ->W2DCollision?
+    {
+        let AO = input.movingNodePosition.sub(vertex1)
+        
+        let u = vertex2.sub(vertex1)
+        var edgeNormal = CGPointMake(-u.y, u.x)
+        
+        if AO.dot(edgeNormal) <= 0
+        {
+            return nil
+        }
+        
+        if input.direction.dot(edgeNormal) >= 0
+        {
+            return nil
+        }
+        
+        // Ray Intersection BEGIN
+        let v = input.moveVector
+        let det = (v.y * u.x) - (v.x * u.y)
+        if det.isNear(0)
+        {
+            return nil
+        }
+        
+        let start = input.movingNodePosition.add(input.direction.mul(input.movingNodeRadius))
+        
+        let dX = vertex1.x - start.x
+        let dY = vertex1.y - start.y
+        
+        let a = (-u.y * dX  + u.x * dY) / det
+        let pointOnV = start.add(v.mul(a))
+        
+        let b = (-v.y * dX + v.x * dY) / det
+        let pointOnU = vertex1.add(u.mul(b))
+
+        assert(pointOnV.isNear(pointOnU))
+        
+        var hit = (a >= 0) && (a <= 1) && (b >= 0) && (b <= 1)
+        // Ray Intersection END
+        
+        // find the closest position to edge
+        
+        let edgeLength = u.norm()
+        let invLength = 1.0 / edgeLength
+        let uUnit = u.mul(invLength)
+        assert(uUnit.norm().isNear(1))
+        
+        let AH = AO.dot(uUnit)
+        
+        // perpendicular distance
+        let squareOHLength = AO.squareNorm() - (AH * AH)
+        if !hit
+        {
+            hit = squareOHLength <= input.movingNodeRadius2
+        }
+        
+        if !hit
+        {
+            return nil
+        }
+        
+        edgeNormal = edgeNormal.mul(invLength)
+        assert(edgeNormal.norm().isNear(1))
+        
+        // symetry of direction
+        let sym = CGPoint.symmetry(edgeNormal, point: input.direction)
+        // this is already normalized in theory but re normalize because of floating point inaccuracies
+        let newDirection = CGPointMake(-sym.x, -sym.y).normalizedVector()
+        
+        let hitPoint = vertex1.add(uUnit.mul(AH))
+        let distanceToEdge = sqrt(squareOHLength)
+        
+        return W2DCollision(   hitNode:myNode,
+            hitPoint:hitPoint,
+            
+            movingNode:input.movingNode,
+            
+            bounceDirection:newDirection,
+            bounceSpeedFactor:bounceSpeedFactor,
+            
+            edgeIndex: edgeIndex,
+            distanceToEdge:distanceToEdge,
+            edgeNormal:edgeNormal)
+
+     }
 }

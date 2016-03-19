@@ -17,6 +17,6 @@ public extension CGFloat
     
     public func isNear(other:CGFloat) -> Bool
     {
-        return abs(self - other) < 1e-5
+        return abs(self - other) < 1e-3
     }
 }

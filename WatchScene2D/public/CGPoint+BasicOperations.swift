@@ -10,6 +10,11 @@ import Foundation
 
 public extension CGPoint
 {
+    func isNear(other:CGPoint) -> Bool
+    {
+        return x.isNear(other.x) && y.isNear(other.y)
+    }
+    
     func norm() -> CGFloat
     {
         if x == 0
