@@ -239,15 +239,14 @@ public class W2DCollider : W2DComponent
         let dX = vertex1.x - start.x
         let dY = vertex1.y - start.y
         
+        var rayHit = false
         let a = (-u.y * dX  + u.x * dY) / det
-        let pointOnV = start.add(v.mul(a))
+        if (a >= 0) && (a <= 1)
+        {
+            let b = (-v.y * dX + v.x * dY) / det
+            rayHit = (b >= 0) && (b <= 1)
+        }
         
-        let b = (-v.y * dX + v.x * dY) / det
-        let pointOnU = vertex1.add(u.mul(b))
-
-        assert(pointOnV.isNear(pointOnU))
-        
-        var hit = (a >= 0) && (a <= 1) && (b >= 0) && (b <= 1)
         // Ray Intersection END
         
         // find the closest position to edge
@@ -261,12 +260,7 @@ public class W2DCollider : W2DComponent
         
         // perpendicular distance
         let squareOHLength = AO.squareNorm() - (AH * AH)
-        if !hit
-        {
-            hit = squareOHLength <= input.movingNodeRadius2
-        }
-        
-        if !hit
+        if !rayHit && squareOHLength > input.movingNodeRadius2
         {
             return nil
         }
