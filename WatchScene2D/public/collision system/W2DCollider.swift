@@ -137,10 +137,10 @@ public class W2DCollider : W2DComponent
             }
         }
         
-        if collision == nil
+        /*if collision == nil
         {
             print("missed collision")
-        }
+        }*/
         
         return collision
     }
