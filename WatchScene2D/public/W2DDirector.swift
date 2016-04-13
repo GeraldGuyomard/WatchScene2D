@@ -34,7 +34,7 @@ public protocol W2DDirector : class
     func setNeedsFullRedraw()
 }
 
-public func createW2DDirector(target:WKInterfaceImage, context:W2DContext) -> W2DDirector
+public func createW2DDirector(target:WKInterfaceObject, context:W2DContext) -> W2DDirector
 {
     return W2DDirectorImpl(target: target, context: context)
 }

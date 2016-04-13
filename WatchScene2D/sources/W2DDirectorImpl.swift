@@ -10,7 +10,7 @@ import Foundation
 
 internal class W2DDirectorImpl : NSObject, W2DDirector
 {
-    private var     fTarget : WKInterfaceImage
+    private var     fTarget : WKInterfaceObject
     private var     fRenderTimer : NSTimer?
     private var     fPreviousRenderTime: NSDate?
     private var     fFrameRate : UInt = 25
@@ -25,7 +25,7 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
     
     private var     fInvalidatedRects : [CGRect]?
     
-    init(target:WKInterfaceImage, context:W2DContext)
+    init(target:WKInterfaceObject, context:W2DContext)
     {
         fTarget = target
         fContext = context
@@ -230,7 +230,14 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         
         fInvalidatedRects = nil
         
-        fTarget.setImage(image)
+        if let img = fTarget as? WKInterfaceImage
+        {
+            img.setImage(image)
+        }
+        else if let button = fTarget as? WKInterfaceButton
+        {
+            button.setBackgroundImage(image)
+        }
     }
     
     func setNeedsRedraw(rect : CGRect)
