@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		740080D61CE54415009CE446 /* W2DLambdaAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740080D51CE54415009CE446 /* W2DLambdaAction.swift */; };
 		74041F901BD323AE004EDB33 /* CGPoint+BasicOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F8F1BD323AE004EDB33 /* CGPoint+BasicOperations.swift */; };
 		74041F921BD32CDA004EDB33 /* W2DDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F911BD32CDA004EDB33 /* W2DDirector.swift */; };
 		74041F941BD43BE8004EDB33 /* W2DBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74041F931BD43BE8004EDB33 /* W2DBehavior.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		740080D51CE54415009CE446 /* W2DLambdaAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DLambdaAction.swift; sourceTree = "<group>"; };
 		74041F8F1BD323AE004EDB33 /* CGPoint+BasicOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+BasicOperations.swift"; sourceTree = "<group>"; };
 		74041F911BD32CDA004EDB33 /* W2DDirector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DDirector.swift; sourceTree = "<group>"; };
 		74041F931BD43BE8004EDB33 /* W2DBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DBehavior.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				74D1BFC01C97CAE100A8CBFF /* W2DFadeToAction.swift */,
 				74D1BFC11C97CAE100A8CBFF /* W2DScaleToAction.swift */,
 				74D1BFC21C97CAE100A8CBFF /* W2DSequenceAction.swift */,
+				740080D51CE54415009CE446 /* W2DLambdaAction.swift */,
 			);
 			path = actions;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				74D1BFD51C97CAF900A8CBFF /* W2DSprite.swift in Sources */,
 				7487DDFB1C14F53400E74977 /* W2DComponent.swift in Sources */,
 				74041F9A1BD44E12004EDB33 /* W2DImageImpl.swift in Sources */,
+				740080D61CE54415009CE446 /* W2DLambdaAction.swift in Sources */,
 				74D1BFD21C97CAF900A8CBFF /* W2DColoredNode.swift in Sources */,
 				74D1BFC61C97CAE100A8CBFF /* W2DScaleToAction.swift in Sources */,
 				74D1BFCB1C97CAEB00A8CBFF /* W2DCollider.swift in Sources */,
