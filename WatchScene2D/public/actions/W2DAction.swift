@@ -27,6 +27,11 @@ public class W2DAction : W2DBehavior
         get { return fTarget }
     }
     
+    public var isRunning : Bool
+    {
+        get { return fIsRunning }
+    }
+    
     public var stopCallback : ((W2DAction, Bool) -> Void)? = nil
     
     public var elapsedTime : NSTimeInterval
@@ -38,9 +43,14 @@ public class W2DAction : W2DBehavior
     {
         if (!fIsRunning)
         {
-            fElapsedTime = 0
-            fIsRunning = true
+            restart()
         }
+    }
+    
+    public func restart()
+    {
+        fElapsedTime = 0
+        fIsRunning = true
     }
     
     public func stop()

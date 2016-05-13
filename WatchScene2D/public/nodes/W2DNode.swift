@@ -32,11 +32,32 @@ public class W2DNode : W2DComponent
     
     private weak var fDirector : W2DDirector?
     private var fIsOnScreen = false
+    private var fIsHidden = false
     private var fAlpha : CGFloat = 1.0
     
     private var fActions : [W2DAction]? = nil
     
-    public var hidden = false
+    public var hidden : Bool
+    {
+        get { return fIsHidden }
+        set
+        {
+            if newValue != fIsHidden
+            {
+                if (fIsHidden)
+                {
+                    fIsHidden = false
+                    setNeedsRedraw(false)
+                }
+                else
+                {
+                    setNeedsRedraw(false)
+                    fIsHidden = true
+                }
+            }
+        }
+    }
+    
     public var alpha : CGFloat
     {
         get { return fAlpha }

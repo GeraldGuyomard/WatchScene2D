@@ -8,8 +8,6 @@
 
 import Foundation
 
-import Foundation
-
 public class W2DLambdaAction : W2DFiniteDurationAction
 {
     public typealias Lambda=(target:W2DNode?, coeff:CGFloat)->Void
