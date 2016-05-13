@@ -19,7 +19,6 @@
 		745C2B5C1BE887ED00EA2639 /* W2DColor4f.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C2B5B1BE887ED00EA2639 /* W2DColor4f.swift */; };
 		7487DDFB1C14F53400E74977 /* W2DComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7487DDFA1C14F53400E74977 /* W2DComponent.swift */; };
 		74D1BFC31C97CAE100A8CBFF /* W2DAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1BFBE1C97CAE100A8CBFF /* W2DAction.swift */; };
-		74D1BFC41C97CAE100A8CBFF /* W2DCallbackAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1BFBF1C97CAE100A8CBFF /* W2DCallbackAction.swift */; };
 		74D1BFC51C97CAE100A8CBFF /* W2DFadeToAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1BFC01C97CAE100A8CBFF /* W2DFadeToAction.swift */; };
 		74D1BFC61C97CAE100A8CBFF /* W2DScaleToAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1BFC11C97CAE100A8CBFF /* W2DScaleToAction.swift */; };
 		74D1BFC71C97CAE100A8CBFF /* W2DSequenceAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1BFC21C97CAE100A8CBFF /* W2DSequenceAction.swift */; };
@@ -47,7 +46,6 @@
 		745C2B5B1BE887ED00EA2639 /* W2DColor4f.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DColor4f.swift; sourceTree = "<group>"; };
 		7487DDFA1C14F53400E74977 /* W2DComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DComponent.swift; sourceTree = "<group>"; };
 		74D1BFBE1C97CAE100A8CBFF /* W2DAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DAction.swift; sourceTree = "<group>"; };
-		74D1BFBF1C97CAE100A8CBFF /* W2DCallbackAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DCallbackAction.swift; sourceTree = "<group>"; };
 		74D1BFC01C97CAE100A8CBFF /* W2DFadeToAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DFadeToAction.swift; sourceTree = "<group>"; };
 		74D1BFC11C97CAE100A8CBFF /* W2DScaleToAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DScaleToAction.swift; sourceTree = "<group>"; };
 		74D1BFC21C97CAE100A8CBFF /* W2DSequenceAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DSequenceAction.swift; sourceTree = "<group>"; };
@@ -90,7 +88,6 @@
 			isa = PBXGroup;
 			children = (
 				74D1BFBE1C97CAE100A8CBFF /* W2DAction.swift */,
-				74D1BFBF1C97CAE100A8CBFF /* W2DCallbackAction.swift */,
 				74D1BFC01C97CAE100A8CBFF /* W2DFadeToAction.swift */,
 				74D1BFC11C97CAE100A8CBFF /* W2DScaleToAction.swift */,
 				74D1BFC21C97CAE100A8CBFF /* W2DSequenceAction.swift */,
@@ -259,7 +256,6 @@
 				74041F961BD43F98004EDB33 /* W2DDirectorImpl.swift in Sources */,
 				74041F941BD43BE8004EDB33 /* W2DBehavior.swift in Sources */,
 				74041F921BD32CDA004EDB33 /* W2DDirector.swift in Sources */,
-				74D1BFC41C97CAE100A8CBFF /* W2DCallbackAction.swift in Sources */,
 				74D1BFD31C97CAF900A8CBFF /* W2DNode.swift in Sources */,
 				74D1BFC71C97CAE100A8CBFF /* W2DSequenceAction.swift in Sources */,
 				745C2B5C1BE887ED00EA2639 /* W2DColor4f.swift in Sources */,

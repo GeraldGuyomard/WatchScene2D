@@ -12,10 +12,12 @@ import Foundation
 
 public class W2DLambdaAction : W2DFiniteDurationAction
 {
-    private let fLambda : (coeff:CGFloat)->Void
+    public typealias Lambda=(target:W2DNode?, coeff:CGFloat)->Void
+    
+    private let fLambda : Lambda
     
     // lambda used for interpolation
-    public init(duration:NSTimeInterval, lambda:(coeff:CGFloat)->Void)
+    public init(duration:NSTimeInterval, lambda:Lambda)
     {
         fLambda = lambda
 
@@ -23,7 +25,7 @@ public class W2DLambdaAction : W2DFiniteDurationAction
     }
 
     // one-call lambda
-    public init(lambda:(coeff:CGFloat)->Void)
+    public init(lambda:Lambda)
     {
         fLambda = lambda
         
@@ -34,12 +36,12 @@ public class W2DLambdaAction : W2DFiniteDurationAction
     {
         if self.duration <= 0.0
         {
-            fLambda(coeff: 0.0)
+            fLambda(target:fTarget, coeff: 0.0)
         }
         else
         {
             let c = CGFloat(self.elapsedTime / self.duration)
-            fLambda(coeff: c)
+            fLambda(target:fTarget, coeff: c)
         }
     }
 }
