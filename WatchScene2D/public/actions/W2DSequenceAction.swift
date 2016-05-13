@@ -24,6 +24,35 @@ public class W2DSequenceAction : W2DFiniteDurationAction
         fDuration += action.duration
     }
     
+    private func _startNextSubAction(dT: NSTimeInterval, director: W2DDirector!)
+    {
+        assert(fRunningSubAction == nil)
+        
+        fRunningSubAction = !fSubActions.isEmpty ? fSubActions.removeFirst() : nil
+        if let action = fRunningSubAction
+        {
+            action.fTarget = self.target
+            
+            action.stopCallback = {[weak self](action:W2DAction, finished:Bool) in
+                if let this = self
+                {
+                    assert(this.fRunningSubAction === action)
+                    this.fRunningSubAction = nil
+                    
+                    this._startNextSubAction(dT, director: director)
+                }
+            }
+            
+            action.start()
+            action.execute(dT, director: director)
+        }
+        else
+        {
+            onDone(true)
+        }
+        
+    }
+    
     public override func execute(dT: NSTimeInterval, director: W2DDirector!)
     {
         super.execute(dT, director: director)
@@ -34,31 +63,8 @@ public class W2DSequenceAction : W2DFiniteDurationAction
         }
         else
         {
-            fRunningSubAction = !fSubActions.isEmpty ? fSubActions.removeFirst() : nil
-            if let action = fRunningSubAction
-            {
-                action.fTarget = self.target
-                
-                action.stopCallback = {[weak self](action:W2DAction, finished:Bool) in
-                    if let this = self
-                    {
-                        this.fRunningSubAction = !this.fSubActions.isEmpty ? this.fSubActions.removeFirst() : nil
-                        if this.fRunningSubAction == nil
-                        {
-                            this.onDone(true)
-                        }
-                    }
-                }
-                
-                action.start()
-                action.execute(dT, director: director)
-            }
-            else
-            {
-                onDone(true)
-            }
+            _startNextSubAction(dT, director: director)
         }
-
     }
     
     public override func stop()

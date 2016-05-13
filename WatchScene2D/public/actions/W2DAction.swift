@@ -11,6 +11,8 @@ import Foundation
 
 public class W2DAction : W2DBehavior
 {
+    public var name : NSString? // for debug
+    
     internal var fTarget : W2DNode?
     
     private var fElapsedTime : NSTimeInterval = 0.0
