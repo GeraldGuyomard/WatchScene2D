@@ -11,6 +11,7 @@ import Foundation
 public class W2DSequenceAction : W2DFiniteDurationAction
 {
     private var fSubActions = [W2DFiniteDurationAction]()
+    private var fSubActionsToRun : [W2DFiniteDurationAction]? = nil
     private var fRunningSubAction: W2DFiniteDurationAction? = nil
     
     public init()
@@ -28,7 +29,7 @@ public class W2DSequenceAction : W2DFiniteDurationAction
     {
         assert(fRunningSubAction == nil)
         
-        fRunningSubAction = !fSubActions.isEmpty ? fSubActions.removeFirst() : nil
+        fRunningSubAction = (fSubActionsToRun != nil) && !fSubActionsToRun!.isEmpty ? fSubActionsToRun!.removeFirst() : nil
         if let action = fRunningSubAction
         {
             action.fTarget = self.target
@@ -48,6 +49,7 @@ public class W2DSequenceAction : W2DFiniteDurationAction
         }
         else
         {
+            fSubActionsToRun = nil
             onDone(true)
         }
         
@@ -67,12 +69,20 @@ public class W2DSequenceAction : W2DFiniteDurationAction
         }
     }
     
+    public override func restart()
+    {
+        fSubActionsToRun = fSubActions // copy
+        
+        super.restart()
+    }
+    
     public override func stop()
     {
         if let action = fRunningSubAction
         {
             action.stopCallback = nil
             fRunningSubAction = nil
+            fSubActionsToRun = nil
             action.stop()
         }
         

@@ -108,7 +108,7 @@ public class W2DFiniteDurationAction : W2DAction
     {
         super.execute(dT, director: director)
         
-        if (fElapsedTime >= fDuration)
+        if fIsRunning && fElapsedTime >= fDuration
         {
             onDone(true)
         }

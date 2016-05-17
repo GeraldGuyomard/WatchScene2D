@@ -44,30 +44,28 @@ public class W2DRepeatAction : W2DFiniteDurationAction
     
     public override func execute(dT: NSTimeInterval, director: W2DDirector!)
     {
-        super.execute(dT, director: director)
-        
-        if fNbRepeatLeft == 0
+        if fNbRepeatLeft != 0
         {
-            return;
-        }
-        
-        if !fSubAction.isRunning
-        {
-            fSubAction.fTarget = self.target
-            
-            fSubAction.stopCallback = {[weak self](action:W2DAction, finished:Bool) in
-                if let this = self
-                {
-                    assert(this.fSubAction === action)
-                    
-                    this._onSubActionEnded(finished)
+            if !fSubAction.isRunning
+            {
+                fSubAction.fTarget = self.target
+                
+                fSubAction.stopCallback = {[weak self](action:W2DAction, finished:Bool) in
+                    if let this = self
+                    {
+                        assert(this.fSubAction === action)
+                        
+                        this._onSubActionEnded(finished)
+                    }
                 }
+                
+                fSubAction.start()
             }
             
-            fSubAction.start()
+            fSubAction.execute(dT, director: director)
         }
         
-        fSubAction.execute(dT, director: director)
+        super.execute(dT, director: director)
     }
     
     public override func stop()
