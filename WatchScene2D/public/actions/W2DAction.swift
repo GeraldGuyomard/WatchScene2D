@@ -108,6 +108,11 @@ public class W2DFiniteDurationAction : W2DAction
     {
         super.execute(dT, director: director)
         
+        checkEndOfExecution()
+    }
+    
+    public func checkEndOfExecution()
+    {
         if fIsRunning && fElapsedTime >= fDuration
         {
             onDone(true)

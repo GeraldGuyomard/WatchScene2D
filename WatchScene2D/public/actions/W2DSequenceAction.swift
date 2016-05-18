@@ -92,4 +92,10 @@ public class W2DSequenceAction : W2DFiniteDurationAction
     public override func run(director: W2DDirector!)
     {
     }
+    
+    public override func checkEndOfExecution()
+    {
+        // do not rely on elapsed time to terminate action
+        // wait for last action to be done
+    }
 }
