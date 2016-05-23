@@ -55,20 +55,6 @@ public class W2DSequenceAction : W2DFiniteDurationAction
         
     }
     
-    public override func execute(dT: NSTimeInterval, director: W2DDirector!)
-    {
-        super.execute(dT, director: director)
-        
-        if let action = fRunningSubAction
-        {
-            action.execute(dT, director: director)
-        }
-        else
-        {
-            _startNextSubAction(dT, director: director)
-        }
-    }
-    
     public override func restart()
     {
         fSubActionsToRun = fSubActions // copy
@@ -89,13 +75,15 @@ public class W2DSequenceAction : W2DFiniteDurationAction
         super.stop()
     }
     
-    public override func run(director: W2DDirector!)
+    public override func run(dT: NSTimeInterval, director: W2DDirector!)
     {
-    }
-    
-    public override func checkEndOfExecution()
-    {
-        // do not rely on elapsed time to terminate action
-        // wait for last action to be done
+        if let action = fRunningSubAction
+        {
+            action.execute(dT, director: director)
+        }
+        else
+        {
+            _startNextSubAction(dT, director: director)
+        }
     }
 }

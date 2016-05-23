@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class W2DFadeToAction : W2DFiniteDurationAction
+public class W2DFadeToAction : W2DSimpleFiniteDurationAction
 {
     private var fInitialAlpha : CGFloat = 0.0
     private var fFinalAlpha : CGFloat
@@ -34,7 +34,7 @@ public class W2DFadeToAction : W2DFiniteDurationAction
         super.start()
     }
     
-    public override func run(director: W2DDirector!)
+    public override func run(dT: NSTimeInterval, director: W2DDirector!)
     {
         if let target = self.target
         {

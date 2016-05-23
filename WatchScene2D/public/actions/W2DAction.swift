@@ -64,10 +64,10 @@ public class W2DAction : W2DBehavior
         
         fElapsedTime += dT
         
-        run(director)
+        run(dT, director:director)
     }
     
-    public func run(director: W2DDirector!)
+    public func run(dT: NSTimeInterval, director: W2DDirector!)
     {
         assert(false) // to override, thx Swift for not allowing declarations of abstract methods
     }
@@ -103,19 +103,18 @@ public class W2DFiniteDurationAction : W2DAction
         fDuration = duration
         super.init()
     }
-    
+}
+
+public class W2DSimpleFiniteDurationAction : W2DFiniteDurationAction
+{
     override public func execute(dT: NSTimeInterval, director: W2DDirector!)
     {
         super.execute(dT, director: director)
         
-        checkEndOfExecution()
-    }
-    
-    public func checkEndOfExecution()
-    {
         if fIsRunning && fElapsedTime >= fDuration
         {
             onDone(true)
         }
     }
 }
+

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class W2DLambdaAction : W2DFiniteDurationAction
+public class W2DLambdaAction : W2DSimpleFiniteDurationAction
 {
     public typealias Lambda=(target:W2DNode?, coeff:CGFloat)->Void
     
@@ -30,7 +30,7 @@ public class W2DLambdaAction : W2DFiniteDurationAction
         super.init(duration:0.0)
     }
     
-    public override func run(director: W2DDirector!)
+    public override func run(dT: NSTimeInterval, director: W2DDirector!)
     {
         if self.duration <= 0.0
         {

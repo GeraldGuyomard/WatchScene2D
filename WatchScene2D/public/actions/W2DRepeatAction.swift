@@ -42,7 +42,7 @@ public class W2DRepeatAction : W2DFiniteDurationAction
         }
     }
     
-    public override func execute(dT: NSTimeInterval, director: W2DDirector!)
+    public override func run(dT: NSTimeInterval, director: W2DDirector!)
     {
         if fNbRepeatLeft != 0
         {
@@ -64,8 +64,6 @@ public class W2DRepeatAction : W2DFiniteDurationAction
             
             fSubAction.execute(dT, director: director)
         }
-        
-        super.execute(dT, director: director)
     }
     
     public override func stop()
@@ -77,10 +75,6 @@ public class W2DRepeatAction : W2DFiniteDurationAction
         }
         
         super.stop()
-    }
-    
-    public override func run(director: W2DDirector!)
-    {
     }
 
 }

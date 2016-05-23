@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class W2DScaleToAction : W2DFiniteDurationAction
+public class W2DScaleToAction : W2DSimpleFiniteDurationAction
 {
     private var fInitialScale = CGPointMake(0, 0)
     private var fFinalScale : CGPoint
@@ -37,7 +37,7 @@ public class W2DScaleToAction : W2DFiniteDurationAction
         super.start()
     }
     
-    public override func run(director: W2DDirector!)
+    public override func run(dT: NSTimeInterval, director: W2DDirector!)
     {
         if let target = self.target
         {
