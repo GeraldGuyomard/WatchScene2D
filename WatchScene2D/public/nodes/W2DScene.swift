@@ -10,7 +10,7 @@ import WatchKit
 
 public class W2DScene : W2DNode
 {
-    public var backgroundColor = W2DColor4f(red: 0, green: 0, blue: 0)
+    public var backgroundColor : W2DColor4f? = W2DColor4f(red: 0, green: 0, blue: 0)
     {
         didSet
         {
@@ -22,15 +22,20 @@ public class W2DScene : W2DNode
     {
         let rect = CGRectMake(0, 0, self.size.width, self.size.height)
         
-        let c = self.backgroundColor
-        if c.alpha != 1
+        if let color = self.backgroundColor
+        {
+            if color.alpha == 0
+            {
+                context.clear(rect)
+            }
+            else
+            {
+                context.fillRect(rect, withColor:color)
+            }
+        }
+        else
         {
             context.clear(rect)
-        }
-        
-        if c.alpha != 0
-        {
-            context.fillRect(rect, withColor: c)
         }
     }
     

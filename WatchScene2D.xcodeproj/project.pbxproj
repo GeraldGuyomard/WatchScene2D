@@ -33,6 +33,7 @@
 		74E4AE811BC5F17A006860EE /* WatchScene2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 74E4AE801BC5F17A006860EE /* WatchScene2D.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		74E4AE961BC60601006860EE /* W2DContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E4AE951BC60601006860EE /* W2DContext.swift */; };
 		74E4AE981BC606A5006860EE /* W2DContextImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E4AE971BC606A5006860EE /* W2DContextImpl.swift */; };
+		74F9633F1CF3CCF800E03DA1 /* W2DSpawnAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F9633E1CF3CCF800E03DA1 /* W2DSpawnAction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		74E4AE821BC5F17A006860EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74E4AE951BC60601006860EE /* W2DContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DContext.swift; sourceTree = "<group>"; };
 		74E4AE971BC606A5006860EE /* W2DContextImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DContextImpl.swift; sourceTree = "<group>"; };
+		74F9633E1CF3CCF800E03DA1 /* W2DSpawnAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = W2DSpawnAction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				740080D51CE54415009CE446 /* W2DLambdaAction.swift */,
 				740080D81CE6858E009CE446 /* W2DDelayAction.swift */,
 				740080DA1CE68630009CE446 /* W2DRepeatAction.swift */,
+				74F9633E1CF3CCF800E03DA1 /* W2DSpawnAction.swift */,
 			);
 			path = actions;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74D1BFD41C97CAF900A8CBFF /* W2DScene.swift in Sources */,
+				74F9633F1CF3CCF800E03DA1 /* W2DSpawnAction.swift in Sources */,
 				740080D91CE6858E009CE446 /* W2DDelayAction.swift in Sources */,
 				74041F901BD323AE004EDB33 /* CGPoint+BasicOperations.swift in Sources */,
 				74D1BFC31C97CAE100A8CBFF /* W2DAction.swift in Sources */,
