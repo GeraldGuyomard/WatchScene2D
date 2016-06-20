@@ -14,12 +14,14 @@ public class W2DNode : W2DComponent
     private weak var fParent : W2DNode? = nil
     private var fChildren : Array<W2DNode>? = nil
     
+    // transforms
     private var fLocalTransform = CGAffineTransformIdentity
     private var fIsLocalTransformValid = false
     
     private var fGlobalTransform = CGAffineTransformIdentity
     private var fIsGlobalTransformValid = false
     
+    // Bounding box
     private var fGlobalBoundingBox = CGRectZero
     private var fIsGlobalBoundingBoxValid = false
     
