@@ -8,14 +8,14 @@
 
 import Foundation
 
-public class W2DLambdaAction : W2DSimpleFiniteDurationAction
+open class W2DLambdaAction : W2DSimpleFiniteDurationAction
 {
-    public typealias Lambda=(target:W2DNode?, coeff:CGFloat)->Void
+    public typealias Lambda=(_ target:W2DNode?, _ coeff:CGFloat)->Void
     
-    private let fLambda : Lambda
+    fileprivate let fLambda : Lambda
     
     // lambda used for interpolation
-    public init(duration:NSTimeInterval, lambda:Lambda)
+    public init(duration:TimeInterval, lambda:@escaping Lambda)
     {
         fLambda = lambda
 
@@ -23,23 +23,23 @@ public class W2DLambdaAction : W2DSimpleFiniteDurationAction
     }
 
     // one-call lambda
-    public init(lambda:Lambda)
+    public init(lambda:@escaping Lambda)
     {
         fLambda = lambda
         
         super.init(duration:0.0)
     }
     
-    public override func run(dT: NSTimeInterval, director: W2DDirector!)
+    open override func run(_ dT: TimeInterval, director: W2DDirector!)
     {
         if self.duration <= 0.0
         {
-            fLambda(target:fTarget, coeff: 0.0)
+            fLambda(fTarget, 0.0)
         }
         else
         {
             let c = CGFloat(self.elapsedTime / self.duration)
-            fLambda(target:fTarget, coeff: c)
+            fLambda(fTarget, c)
         }
     }
 }

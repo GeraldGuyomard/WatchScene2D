@@ -8,26 +8,26 @@
 
 import Foundation
 
-public class W2DScaleToAction : W2DSimpleFiniteDurationAction
+open class W2DScaleToAction : W2DSimpleFiniteDurationAction
 {
-    private var fInitialScale = CGPointMake(0, 0)
-    private var fFinalScale : CGPoint
+    fileprivate var fInitialScale = CGPoint(x: 0, y: 0)
+    fileprivate var fFinalScale : CGPoint
     
-    public init(duration:NSTimeInterval, finalScale:CGFloat)
+    public init(duration:TimeInterval, finalScale:CGFloat)
     {
-        fFinalScale = CGPointMake(finalScale, finalScale)
+        fFinalScale = CGPoint(x: finalScale, y: finalScale)
         
         super.init(duration: duration)
     }
 
-    public init(duration:NSTimeInterval, finalScale:CGPoint)
+    public init(duration:TimeInterval, finalScale:CGPoint)
     {
         fFinalScale = finalScale
         
         super.init(duration: duration)
     }
     
-    public override func start()
+    open override func start()
     {
         if let target = fTarget
         {
@@ -37,7 +37,7 @@ public class W2DScaleToAction : W2DSimpleFiniteDurationAction
         super.start()
     }
     
-    public override func run(dT: NSTimeInterval, director: W2DDirector!)
+    open override func run(_ dT: TimeInterval, director: W2DDirector!)
     {
         if let target = self.target
         {

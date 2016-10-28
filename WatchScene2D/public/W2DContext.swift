@@ -14,22 +14,22 @@ public protocol W2DContext
     var height : UInt { get }
     var clippingRect : CGRect? { get }
     
-    func clear(rect:CGRect)
-    func fillRect(rect:CGRect, withColor color:W2DColor4f)
+    func clear(_ rect:CGRect)
+    func fillRect(_ rect:CGRect, withColor color:W2DColor4f)
     
     func image(named name:String) -> W2DImage?
     
     func render() -> UIImage?
-    func render(dirtyRects: [CGRect]?) -> UIImage?
+    func render(_ dirtyRects: [CGRect]?) -> UIImage?
     
     func saveState()
     func restoreState()
     
-    func applyTransform(transform:CGAffineTransform)
-    func applyClipping(rect:CGRect)
+    func applyTransform(_ transform:CGAffineTransform)
+    func applyClipping(_ rect:CGRect)
 }
 
-public func createW2DContext(width width:UInt, height:UInt) -> W2DContext
+public func createW2DContext(width:UInt, height:UInt) -> W2DContext
 {
     return W2DContextImpl(width: width, height: height)
 }

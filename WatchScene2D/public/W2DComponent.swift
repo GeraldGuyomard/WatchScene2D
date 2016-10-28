@@ -8,19 +8,19 @@
 
 import Foundation
 
-public class W2DComponent
+open class W2DComponent
 {
-    public var debugName : String? = nil
+    open var debugName : String? = nil
     
     public init()
     {
     }
     
     // Linked list
-    private weak var fPrevious: W2DComponent? = nil
-    private var fNext : W2DComponent? = nil
+    fileprivate weak var fPrevious: W2DComponent? = nil
+    fileprivate var fNext : W2DComponent? = nil
     
-    public var head : W2DComponent
+    open var head : W2DComponent
     {
         get
         {
@@ -41,7 +41,7 @@ public class W2DComponent
         }
     }
     
-    public func addComponent(component:W2DComponent!)
+    open func addComponent(_ component:W2DComponent!)
     {
         assert(component.fPrevious == nil, "component should be detached")
         assert(component.fNext == nil, "component should be detached")
@@ -65,7 +65,7 @@ public class W2DComponent
         }
     }
     
-    public func removeComponent()
+    open func removeComponent()
     {
         let head = self.head
         
@@ -91,7 +91,7 @@ public class W2DComponent
         }
     }
     
-    public func component<T>() -> T?
+    open func component<T>() -> T?
     {
         var comp :W2DComponent? = self
         
@@ -122,9 +122,9 @@ public class W2DComponent
     }
     
     // To be overridden
-    public func onComponentAdded(newComponent:W2DComponent)
+    open func onComponentAdded(_ newComponent:W2DComponent)
     {}
     
-    public func onComponentRemoved(oldHead:W2DComponent, oldComponent:W2DComponent)
+    open func onComponentRemoved(_ oldHead:W2DComponent, oldComponent:W2DComponent)
     {}
 }

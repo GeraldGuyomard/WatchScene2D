@@ -22,7 +22,7 @@ public struct W2DCollision
     public var distanceToEdge : CGFloat
     public var edgeNormal: CGPoint
     
-    public func closerThan(collision:W2DCollision?) -> Bool
+    public func closerThan(_ collision:W2DCollision?) -> Bool
     {
         if let c = collision
         {

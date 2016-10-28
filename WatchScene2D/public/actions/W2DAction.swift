@@ -9,37 +9,37 @@
 import WatchKit
 import Foundation
 
-public class W2DAction : W2DBehavior
+open class W2DAction : W2DBehavior
 {
-    public var name : NSString? // for debug
+    open var name : NSString? // for debug
     
     internal var fTarget : W2DNode?
     
-    private var fElapsedTime : NSTimeInterval = 0.0
+    fileprivate var fElapsedTime : TimeInterval = 0.0
     internal var fIsRunning = false
     
     public init()
     {
     }
     
-    public var target: W2DNode?
+    open var target: W2DNode?
     {
         get { return fTarget }
     }
     
-    public var isRunning : Bool
+    open var isRunning : Bool
     {
         get { return fIsRunning }
     }
     
-    public var stopCallback : ((W2DAction, Bool) -> Void)? = nil
+    open var stopCallback : ((W2DAction, Bool) -> Void)? = nil
     
-    public var elapsedTime : NSTimeInterval
+    open var elapsedTime : TimeInterval
     {
         get { return fElapsedTime }
     }
     
-    public func start()
+    open func start()
     {
         if (!fIsRunning)
         {
@@ -47,18 +47,18 @@ public class W2DAction : W2DBehavior
         }
     }
     
-    public func restart()
+    open func restart()
     {
         fElapsedTime = 0
         fIsRunning = true
     }
     
-    public func stop()
+    open func stop()
     {
         onDone(false)
     }
     
-    public func execute(dT: NSTimeInterval, director: W2DDirector!)
+    open func execute(_ dT: TimeInterval, director: W2DDirector!)
     {
         assert(fIsRunning)
         
@@ -67,12 +67,12 @@ public class W2DAction : W2DBehavior
         run(dT, director:director)
     }
     
-    public func run(dT: NSTimeInterval, director: W2DDirector!)
+    open func run(_ dT: TimeInterval, director: W2DDirector!)
     {
         assert(false) // to override, thx Swift for not allowing declarations of abstract methods
     }
     
-    internal func onDone(finished:Bool)
+    internal func onDone(_ finished:Bool)
     {
         fTarget = nil
         
@@ -89,25 +89,25 @@ public class W2DAction : W2DBehavior
     }
 }
 
-public class W2DFiniteDurationAction : W2DAction
+open class W2DFiniteDurationAction : W2DAction
 {
-    internal var fDuration : NSTimeInterval
+    internal var fDuration : TimeInterval
     
-    public var duration : NSTimeInterval
+    open var duration : TimeInterval
     {
         get { return fDuration }
     }
     
-    public init(duration:NSTimeInterval)
+    public init(duration:TimeInterval)
     {
         fDuration = duration
         super.init()
     }
 }
 
-public class W2DSimpleFiniteDurationAction : W2DFiniteDurationAction
+open class W2DSimpleFiniteDurationAction : W2DFiniteDurationAction
 {
-    override public func execute(dT: NSTimeInterval, director: W2DDirector!)
+    override open func execute(_ dT: TimeInterval, director: W2DDirector!)
     {
         super.execute(dT, director: director)
         

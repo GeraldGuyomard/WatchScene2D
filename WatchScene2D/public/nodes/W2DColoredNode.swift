@@ -8,9 +8,9 @@
 
 import WatchKit
 
-public class W2DColoredNode : W2DNode
+open class W2DColoredNode : W2DNode
 {
-    public var color : W2DColor4f?
+    open var color : W2DColor4f?
     {
         didSet
         {
@@ -25,12 +25,12 @@ public class W2DColoredNode : W2DNode
         self.color = color
     }
     
-    override public func selfRender(context: W2DContext)
+    override open func selfRender(_ context: W2DContext)
     {
         if let color = self.color
         {
             let s = self.size
-            let rect = CGRectMake(0, 0, s.width, s.height)
+            let rect = CGRect(x: 0, y: 0, width: s.width, height: s.height)
             context.fillRect(rect, withColor: color)
         }
     }

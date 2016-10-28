@@ -10,8 +10,8 @@ import Foundation
 
 internal class W2DImageImpl : W2DImage
 {
-    private var fCGContext : CGContextRef!
-    private var fUIImage : UIImage?
+    fileprivate var fCGContext : CGContext!
+    fileprivate var fUIImage : UIImage?
     
     var size : CGSize
     {
@@ -24,7 +24,7 @@ internal class W2DImageImpl : W2DImage
         return s
     }
     
-    init?(context:CGContextRef, named:String)
+    init?(context:CGContext, named:String)
     {
         fCGContext = context
         
@@ -38,18 +38,18 @@ internal class W2DImageImpl : W2DImage
         }
     }
     
-    func draw(pos:CGPoint)
+    func draw(_ pos:CGPoint)
     {
         if let img = fUIImage
         {
-            let cgImage = img.CGImage;
-            let rect = CGRect(x:pos.x, y:pos.y, width:CGFloat(CGImageGetWidth(cgImage)), height:CGFloat(CGImageGetHeight(cgImage)))
+            let cgImage = img.cgImage;
+            let rect = CGRect(x:pos.x, y:pos.y, width:CGFloat((cgImage?.width)!), height:CGFloat((cgImage?.height)!))
             
-            CGContextDrawImage(fCGContext, rect, cgImage)
+            fCGContext.draw(cgImage!, in: rect)
         }
     }
 
-    func draw(pos:CGPoint, alpha:CGFloat)
+    func draw(_ pos:CGPoint, alpha:CGFloat)
     {
         if (alpha == 1.0)
         {
@@ -59,26 +59,26 @@ internal class W2DImageImpl : W2DImage
         {
             if let img = fUIImage
             {
-                let cgImage = img.CGImage;
-                let rect = CGRect(x:pos.x, y:pos.y, width:CGFloat(CGImageGetWidth(cgImage)), height:CGFloat(CGImageGetHeight(cgImage)))
+                let cgImage = img.cgImage;
+                let rect = CGRect(x:pos.x, y:pos.y, width:CGFloat((cgImage?.width)!), height:CGFloat((cgImage?.height)!))
                 
-                CGContextSaveGState(fCGContext)
-                CGContextSetAlpha(fCGContext, alpha)
-                CGContextDrawImage(fCGContext, rect, cgImage)
-                CGContextRestoreGState(fCGContext)
+                fCGContext.saveGState()
+                fCGContext.setAlpha(alpha)
+                fCGContext.draw(cgImage!, in: rect)
+                fCGContext.restoreGState()
             }
         }
     }
     
-    func draw(rect:CGRect)
+    func draw(_ rect:CGRect)
     {
         if let img = fUIImage
         {
-            CGContextDrawImage(fCGContext, rect, img.CGImage)
+            fCGContext.draw(img.cgImage!, in: rect)
         }
     }
     
-    func draw(rect:CGRect, alpha:CGFloat)
+    func draw(_ rect:CGRect, alpha:CGFloat)
     {
         if (alpha == 1.0)
         {
@@ -88,10 +88,10 @@ internal class W2DImageImpl : W2DImage
         {
             if let img = fUIImage
             {
-                CGContextSaveGState(fCGContext)
-                CGContextSetAlpha(fCGContext, alpha)
-                CGContextDrawImage(fCGContext, rect, img.CGImage)
-                CGContextRestoreGState(fCGContext)
+                fCGContext.saveGState()
+                fCGContext.setAlpha(alpha)
+                fCGContext.draw(img.cgImage!, in: rect)
+                fCGContext.restoreGState()
             }
         }
     }

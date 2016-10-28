@@ -9,37 +9,37 @@
 import WatchKit
 import Foundation
 
-public class W2DNode : W2DComponent
+open class W2DNode : W2DComponent
 {
-    private weak var fParent : W2DNode? = nil
-    private var fChildren : Array<W2DNode>? = nil
+    fileprivate weak var fParent : W2DNode? = nil
+    fileprivate var fChildren : Array<W2DNode>? = nil
     
     // transforms
-    private var fLocalTransform = CGAffineTransformIdentity
-    private var fIsLocalTransformValid = false
+    fileprivate var fLocalTransform = CGAffineTransform.identity
+    fileprivate var fIsLocalTransformValid = false
     
-    private var fGlobalTransform = CGAffineTransformIdentity
-    private var fIsGlobalTransformValid = false
+    fileprivate var fGlobalTransform = CGAffineTransform.identity
+    fileprivate var fIsGlobalTransformValid = false
     
     // Bounding box
-    private var fGlobalBoundingBox = CGRectZero
-    private var fIsGlobalBoundingBoxValid = false
+    fileprivate var fGlobalBoundingBox = CGRect.zero
+    fileprivate var fIsGlobalBoundingBoxValid = false
     
     // decomposed local transform
-    private var fPosition = CGPointMake(0, 0)
-    private var fAnchorPoint = CGPointMake(0, 0)
-    private var fSize = CGSizeMake(0, 0)
-    private var fScaleXY = CGPointMake(1, 1)
-    private var fRotation : CGFloat = 0.0
+    fileprivate var fPosition = CGPoint(x: 0, y: 0)
+    fileprivate var fAnchorPoint = CGPoint(x: 0, y: 0)
+    fileprivate var fSize = CGSize(width: 0, height: 0)
+    fileprivate var fScaleXY = CGPoint(x: 1, y: 1)
+    fileprivate var fRotation : CGFloat = 0.0
     
-    private weak var fDirector : W2DDirector?
-    private var fIsOnScreen = false
-    private var fIsHidden = false
-    private var fAlpha : CGFloat = 1.0
+    fileprivate weak var fDirector : W2DDirector?
+    fileprivate var fIsOnScreen = false
+    fileprivate var fIsHidden = false
+    fileprivate var fAlpha : CGFloat = 1.0
     
-    private var fActions : [W2DAction]? = nil
+    fileprivate var fActions : [W2DAction]? = nil
     
-    public var hidden : Bool
+    open var hidden : Bool
     {
         get { return fIsHidden }
         set
@@ -60,7 +60,7 @@ public class W2DNode : W2DComponent
         }
     }
     
-    public var alpha : CGFloat
+    open var alpha : CGFloat
     {
         get { return fAlpha }
         set
@@ -83,7 +83,7 @@ public class W2DNode : W2DComponent
         }
     }
     
-    public var isOnScreen : Bool
+    open var isOnScreen : Bool
     {
         get
         {
@@ -91,7 +91,7 @@ public class W2DNode : W2DComponent
         }
     }
     
-    public var position : CGPoint
+    open var position : CGPoint
     {
         get { return fPosition }
         
@@ -109,7 +109,7 @@ public class W2DNode : W2DComponent
         }
     }
 
-    public var anchorPoint : CGPoint
+    open var anchorPoint : CGPoint
     {
         get { return fAnchorPoint }
         
@@ -127,7 +127,7 @@ public class W2DNode : W2DComponent
         }
     }
     
-    public var scaleXY : CGPoint
+    open var scaleXY : CGPoint
     {
         get { return fScaleXY }
         
@@ -145,7 +145,7 @@ public class W2DNode : W2DComponent
         }
     }
 
-    public var scale : CGFloat
+    open var scale : CGFloat
     {
         get
         {
@@ -168,7 +168,7 @@ public class W2DNode : W2DComponent
         }
     }
     
-    public var rotation : CGFloat
+    open var rotation : CGFloat
         {
         get { return fRotation }
         
@@ -186,7 +186,7 @@ public class W2DNode : W2DComponent
         }
     }
     
-    public var size : CGSize
+    open var size : CGSize
     {
         get { return fSize }
         
@@ -209,31 +209,31 @@ public class W2DNode : W2DComponent
         fDirector = director
     }
     
-    public var director : W2DDirector?
+    open var director : W2DDirector?
     {
         get { return fDirector }
     }
     
-    public var parent : W2DNode?
+    open var parent : W2DNode?
     {
         get { return fParent }
     }
     
-    public var children :Array<W2DNode>?
+    open var children :Array<W2DNode>?
     {
         get { return fChildren }
     }
     
-    public func removeFromParent()
+    open func removeFromParent()
     {
         if let p = fParent
         {
             assert(p.fChildren != nil)
-            if let index = p.fChildren!.indexOf({(n:W2DNode) -> Bool in
+            if let index = p.fChildren!.index(where: {(n:W2DNode) -> Bool in
                 return n === self
             })
             {
-                p.fChildren!.removeAtIndex(index)
+                p.fChildren!.remove(at: index)
                 if p.fChildren!.count == 0
                 {
                     p.fChildren = nil
@@ -248,7 +248,7 @@ public class W2DNode : W2DComponent
         }
     }
     
-    public func addChild(child:W2DNode!)
+    open func addChild(_ child:W2DNode!)
     {
         if let oldParent = child.parent
         {
@@ -271,18 +271,18 @@ public class W2DNode : W2DComponent
         child.setIsOnScreen(fIsOnScreen)
     }
     
-    public var localTransform : CGAffineTransform
+    open var localTransform : CGAffineTransform
     {
         if !fIsLocalTransformValid
         {
             if fAnchorPoint.x != 0 || fAnchorPoint.y != 0
             {
-                let aPoint = CGPointMake(-fSize.width * fAnchorPoint.x, -fSize.height * fAnchorPoint.y)
-                fLocalTransform = CGAffineTransformMakeTranslation(aPoint.x, aPoint.y)
+                let aPoint = CGPoint(x: -fSize.width * fAnchorPoint.x, y: -fSize.height * fAnchorPoint.y)
+                fLocalTransform = CGAffineTransform(translationX: aPoint.x, y: aPoint.y)
             }
             else
             {
-                fLocalTransform = CGAffineTransformIdentity
+                fLocalTransform = CGAffineTransform.identity
             }
             
             if fScaleXY.x != 1 || fScaleXY.y != 1
@@ -297,7 +297,7 @@ public class W2DNode : W2DComponent
             
             if fRotation != 0
             {
-                fLocalTransform = CGAffineTransformRotate(fLocalTransform, fRotation)
+                fLocalTransform = fLocalTransform.rotated(by: fRotation)
             }
             
             fLocalTransform.tx += fPosition.x
@@ -309,13 +309,13 @@ public class W2DNode : W2DComponent
         return fLocalTransform
     }
     
-    public var globalTransform : CGAffineTransform
+    open var globalTransform : CGAffineTransform
     {
         if !fIsGlobalTransformValid
         {
             if fParent != nil
             {
-                fGlobalTransform = CGAffineTransformConcat(self.localTransform, fParent!.globalTransform)
+                fGlobalTransform = self.localTransform.concatenating(fParent!.globalTransform)
             }
             else
             {
@@ -328,12 +328,12 @@ public class W2DNode : W2DComponent
         return fGlobalTransform
     }
     
-    public var globalBoundingBox : CGRect
+    open var globalBoundingBox : CGRect
     {
         if !fIsGlobalBoundingBoxValid
         {
-            let localBox = CGRectMake(0, 0, self.size.width, self.size.height)
-            fGlobalBoundingBox = CGRectApplyAffineTransform(localBox, self.globalTransform)
+            let localBox = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
+            fGlobalBoundingBox = localBox.applying(self.globalTransform)
             
             fIsGlobalBoundingBoxValid = true
         }
@@ -341,7 +341,7 @@ public class W2DNode : W2DComponent
         return fGlobalBoundingBox
     }
     
-    public var globalBoundingVertices : [CGPoint]
+    open var globalBoundingVertices : [CGPoint]
     {
         get
         {
@@ -350,9 +350,9 @@ public class W2DNode : W2DComponent
                 let box = self.globalBoundingBox
                 
                 let A = box.origin
-                let B = CGPointMake(box.origin.x, box.origin.y + box.size.height)
-                let C = CGPointMake(box.origin.x + box.size.width, box.origin.y + box.size.height)
-                let D = CGPointMake(box.origin.x + box.size.width, box.origin.y)
+                let B = CGPoint(x: box.origin.x, y: box.origin.y + box.size.height)
+                let C = CGPoint(x: box.origin.x + box.size.width, y: box.origin.y + box.size.height)
+                let D = CGPoint(x: box.origin.x + box.size.width, y: box.origin.y)
                 
                 return [A, B, C, D]
             }
@@ -360,17 +360,17 @@ public class W2DNode : W2DComponent
             {
                 let t = self.globalTransform
                 
-                let A = CGPointApplyAffineTransform(CGPointMake(0, 0), t)
-                let B = CGPointApplyAffineTransform(CGPointMake(0, fSize.height), t)
-                let C = CGPointApplyAffineTransform(CGPointMake(fSize.width, fSize.height), t)
-                let D = CGPointApplyAffineTransform(CGPointMake(fSize.width, 0), t)
+                let A = CGPoint(x: 0, y: 0).applying(t)
+                let B = CGPoint(x: 0, y: fSize.height).applying(t)
+                let C = CGPoint(x: fSize.width, y: fSize.height).applying(t)
+                let D = CGPoint(x: fSize.width, y: 0).applying(t)
                 
                 return [A, B, C, D]
             }
         }
     }
     
-    public func render()
+    open func render()
     {
         if (!self.hidden)
         {
@@ -384,7 +384,7 @@ public class W2DNode : W2DComponent
             if let clippingRect = context.clippingRect
             {
                 let rect = self.globalBoundingBox
-                shouldRender = CGRectIntersectsRect(clippingRect, rect)
+                shouldRender = clippingRect.intersects(rect)
             }
 
             if shouldRender
@@ -404,10 +404,10 @@ public class W2DNode : W2DComponent
         }
     }
     
-    public func selfRender(context:W2DContext)
+    open func selfRender(_ context:W2DContext)
     {}
     
-    public func setNeedsRedraw(descendantsToo:Bool)
+    open func setNeedsRedraw(_ descendantsToo:Bool)
     {
         if !self.hidden && self.isOnScreen
         {
@@ -433,7 +433,7 @@ public class W2DNode : W2DComponent
     }
     
     
-    public func removeAction(action:W2DAction)
+    open func removeAction(_ action:W2DAction)
     {
         if fActions != nil
         {
@@ -441,7 +441,7 @@ public class W2DNode : W2DComponent
             {
                 if fActions![i] === action
                 {
-                    fActions!.removeAtIndex(i)
+                    fActions!.remove(at: i)
                     if fActions!.isEmpty
                     {
                         fActions = nil
@@ -459,7 +459,7 @@ public class W2DNode : W2DComponent
         }
     }
     
-    public func removeAllActions()
+    open func removeAllActions()
     {
         if let actions = fActions
         {
@@ -475,7 +475,7 @@ public class W2DNode : W2DComponent
     /*
         Internal methods
     */
-    internal func setIsOnScreen(onScreen:Bool)
+    internal func setIsOnScreen(_ onScreen:Bool)
     {
         if fIsOnScreen != onScreen
         {
@@ -516,9 +516,9 @@ public class W2DNode : W2DComponent
         }
     }
     
-    public var targetNode : W2DNode? { get { return self } }
+    open var targetNode : W2DNode? { get { return self } }
     
-    public func run(action:W2DAction)
+    open func run(_ action:W2DAction)
     {
         action.fTarget = self
         action.stopCallback = {[weak self](action:W2DAction, finished:Bool) in

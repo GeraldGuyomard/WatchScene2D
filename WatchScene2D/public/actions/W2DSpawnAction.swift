@@ -8,17 +8,17 @@
 
 import Foundation
 
-public class W2DSpawnAction : W2DFiniteDurationAction
+open class W2DSpawnAction : W2DFiniteDurationAction
 {
-    private var fSubActions = [W2DFiniteDurationAction]()
-    private var fRunningSubActions : [W2DFiniteDurationAction]? = nil
+    fileprivate var fSubActions = [W2DFiniteDurationAction]()
+    fileprivate var fRunningSubActions : [W2DFiniteDurationAction]? = nil
     
     public init()
     {
         super.init(duration:0)
     }
     
-    public func addAction(action:W2DFiniteDurationAction)
+    open func addAction(_ action:W2DFiniteDurationAction)
     {
         fSubActions.append(action)
         if (action.duration > fDuration)
@@ -27,14 +27,14 @@ public class W2DSpawnAction : W2DFiniteDurationAction
         }
     }
     
-    public override func restart()
+    open override func restart()
     {
         super.restart()
         
         fRunningSubActions = fSubActions // copy
     }
     
-    public override func stop()
+    open override func stop()
     {
         if let actions = fRunningSubActions
         {
@@ -50,7 +50,7 @@ public class W2DSpawnAction : W2DFiniteDurationAction
         super.stop()
     }
     
-    private func _onSubActionFinished(action:W2DAction!)
+    fileprivate func _onSubActionFinished(_ action:W2DAction!)
     {
         assert(fRunningSubActions != nil);
         var index = 0
@@ -58,7 +58,7 @@ public class W2DSpawnAction : W2DFiniteDurationAction
         {
             if a === action
             {
-                fRunningSubActions!.removeAtIndex(index)
+                fRunningSubActions!.remove(at: index)
                 if (fRunningSubActions!.isEmpty)
                 {
                     fRunningSubActions = nil
@@ -72,7 +72,7 @@ public class W2DSpawnAction : W2DFiniteDurationAction
         }
     }
     
-    public override func run(dT: NSTimeInterval, director: W2DDirector!)
+    open override func run(_ dT: TimeInterval, director: W2DDirector!)
     {
         if let actions = fRunningSubActions
         {

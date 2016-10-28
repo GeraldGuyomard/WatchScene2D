@@ -8,9 +8,9 @@
 
 import WatchKit
 
-public class W2DSprite : W2DNode
+open class W2DSprite : W2DNode
 {
-    private var fImage : W2DImage?
+    fileprivate var fImage : W2DImage?
     
     public init(image:W2DImage?, director:W2DDirector)
     {
@@ -27,7 +27,7 @@ public class W2DSprite : W2DNode
         self.image = img
     }
     
-    public var image : W2DImage?
+    open var image : W2DImage?
     {
         get { return fImage }
         
@@ -41,19 +41,19 @@ public class W2DSprite : W2DNode
             }
             else
             {
-                self.size = CGSizeMake(0, 0)
+                self.size = CGSize(width: 0, height: 0)
             }
             
             setNeedsRedraw(false)
         }
     }
     
-    override public func selfRender(context: W2DContext)
+    override open func selfRender(_ context: W2DContext)
     {
         if let img = self.image
         {
             let s = self.size
-            let rect = CGRectMake(0, 0, s.width, s.height)
+            let rect = CGRect(x: 0, y: 0, width: s.width, height: s.height)
             img.draw(rect, alpha: self.alpha)
         }
     }

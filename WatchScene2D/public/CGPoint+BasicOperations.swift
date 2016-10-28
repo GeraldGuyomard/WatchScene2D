@@ -10,7 +10,7 @@ import Foundation
 
 public extension CGPoint
 {
-    func isNear(other:CGPoint) -> Bool
+    func isNear(_ other:CGPoint) -> Bool
     {
         return x.isNear(other.x) && y.isNear(other.y)
     }
@@ -38,7 +38,7 @@ public extension CGPoint
     
     func opposite() -> CGPoint
     {
-        return CGPointMake(-x, -y)
+        return CGPoint(x: -x, y: -y)
     }
     
     func normalizedVector() -> CGPoint
@@ -46,38 +46,38 @@ public extension CGPoint
         let l = norm();
         if l == 0
         {
-            return CGPointMake(0, 0);
+            return CGPoint(x: 0, y: 0);
         }
         
-        return CGPointMake(x / l, y / l);
+        return CGPoint(x: x / l, y: y / l);
     }
     
-    func add(other: CGPoint) -> CGPoint
+    func add(_ other: CGPoint) -> CGPoint
     {
-        return CGPointMake(x + other.x, y + other.y)
+        return CGPoint(x: x + other.x, y: y + other.y)
     }
 
-    func sub(other: CGPoint) -> CGPoint
+    func sub(_ other: CGPoint) -> CGPoint
     {
-        return CGPointMake(x - other.x, y - other.y)
+        return CGPoint(x: x - other.x, y: y - other.y)
     }
     
-    func mul(f : CGFloat) -> CGPoint
+    func mul(_ f : CGFloat) -> CGPoint
     {
-        return CGPointMake(x * f, y * f);
+        return CGPoint(x: x * f, y: y * f);
     }
     
-    func dot(other:CGPoint) -> CGFloat
+    func dot(_ other:CGPoint) -> CGFloat
     {
         return (x * other.x) + (y * other.y)
     }
     
-    static func lerp(startValue:CGPoint, endValue:CGPoint, coeff:CGFloat) -> CGPoint
+    static func lerp(_ startValue:CGPoint, endValue:CGPoint, coeff:CGFloat) -> CGPoint
     {
-        return CGPointMake(CGFloat.lerp(startValue.x, endValue:endValue.x, coeff:coeff), CGFloat.lerp(startValue.y, endValue:endValue.y, coeff:coeff))
+        return CGPoint(x: CGFloat.lerp(startValue.x, endValue:endValue.x, coeff:coeff), y: CGFloat.lerp(startValue.y, endValue:endValue.y, coeff:coeff))
     }
     
-    static func symmetry(axis:CGPoint, point:CGPoint) -> CGPoint
+    static func symmetry(_ axis:CGPoint, point:CGPoint) -> CGPoint
     {
         let normalizedAxis = axis.normalizedVector()
         
@@ -89,6 +89,6 @@ public extension CGPoint
         let symX = (m00 * point.x) + (m01 * point.y)
         let symY = (m10 * point.x) + (m11 * point.y)
         
-        return CGPointMake(symX, symY)
+        return CGPoint(x: symX, y: symY)
     }
 }

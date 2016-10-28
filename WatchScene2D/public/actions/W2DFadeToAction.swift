@@ -8,19 +8,19 @@
 
 import Foundation
 
-public class W2DFadeToAction : W2DSimpleFiniteDurationAction
+open class W2DFadeToAction : W2DSimpleFiniteDurationAction
 {
-    private var fInitialAlpha : CGFloat = 0.0
-    private var fFinalAlpha : CGFloat
+    fileprivate var fInitialAlpha : CGFloat = 0.0
+    fileprivate var fFinalAlpha : CGFloat
     
-    public init(duration:NSTimeInterval, finalAlpha:CGFloat)
+    public init(duration:TimeInterval, finalAlpha:CGFloat)
     {
         fFinalAlpha = finalAlpha
         
         super.init(duration: duration)
     }
     
-    public override func start()
+    open override func start()
     {
         if let target = fTarget
         {
@@ -34,7 +34,7 @@ public class W2DFadeToAction : W2DSimpleFiniteDurationAction
         super.start()
     }
     
-    public override func run(dT: NSTimeInterval, director: W2DDirector!)
+    open override func run(_ dT: TimeInterval, director: W2DDirector!)
     {
         if let target = self.target
         {

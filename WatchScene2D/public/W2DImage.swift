@@ -12,9 +12,9 @@ public protocol W2DImage
 {
     var size : CGSize { get }
     
-    func draw(pos:CGPoint)
-    func draw(pos:CGPoint, alpha:CGFloat)
+    func draw(_ pos:CGPoint)
+    func draw(_ pos:CGPoint, alpha:CGFloat)
     
-    func draw(rect:CGRect)
-    func draw(rect:CGRect, alpha:CGFloat)
+    func draw(_ rect:CGRect)
+    func draw(_ rect:CGRect, alpha:CGFloat)
 }

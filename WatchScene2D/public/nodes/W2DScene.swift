@@ -8,9 +8,9 @@
 
 import WatchKit
 
-public class W2DScene : W2DNode
+open class W2DScene : W2DNode
 {
-    public var backgroundColor : W2DColor4f? = W2DColor4f(red: 0, green: 0, blue: 0)
+    open var backgroundColor : W2DColor4f? = W2DColor4f(red: 0, green: 0, blue: 0)
     {
         didSet
         {
@@ -18,9 +18,9 @@ public class W2DScene : W2DNode
         }
     }
     
-    override public func selfRender(context: W2DContext)
+    override open func selfRender(_ context: W2DContext)
     {
-        let rect = CGRectMake(0, 0, self.size.width, self.size.height)
+        let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
         
         if let color = self.backgroundColor
         {
@@ -39,12 +39,12 @@ public class W2DScene : W2DNode
         }
     }
     
-    public func present()
+    open func present()
     {
         setIsOnScreen(true)
     }
     
-    public func discard()
+    open func discard()
     {
         setIsOnScreen(false)
     }

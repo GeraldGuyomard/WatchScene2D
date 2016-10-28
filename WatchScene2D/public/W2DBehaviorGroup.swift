@@ -8,11 +8,11 @@
 
 import Foundation
 
-public class W2DBehaviorGroup : W2DBehavior
+open class W2DBehaviorGroup : W2DBehavior
 {
-    private var fBehaviors = [W2DBehavior]()
+    fileprivate var fBehaviors = [W2DBehavior]()
     
-    public func execute(dT:NSTimeInterval, director:W2DDirector!)
+    open func execute(_ dT:TimeInterval, director:W2DDirector!)
     {
         for behavior in fBehaviors
         {
@@ -20,15 +20,15 @@ public class W2DBehaviorGroup : W2DBehavior
         }
     }
     
-    private func _behaviorIndex(behavior:W2DBehavior) -> Array<W2DBehavior>.Index?
+    fileprivate func _behaviorIndex(_ behavior:W2DBehavior) -> Array<W2DBehavior>.Index?
     {
         return
-            fBehaviors.indexOf({ (b:W2DBehavior) -> Bool in
+            fBehaviors.index(where: { (b:W2DBehavior) -> Bool in
                 return b === behavior;
             })
     }
     
-    public func addBehavior(behavior:W2DBehavior)
+    open func addBehavior(_ behavior:W2DBehavior)
     {
         if (_behaviorIndex(behavior) == nil)
         {
@@ -36,11 +36,11 @@ public class W2DBehaviorGroup : W2DBehavior
         }
     }
     
-    public func removeBehavior(behavior:W2DBehavior)
+    open func removeBehavior(_ behavior:W2DBehavior)
     {
         if let index = _behaviorIndex(behavior)
         {
-            fBehaviors.removeAtIndex(index)
+            fBehaviors.remove(at: index)
         }
     }
 }

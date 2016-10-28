@@ -8,24 +8,24 @@
 
 import Foundation
 
-public class W2DSequenceAction : W2DFiniteDurationAction
+open class W2DSequenceAction : W2DFiniteDurationAction
 {
-    private var fSubActions = [W2DFiniteDurationAction]()
-    private var fSubActionsToRun : [W2DFiniteDurationAction]? = nil
-    private var fRunningSubAction: W2DFiniteDurationAction? = nil
+    fileprivate var fSubActions = [W2DFiniteDurationAction]()
+    fileprivate var fSubActionsToRun : [W2DFiniteDurationAction]? = nil
+    fileprivate var fRunningSubAction: W2DFiniteDurationAction? = nil
     
     public init()
     {
         super.init(duration:0)
     }
     
-    public func addAction(action:W2DFiniteDurationAction)
+    open func addAction(_ action:W2DFiniteDurationAction)
     {
         fSubActions.append(action)
         fDuration += action.duration
     }
     
-    private func _startNextSubAction(dT: NSTimeInterval, director: W2DDirector!)
+    fileprivate func _startNextSubAction(_ dT: TimeInterval, director: W2DDirector!)
     {
         assert(fRunningSubAction == nil)
         
@@ -55,14 +55,14 @@ public class W2DSequenceAction : W2DFiniteDurationAction
         
     }
     
-    public override func restart()
+    open override func restart()
     {
         fSubActionsToRun = fSubActions // copy
         
         super.restart()
     }
     
-    public override func stop()
+    open override func stop()
     {
         if let action = fRunningSubAction
         {
@@ -75,7 +75,7 @@ public class W2DSequenceAction : W2DFiniteDurationAction
         super.stop()
     }
     
-    public override func run(dT: NSTimeInterval, director: W2DDirector!)
+    open override func run(_ dT: TimeInterval, director: W2DDirector!)
     {
         if let action = fRunningSubAction
         {

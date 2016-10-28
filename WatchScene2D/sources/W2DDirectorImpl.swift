@@ -10,20 +10,20 @@ import Foundation
 
 internal class W2DDirectorImpl : NSObject, W2DDirector
 {
-    private var     fTarget : WKInterfaceObject
-    private var     fRenderTimer : NSTimer?
-    private var     fPreviousRenderTime: NSDate?
-    private var     fFrameRate : UInt = 25
-    private var     fdT : NSTimeInterval = 0.0
-    private var     fContext : W2DContext
-    private var     fBehaviors = W2DBehaviorGroup()
-    private var     fActions = W2DBehaviorGroup()
+    fileprivate var     fTarget : WKInterfaceObject
+    fileprivate var     fRenderTimer : Timer?
+    fileprivate var     fPreviousRenderTime: Date?
+    fileprivate var     fFrameRate : UInt = 25
+    fileprivate var     fdT : TimeInterval = 0.0
+    fileprivate var     fContext : W2DContext
+    fileprivate var     fBehaviors = W2DBehaviorGroup()
+    fileprivate var     fActions = W2DBehaviorGroup()
     
-    private var     fInterfacePicker : WKInterfacePicker?
-    private var     fSensitivity = Float(0.0)
-    private var     fLastNormalizedInput = Float(0.0)
+    fileprivate var     fInterfacePicker : WKInterfacePicker?
+    fileprivate var     fSensitivity = Float(0.0)
+    fileprivate var     fLastNormalizedInput = Float(0.0)
     
-    private var     fInvalidatedRects : [CGRect]?
+    fileprivate var     fInvalidatedRects : [CGRect]?
     
     init(target:WKInterfaceObject, context:W2DContext)
     {
@@ -54,7 +54,7 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         }
     }
     
-    var dT : NSTimeInterval { return fdT }
+    var dT : TimeInterval { return fdT }
     
     var currentScene : W2DScene?
     {
@@ -69,7 +69,7 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
                 
                 if let newScene = self.currentScene
                 {
-                    newScene.size = CGSizeMake(CGFloat(fContext.width), CGFloat(fContext.height))
+                    newScene.size = CGSize(width: CGFloat(fContext.width), height: CGFloat(fContext.height))
                     newScene.present()
                 }
             }
@@ -94,7 +94,7 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         get { return fActions }
     }
     
-    func setupDigitalCrownInput(picker picker:WKInterfacePicker, sensitivity:UInt)
+    func setupDigitalCrownInput(picker:WKInterfacePicker, sensitivity:UInt)
     {
         fInterfacePicker = picker
         fSensitivity = Float(sensitivity) - 1
@@ -115,7 +115,7 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         }
     }
     
-    func setDigitalCrownValue(value:Float)
+    func setDigitalCrownValue(_ value:Float)
     {
         assert(fInterfacePicker != nil)
         
@@ -126,7 +126,7 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         }
     }
     
-    func processDigitalCrownInput(input:NSInteger, handler:(Float) -> Void)
+    func processDigitalCrownInput(_ input:NSInteger, handler:(Float) -> Void)
     {
         fLastNormalizedInput = (fSensitivity != 0) ? (Float(input) / fSensitivity) : 0
         
@@ -140,8 +140,8 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         
         if fRenderTimer == nil
         {
-            let t : NSTimeInterval = 1.0 / NSTimeInterval(fFrameRate)
-            fRenderTimer = NSTimer.scheduledTimerWithTimeInterval(t, target:self, selector:Selector("onRenderTimer:"), userInfo:nil, repeats:true)
+            let t : TimeInterval = 1.0 / TimeInterval(fFrameRate)
+            fRenderTimer = Timer.scheduledTimer(timeInterval: t, target:self, selector:#selector(W2DDirectorImpl.onRenderTimer(_:)), userInfo:nil, repeats:true)
         }
     }
     
@@ -154,25 +154,25 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         }
     }
     
-    func addBehavior(behavior:W2DBehavior)
+    func addBehavior(_ behavior:W2DBehavior)
     {
         fBehaviors.addBehavior(behavior)
     }
     
-    func removeBehavior(behavior:W2DBehavior)
+    func removeBehavior(_ behavior:W2DBehavior)
     {
         fBehaviors.removeBehavior(behavior)
     }
     
-    func onRenderTimer(timer:NSTimer)
+    func onRenderTimer(_ timer:Timer)
     {
-        let startT = NSDate()
+        let startT = Date()
         if let previousTime = fPreviousRenderTime
         {
-            let timerT = startT.timeIntervalSinceDate(previousTime)
+            let timerT = startT.timeIntervalSince(previousTime)
             //print("timer interval=\(timerT * 1000.0) ms")
             
-            fdT = startT.timeIntervalSinceDate(previousTime)
+            fdT = startT.timeIntervalSince(previousTime)
         }
         
         fPreviousRenderTime = startT;
@@ -183,13 +183,13 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         self.render()
         self.presentRender()
         
-        let  endT = NSDate()
-        let duration = endT.timeIntervalSinceDate(startT);
+        let  endT = Date()
+        let duration = endT.timeIntervalSince(startT);
         
         //print("frame:\(duration * 1000.0) ms")
     }
     
-    private func render()
+    fileprivate func render()
     {
         if let scene = self.currentScene
         {
@@ -215,7 +215,7 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         }
     }
     
-    private func presentRender()
+    fileprivate func presentRender()
     {
         var image : UIImage?
         
@@ -240,9 +240,9 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
         }
     }
     
-    func setNeedsRedraw(rect : CGRect)
+    func setNeedsRedraw(_ rect : CGRect)
     {
-        var rectI = CGRectIntegral(rect)
+        var rectI = rect.integral
         
         if rectI.size.width <= 0 || rectI.size.height <= 0
         {
@@ -262,25 +262,25 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
                 while i < c
                 {
                     let r = fInvalidatedRects![i]
-                    if CGRectIntersectsRect(r, rectI)
+                    if r.intersects(rectI)
                     {
                         shouldAppend = false
                         
-                        if CGRectContainsRect(r, rectI)
+                        if r.contains(rectI)
                         {
                             shouldLoop = false
                         }
                         else
                         {
-                            fInvalidatedRects!.removeAtIndex(i)
-                            rectI = CGRectUnion(rectI, r)
+                            fInvalidatedRects!.remove(at: i)
+                            rectI = rectI.union(r)
                         }
                         
                         break
                     }
                     else
                     {
-                        ++i
+                        i += 1
                     }
                 }
                 
@@ -300,6 +300,6 @@ internal class W2DDirectorImpl : NSObject, W2DDirector
     
     func setNeedsFullRedraw()
     {
-        setNeedsRedraw(CGRectMake(0, 0, CGFloat(fContext.width), CGFloat(fContext.height)))
+        setNeedsRedraw(CGRect(x: 0, y: 0, width: CGFloat(fContext.width), height: CGFloat(fContext.height)))
     }
 }

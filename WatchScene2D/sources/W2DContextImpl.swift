@@ -24,10 +24,10 @@ import Foundation
         
         let rgbColorSpace = CGColorSpaceCreateDeviceRGB();
         
-        fCGContext = CGBitmapContextCreate(fBackBuffer, Int(fWidth), Int(fHeight), 8, Int(fWidth * 4), rgbColorSpace, CGImageAlphaInfo.PremultipliedLast.rawValue)
+        fCGContext = CGContext(data: fBackBuffer, width: Int(fWidth), height: Int(fHeight), bitsPerComponent: 8, bytesPerRow: Int(fWidth * 4), space: rgbColorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
         
         //CGContextSetInterpolationQuality(fCGContext, .None)
-        CGContextSetInterpolationQuality(fCGContext, .Low)
+        fCGContext!.interpolationQuality = .low
     }
     
     deinit
@@ -47,17 +47,17 @@ import Foundation
         get { return Int(fWidth * fHeight * 4) }
     }
     
-    func clear(rect:CGRect)
+    func clear(_ rect:CGRect)
     {
-        CGContextClearRect(fCGContext, rect)
+        fCGContext?.clear(rect)
     }
     
-    func fillRect(rect:CGRect, withColor color:W2DColor4f)
+    func fillRect(_ rect:CGRect, withColor color:W2DColor4f)
     {
         if color.alpha != 0
         {
-            CGContextSetRGBFillColor(fCGContext, color.red, color.green, color.blue, color.alpha)
-            CGContextFillRect(fCGContext, rect)
+            fCGContext?.setFillColor(red: color.red, green: color.green, blue: color.blue, alpha: color.alpha)
+            fCGContext?.fill(rect)
         }
     }
     
@@ -66,40 +66,50 @@ import Foundation
         return W2DImageImpl(context:fCGContext!, named: name)
     }
     
-    private func createCGImage(backBuffer: UnsafeMutablePointer<Void>) -> CGImage?
+    fileprivate func createCGImage(_ backBuffer: UnsafeMutableRawPointer) -> CGImage?
     {
-        let provider = CGDataProviderCreateWithData(nil, backBuffer, self.bufferSize, nil)
+        let releaseCallback: CGDataProviderReleaseDataCallback = { (info: UnsafeMutableRawPointer?, data: UnsafeRawPointer, size: Int) -> () in
+        }
         
-        let bitsPerComponent = CGBitmapContextGetBitsPerComponent (fCGContext)
-        let bitsPerPixel = CGBitmapContextGetBitsPerPixel(fCGContext)
-        let bytesPerRow = CGBitmapContextGetBytesPerRow(fCGContext)
-        let colorSpace = CGBitmapContextGetColorSpace(fCGContext)
+        let provider = CGDataProvider(dataInfo: nil, data: backBuffer, size: self.bufferSize, releaseData: releaseCallback)
         
-        let cgImage = CGImageCreate(Int(fWidth), Int(fHeight),
-            bitsPerComponent,
-            bitsPerPixel,
-            bytesPerRow,
-            colorSpace,
-            CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedLast.rawValue),
-            provider,
-            nil,
-            false,
-            .RenderingIntentDefault)
-        
-        return cgImage
+        if let cgContext = fCGContext
+        {
+            let bitsPerComponent = cgContext.bitsPerComponent
+            let bitsPerPixel = cgContext.bitsPerPixel
+            let bytesPerRow = cgContext.bytesPerRow
+            let colorSpace = cgContext.colorSpace
+            
+            let cgImage = CGImage(width: Int(fWidth), height: Int(fHeight),
+                                  bitsPerComponent: bitsPerComponent,
+                                  bitsPerPixel: bitsPerPixel,
+                                  bytesPerRow: bytesPerRow,
+                                  space: colorSpace!,
+                                  bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue),
+                                  provider: provider!,
+                                  decode: nil,
+                                  shouldInterpolate: false,
+                                  intent: .defaultIntent)
+            
+            return cgImage
+        }
+        else
+        {
+            return nil
+        }
     }
     
     func render() -> UIImage?
     {
         if (fImage == nil)
         {
-            fImage = createCGImage(fBackBuffer)
+            fImage = createCGImage(fBackBuffer!)
         }
         
-        return UIImage(CGImage: fImage!)
+        return UIImage(cgImage: fImage!)
     }
     
-    func render(dirtyRects: [CGRect]?) -> UIImage?
+    func render(_ dirtyRects: [CGRect]?) -> UIImage?
     {
         if let rects = dirtyRects
         {
@@ -122,30 +132,30 @@ import Foundation
     
     func saveState()
     {
-        CGContextSaveGState(fCGContext)
+        fCGContext?.saveGState()
     }
     
     func restoreState()
     {
-        CGContextRestoreGState(fCGContext)
+        fCGContext?.restoreGState()
     }
     
-    func applyTransform(transform:CGAffineTransform)
+    func applyTransform(_ transform:CGAffineTransform)
     {
-        CGContextConcatCTM(fCGContext, transform)
+        fCGContext?.concatenate(transform)
     }
     
-    func applyClipping(rect:CGRect)
+    func applyClipping(_ rect:CGRect)
     {
-        CGContextClipToRect(fCGContext, rect)
+        fCGContext?.clip(to: rect)
         fClippingRect = rect
     }
     
-    private var    fBackBuffer : UnsafeMutablePointer<Void> = UnsafeMutablePointer<Void>();
-    private var    fCGContext : CGContext?;
-    private var    fWidth : UInt = 0;
-    private var    fHeight : UInt = 0;
-    private var    fClippingRect : CGRect? = nil
-    private var    fImage : CGImage?
+    fileprivate var    fBackBuffer : UnsafeMutableRawPointer?;
+    fileprivate var    fCGContext : CGContext?;
+    fileprivate var    fWidth : UInt = 0;
+    fileprivate var    fHeight : UInt = 0;
+    fileprivate var    fClippingRect : CGRect? = nil
+    fileprivate var    fImage : CGImage?
     
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class W2DRepeatAction : W2DFiniteDurationAction
+open class W2DRepeatAction : W2DFiniteDurationAction
 {
     internal var fSubAction: W2DFiniteDurationAction!
     internal var fNbRepeatLeft : Int // <0 means infinite loop
@@ -16,14 +16,14 @@ public class W2DRepeatAction : W2DFiniteDurationAction
     required public init(action:W2DFiniteDurationAction!, count:Int)
     {
         fSubAction = action
-        let d: NSTimeInterval = (count >= 0) ? NSTimeInterval(count) * action.duration : NSTimeInterval.infinity
+        let d: TimeInterval = (count >= 0) ? TimeInterval(count) * action.duration : TimeInterval.infinity
         
         fNbRepeatLeft = count
         
         super.init(duration:d)
     }
     
-    private func _onSubActionEnded(finished:Bool)
+    fileprivate func _onSubActionEnded(_ finished:Bool)
     {
         if fNbRepeatLeft > 0
         {
@@ -42,7 +42,7 @@ public class W2DRepeatAction : W2DFiniteDurationAction
         }
     }
     
-    public override func run(dT: NSTimeInterval, director: W2DDirector!)
+    open override func run(_ dT: TimeInterval, director: W2DDirector!)
     {
         if fNbRepeatLeft != 0
         {
@@ -66,7 +66,7 @@ public class W2DRepeatAction : W2DFiniteDurationAction
         }
     }
     
-    public override func stop()
+    open override func stop()
     {
         if fSubAction.isRunning
         {

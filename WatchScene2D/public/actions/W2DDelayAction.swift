@@ -8,9 +8,9 @@
 
 import Foundation
 
-public class W2DDelayAction : W2DSimpleFiniteDurationAction
+open class W2DDelayAction : W2DSimpleFiniteDurationAction
 {
-    public override func run(dT: NSTimeInterval, director: W2DDirector!)
+    open override func run(_ dT: TimeInterval, director: W2DDirector!)
     {
         // do nothing, simple wait...
     }
